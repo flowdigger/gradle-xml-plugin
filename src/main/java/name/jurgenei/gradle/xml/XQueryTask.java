@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -7,11 +7,11 @@ import java.util.Map;
 import javax.xml.transform.Source;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
-import name.jurgenei.gradle.xml.json.JsonCanonicalSerializer;
-import name.jurgenei.gradle.xml.json.JsonCanonicalXmlReader;
-import name.jurgenei.gradle.xml.saxon.SaxonXirResolvers;
-import name.jurgenei.xir.XirSerializer;
-import name.jurgenei.xir.XirReader;
+import org.flowdigger.gradle.xml.json.JsonCanonicalSerializer;
+import org.flowdigger.gradle.xml.json.JsonCanonicalXmlReader;
+import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
+import org.flowdigger.xir.XirSerializer;
+import org.flowdigger.xir.XirReader;
 import net.sf.saxon.s9api.Destination;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;

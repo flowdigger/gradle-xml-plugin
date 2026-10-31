@@ -1,7 +1,7 @@
-package name.jurgenei.gradle.xml.xir;
+package org.flowdigger.gradle.xml.xir;
 
-import name.jurgenei.xir.XirParser;
-import name.jurgenei.xir.XirSerializer;
+import org.flowdigger.xir.XirParser;
+import org.flowdigger.xir.XirSerializer;
 import org.junit.Assert;
 import org.junit.Test;
 

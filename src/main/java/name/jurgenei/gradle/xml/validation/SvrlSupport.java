@@ -1,11 +1,11 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml.validation;
+package org.flowdigger.gradle.xml.validation;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
-import name.jurgenei.gradle.xml.SaxXmlWriter;
+import org.flowdigger.gradle.xml.SaxXmlWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;

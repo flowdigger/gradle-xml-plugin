@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -16,11 +16,11 @@ import java.util.concurrent.Executors;
 import javax.xml.transform.Source;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
-import name.jurgenei.gradle.xml.validation.ReportFormat;
-import name.jurgenei.gradle.xml.validation.SvrlSupport;
-import name.jurgenei.gradle.xml.validation.ValidationResult;
-import name.jurgenei.gradle.xml.validation.ValidationTaskSpec;
-import name.jurgenei.xir.XirReader;
+import org.flowdigger.gradle.xml.validation.ReportFormat;
+import org.flowdigger.gradle.xml.validation.SvrlSupport;
+import org.flowdigger.gradle.xml.validation.ValidationResult;
+import org.flowdigger.gradle.xml.validation.ValidationTaskSpec;
+import org.flowdigger.xir.XirReader;
 import org.gradle.api.Action;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.ConfigurableFileTree;

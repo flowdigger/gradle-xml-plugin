@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.xml.validation;
+package org.flowdigger.gradle.xml.validation;
 
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.provider.MapProperty;

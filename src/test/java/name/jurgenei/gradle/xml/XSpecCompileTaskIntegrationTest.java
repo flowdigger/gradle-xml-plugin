@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertTrue;
 
@@ -26,9 +26,9 @@ public class XSpecCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileXSpec', name.jurgenei.gradle.xml.XSpecCompileTask) {
+            tasks.register('compileXSpec', org.flowdigger.gradle.xml.XSpecCompileTask) {
               source 'src/main/xspec/sample.xspec'
               outputDir.set(layout.buildDirectory.dir('generated/xspec'))
               failOnError.set(true)
@@ -74,9 +74,9 @@ public class XSpecCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileXSpec', name.jurgenei.gradle.xml.XSpecCompileTask) {
+            tasks.register('compileXSpec', org.flowdigger.gradle.xml.XSpecCompileTask) {
               input 'src/main/xspec/missing.xspec'
               output 'build/generated/xspec/missing.xspec.xsl'
             }

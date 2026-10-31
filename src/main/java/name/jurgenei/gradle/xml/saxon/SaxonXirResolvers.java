@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml.saxon;
+package org.flowdigger.gradle.xml.saxon;
 
 import java.net.URI;
 import java.util.Locale;
@@ -7,7 +7,7 @@ import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.sax.SAXSource;
-import name.jurgenei.xir.XirReader;
+import org.flowdigger.xir.XirReader;
 import net.sf.saxon.Configuration;
 import net.sf.saxon.lib.ResourceRequest;
 import net.sf.saxon.lib.ResourceResolver;

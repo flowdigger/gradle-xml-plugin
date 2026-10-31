@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.xml.json;
+package org.flowdigger.gradle.xml.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +12,7 @@ import java.util.Deque;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import name.jurgenei.xir.XirSerializer;
+import org.flowdigger.xir.XirSerializer;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;

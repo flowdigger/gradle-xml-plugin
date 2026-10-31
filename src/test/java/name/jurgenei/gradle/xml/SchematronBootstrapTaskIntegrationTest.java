@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
@@ -28,24 +28,24 @@ public class SchematronBootstrapTaskIntegrationTest {
             """);
 
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('bootstrapCanonicalSchematron', name.jurgenei.gradle.xml.SchematronBootstrapTask) {
+            tasks.register('bootstrapCanonicalSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
               schemaUrl(file('src/main/xsd/canonical.xsd').toURI().toString())
               output 'src/main/schematron/canonical-sel.sch'
             }
 
-            tasks.register('bootstrapFromLocalXsd', name.jurgenei.gradle.xml.SchematronBootstrapTask) {
+            tasks.register('bootstrapFromLocalXsd', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
               schemaFile.set(layout.projectDirectory.file('src/main/xsd/canonical.xsd'))
               output 'src/main/schematron/canonical-local.sch'
             }
 
-            tasks.register('validateCanonicalSchematron', name.jurgenei.gradle.xml.SchematronTask) {
+            tasks.register('validateCanonicalSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               dependsOn tasks.named('bootstrapCanonicalSchematron')
               schema.set(layout.projectDirectory.file('src/main/schematron/canonical-sel.sch'))
               source 'src/main/xml/canonical.xml'
               outputDir.set(layout.buildDirectory.dir('out/schematron'))
-              reportFormat.set(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+              reportFormat.set(org.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
               failOnError.set(true)
             }
             """);
@@ -101,9 +101,9 @@ public class SchematronBootstrapTaskIntegrationTest {
     public void doesNotOverwriteExistingSchematronAndLogsWarning() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-bootstrap-safe'\n");
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('bootstrapSchematron', name.jurgenei.gradle.xml.SchematronBootstrapTask) {
+            tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
               schema 'src/main/xsd/schema.xsd'
               output 'src/main/schematron/rules.sch'
             }
@@ -132,9 +132,9 @@ public class SchematronBootstrapTaskIntegrationTest {
     public void emitsSelProfilesForNamedAndInlineComplexTypes() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-bootstrap-sel-profiles'\n");
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('bootstrapSchematron', name.jurgenei.gradle.xml.SchematronBootstrapTask) {
+            tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
               schema 'src/main/xsd/schema.xsd'
               output 'build/generated/schematron/generated.sch'
             }
@@ -191,9 +191,9 @@ public class SchematronBootstrapTaskIntegrationTest {
     public void failsWhenNeitherSchemaFileNorSchemaUrlConfigured() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-bootstrap-missing-source'\n");
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('bootstrapSchematron', name.jurgenei.gradle.xml.SchematronBootstrapTask) {
+            tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
               output 'build/generated/schematron/generated.sch'
             }
             """);

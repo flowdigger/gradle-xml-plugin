@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertTrue;
 
@@ -25,16 +25,16 @@ public class ShaclSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileShaclSel', name.jurgenei.gradle.xml.ShaclSelCompileTask) {
+            tasks.register('compileShaclSel', org.flowdigger.gradle.xml.ShaclSelCompileTask) {
               schema 'src/main/shacl/collibra.shacl.xml'
               output 'build/generated/sel/shacl-sel.xsl'
               outputSchematron 'build/generated/sel/shacl-sel.sch'
               groupOutput 'relations', 'sel/relations.xml'
             }
 
-            tasks.register('extractShaclSel', name.jurgenei.gradle.xml.ShaclSelExtractTask) {
+            tasks.register('extractShaclSel', org.flowdigger.gradle.xml.ShaclSelExtractTask) {
               dependsOn tasks.named('compileShaclSel')
               schema 'build/generated/sel/shacl-sel.sch'
               style 'build/generated/sel/shacl-sel.xsl'

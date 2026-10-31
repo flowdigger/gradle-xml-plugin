@@ -1,8 +1,8 @@
 plugins {
-    id 'name.jurgenei.gradle.xml'
+    id 'org.flowdigger.gradle.xml'
 }
 
-tasks.register('runXslt', name.jurgenei.gradle.xml.XsltTask) {
+tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
     style 'src/main/xslt/main.xsl'
     source 'src/main/xml/input.xml'
     outputDir.set(layout.buildDirectory.dir('out/xslt'))
@@ -10,7 +10,7 @@ tasks.register('runXslt', name.jurgenei.gradle.xml.XsltTask) {
     param 'prefix', 'Hello '
 }
 
-tasks.register('runXsltXir', name.jurgenei.gradle.xml.XsltTask) {
+tasks.register('runXsltXir', org.flowdigger.gradle.xml.XsltTask) {
     style 'src/main/xslt/main.xsl'
     source 'src/main/xir/input.xir'
     outputDir.set(layout.buildDirectory.dir('out/xslt-xir'))
@@ -19,7 +19,7 @@ tasks.register('runXsltXir', name.jurgenei.gradle.xml.XsltTask) {
     param 'prefix', 'Hello '
 }
 
-tasks.register('runXsltIdentityXir', name.jurgenei.gradle.xml.XsltTask) {
+tasks.register('runXsltIdentityXir', org.flowdigger.gradle.xml.XsltTask) {
     style 'src/main/xslt/identity.xir'
     source 'src/main/xir/identity-input.xir'
     outputDir.set(layout.buildDirectory.dir('out/xslt-identity'))
@@ -27,7 +27,7 @@ tasks.register('runXsltIdentityXir', name.jurgenei.gradle.xml.XsltTask) {
     xirFormat.set('beautified')
 }
 
-tasks.register('runSelfTest', name.jurgenei.gradle.xml.XSpecTask) {
+tasks.register('runSelfTest', org.flowdigger.gradle.xml.XSpecTask) {
     dependsOn 'runXslt', 'runXsltXir', 'runXsltIdentityXir'
     source 'src/main/xspec/selftest.xspec'
     outputDir.set(layout.buildDirectory.dir('reports/xspec'))

@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml.json;
+package org.flowdigger.gradle.xml.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import java.io.File;
 import java.io.StringWriter;
@@ -27,10 +27,10 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
-import name.jurgenei.gradle.xml.json.JsonCanonicalXmlReader;
-import name.jurgenei.gradle.xml.saxon.SaxonXirResolvers;
-import name.jurgenei.xir.XirReader;
-import name.jurgenei.xir.XirSerializer;
+import org.flowdigger.gradle.xml.json.JsonCanonicalXmlReader;
+import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
+import org.flowdigger.xir.XirReader;
+import org.flowdigger.xir.XirSerializer;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.Serializer;

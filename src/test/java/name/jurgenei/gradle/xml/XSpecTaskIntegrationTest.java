@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertTrue;
 
@@ -25,9 +25,9 @@ public class XSpecTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('runXSpec', name.jurgenei.gradle.xml.XSpecTask) {
+            tasks.register('runXSpec', org.flowdigger.gradle.xml.XSpecTask) {
               source 'src/main/xspec/sample.xspec'
               outputDir.set(layout.buildDirectory.dir('reports/xspec'))
               failOnError.set(true)
@@ -61,14 +61,14 @@ public class XSpecTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileXSpec', name.jurgenei.gradle.xml.XSpecCompileTask) {
+            tasks.register('compileXSpec', org.flowdigger.gradle.xml.XSpecCompileTask) {
               input 'src/main/xspec/sample.xspec'
               output 'build/generated/xspec/sample-runner.xsl'
             }
 
-            tasks.register('runXSpec', name.jurgenei.gradle.xml.XSpecTask) {
+            tasks.register('runXSpec', org.flowdigger.gradle.xml.XSpecTask) {
               dependsOn tasks.named('compileXSpec')
               input 'build/generated/xspec/sample-runner.xsl'
               output 'build/reports/xspec/sample-report.xml'

@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.xml.validation;
+package org.flowdigger.gradle.xml.validation;
 
 /**
  * Output report formats emitted by validation tasks.

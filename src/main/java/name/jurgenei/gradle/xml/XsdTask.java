@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 import javax.xml.XMLConstants;
 import javax.xml.validation.SchemaFactory;
-import name.jurgenei.gradle.xml.validation.ValidationIssue;
-import name.jurgenei.gradle.xml.validation.ValidationResult;
-import name.jurgenei.gradle.xml.validation.XsdEngine;
+import org.flowdigger.gradle.xml.validation.ValidationIssue;
+import org.flowdigger.gradle.xml.validation.ValidationResult;
+import org.flowdigger.gradle.xml.validation.XsdEngine;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.SchemaManager;

@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.xml.json;
+package org.flowdigger.gradle.xml.json;
 
 import java.io.IOException;
 import java.io.InputStream;

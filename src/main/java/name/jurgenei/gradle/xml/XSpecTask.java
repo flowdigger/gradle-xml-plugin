@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import java.io.File;
 import java.net.URL;
@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-import name.jurgenei.gradle.xml.saxon.SaxonXirResolvers;
+import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.Serializer;

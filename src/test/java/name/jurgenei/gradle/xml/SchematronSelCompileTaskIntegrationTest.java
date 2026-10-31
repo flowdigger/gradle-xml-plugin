@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertTrue;
 
@@ -26,9 +26,9 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+            tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
               output 'build/generated/sel/sel.xsl'
               groupOutput 'knowledge', 'sel/knowledge.xml'
@@ -83,9 +83,9 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+            tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
               output 'build/generated/sel/sel.xsl'
             }
@@ -123,9 +123,9 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+            tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/missing.sch'
               output 'build/generated/sel/sel.xsl'
             }
@@ -147,9 +147,9 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+            tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
               output 'build/generated/sel/sel.xsl'
               phase 'knowledge-phase'
@@ -201,9 +201,9 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+            tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
               output 'build/generated/sel/sel.xsl'
             }
@@ -254,9 +254,9 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+            tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
               output 'build/generated/sel/sel.xsl'
               phase 'missing-phase'
@@ -296,9 +296,9 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+            tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
               output 'build/generated/sel/sel.xsl'
               groupOutput 'knowledge', 'sel/knowledge.xml'
@@ -345,9 +345,9 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+            tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
               output 'build/generated/sel/sel.xsl'
             }
@@ -382,9 +382,9 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+            tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
               output 'build/generated/sel/sel.xsl'
             }
@@ -424,9 +424,9 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+            tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
               output 'build/generated/sel/sel.xsl'
               outputNamespaceUri 'urn:override:sel'

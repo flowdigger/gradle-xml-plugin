@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import java.io.File;
 import java.io.StringReader;
@@ -17,7 +17,7 @@ import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import name.jurgenei.gradle.xml.saxon.SaxonXirResolvers;
+import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.Serializer;
@@ -25,8 +25,8 @@ import net.sf.saxon.s9api.XdmAtomicValue;
 import net.sf.saxon.s9api.XsltCompiler;
 import net.sf.saxon.s9api.XsltExecutable;
 import net.sf.saxon.s9api.XsltTransformer;
-import name.jurgenei.gradle.xml.validation.SvrlSupport;
-import name.jurgenei.gradle.xml.validation.ValidationResult;
+import org.flowdigger.gradle.xml.validation.SvrlSupport;
+import org.flowdigger.gradle.xml.validation.ValidationResult;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Property;
@@ -350,7 +350,7 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
         validator.transform();
 
         String svrlXml = output.toString();
-        List<name.jurgenei.gradle.xml.validation.ValidationIssue> issues = SvrlSupport.parseSvrlIssues(svrlXml);
+        List<org.flowdigger.gradle.xml.validation.ValidationIssue> issues = SvrlSupport.parseSvrlIssues(svrlXml);
         return new ValidationResult(issues, svrlXml);
     }
 

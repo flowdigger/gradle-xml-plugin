@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -33,8 +33,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -83,8 +83,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -129,8 +129,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -171,8 +171,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -216,8 +216,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -266,8 +266,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               input 'src/main/xml/a.xml'
               output 'build/custom/b.xml'
@@ -314,8 +314,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source(fileTree('src/main/xml') {
                 include '**/*.xml'
@@ -376,8 +376,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -432,8 +432,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -471,8 +471,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -497,8 +497,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xir/input.xir'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -527,8 +527,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -565,8 +565,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -608,8 +608,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -643,8 +643,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -679,8 +679,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/json/input.json'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -728,8 +728,8 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -767,15 +767,15 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('xmlToJson', name.jurgenei.gradle.xml.XQueryTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('xmlToJson', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/json'))
               outputExtension.set('.json')
               jsonMode.set('canonical')
             }
-            tasks.register('jsonToXml', name.jurgenei.gradle.xml.XQueryTask) {
+            tasks.register('jsonToXml', org.flowdigger.gradle.xml.XQueryTask) {
               dependsOn 'xmlToJson'
               query 'src/main/xquery/main.xq'
               input 'build/out/json/input.json'

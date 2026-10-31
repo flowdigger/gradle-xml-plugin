@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -33,13 +33,13 @@ public class SchematronTaskIntegrationTest {
             rootProject.name = 'schematron-test'
             """);
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runSchematron', name.jurgenei.gradle.xml.SchematronTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
               source 'src/main/xml/invalid.xml'
               outputDir.set(layout.buildDirectory.dir('out/schematron'))
-              reportFormat.set(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+              reportFormat.set(org.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
               failOnError.set(false)
             }
             """);
@@ -76,8 +76,8 @@ public class SchematronTaskIntegrationTest {
             rootProject.name = 'schematron-tree-test'
             """);
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runSchematron', name.jurgenei.gradle.xml.SchematronTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
               source(fileTree('src/main/xml') {
@@ -130,8 +130,8 @@ public class SchematronTaskIntegrationTest {
             rootProject.name = 'schematron-style-cache-test'
             """);
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runSchematron', name.jurgenei.gradle.xml.SchematronTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
               style 'build/generated/schematron/compiled.xsl'
@@ -175,8 +175,8 @@ public class SchematronTaskIntegrationTest {
             secondCompiledTimestamp == firstCompiledTimestamp);
 
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runSchematron', name.jurgenei.gradle.xml.SchematronTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
               style 'build/generated/schematron/compiled.xsl'
@@ -209,8 +209,8 @@ public class SchematronTaskIntegrationTest {
             rootProject.name = 'schematron-debug-format-test'
             """);
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runSchematron', name.jurgenei.gradle.xml.SchematronTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               style 'build/generated/schematron/compiled.xsl'
               source 'src/main/xml/invalid.xml'
@@ -255,8 +255,8 @@ public class SchematronTaskIntegrationTest {
     public void schematronTaskDoesNotUseTaskProjectAtExecutionTime() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-cc-warning-fail'\n");
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('schematronTask', name.jurgenei.gradle.xml.SchematronTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('schematronTask', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
               source 'src/main/xml/invalid.xml'
@@ -316,13 +316,13 @@ public class SchematronTaskIntegrationTest {
             rootProject.name = 'schematron-xir-test'
             """);
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runSchematron', name.jurgenei.gradle.xml.SchematronTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.xir'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
               source 'src/main/xir/invalid.xir'
               outputDir.set(layout.buildDirectory.dir('out/schematron'))
-              reportFormat.set(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+              reportFormat.set(org.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
               failOnError.set(false)
             }
             """);
@@ -357,13 +357,13 @@ public class SchematronTaskIntegrationTest {
             rootProject.name = 'schematron-doc-xir-test'
             """);
         write("build.gradle", """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runSchematron', name.jurgenei.gradle.xml.SchematronTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
               source 'src/main/xml/input.xml'
               outputDir.set(layout.buildDirectory.dir('out/schematron'))
-              reportFormat.set(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL)
+              reportFormat.set(org.flowdigger.gradle.xml.validation.ReportFormat.SVRL)
               failOnError.set(false)
             }
             """);

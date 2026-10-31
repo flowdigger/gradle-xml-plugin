@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 /**
  * Normalized SEL rule metadata extracted from Schematron annotations.

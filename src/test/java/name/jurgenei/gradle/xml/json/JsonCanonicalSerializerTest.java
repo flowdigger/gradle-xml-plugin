@@ -1,7 +1,7 @@
-package name.jurgenei.gradle.xml.json;
+package org.flowdigger.gradle.xml.json;
 
 import java.io.StringWriter;
-import name.jurgenei.xir.XirSerializer;
+import org.flowdigger.xir.XirSerializer;
 import org.junit.Test;
 import org.xml.sax.helpers.AttributesImpl;
 

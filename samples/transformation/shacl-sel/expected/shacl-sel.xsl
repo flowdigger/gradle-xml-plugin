@@ -2,7 +2,7 @@
 <xsl:stylesheet version="3.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:sx="urn:name.jurgenei.gradle.xml:sel-support"
+    xmlns:sx="urn:org.flowdigger.gradle.xml:sel-support"
     xmlns:c="http://jurgenei.name/canonical"
     xmlns:sel="http://jurgenei.name/sel"
     exclude-result-prefixes="xs c sx" expand-text="yes">

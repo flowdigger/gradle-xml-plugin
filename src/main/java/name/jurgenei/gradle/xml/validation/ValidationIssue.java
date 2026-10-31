@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.xml.validation;
+package org.flowdigger.gradle.xml.validation;
 
 /**
  * A single validation finding mapped to SVRL/JUnit output.

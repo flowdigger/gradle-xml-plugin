@@ -1,8 +1,8 @@
 plugins {
-    id 'name.jurgenei.gradle.xml'
+    id 'org.flowdigger.gradle.xml'
 }
 
-tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
     query 'src/main/xquery/main.xq'
     source 'src/main/xml/input.xml'
     outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -10,7 +10,7 @@ tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
     param 'prefix', 'Hello '
 }
 
-tasks.register('runXQueryXir', name.jurgenei.gradle.xml.XQueryTask) {
+tasks.register('runXQueryXir', org.flowdigger.gradle.xml.XQueryTask) {
     query 'src/main/xquery/main.xq'
     source 'src/main/xir/input.xir'
     outputDir.set(layout.buildDirectory.dir('out/xquery-xir'))
@@ -19,7 +19,7 @@ tasks.register('runXQueryXir', name.jurgenei.gradle.xml.XQueryTask) {
     param 'prefix', 'Hello '
 }
 
-tasks.register('runXQueryIdentity', name.jurgenei.gradle.xml.XQueryTask) {
+tasks.register('runXQueryIdentity', org.flowdigger.gradle.xml.XQueryTask) {
     query 'src/main/xquery/identity.xq'
     source 'src/main/xir/identity-input.xir'
     outputDir.set(layout.buildDirectory.dir('out/xquery-identity'))
@@ -27,7 +27,7 @@ tasks.register('runXQueryIdentity', name.jurgenei.gradle.xml.XQueryTask) {
     xirFormat.set('beautified')
 }
 
-tasks.register('runSelfTest', name.jurgenei.gradle.xml.XSpecTask) {
+tasks.register('runSelfTest', org.flowdigger.gradle.xml.XSpecTask) {
     dependsOn 'runXQuery', 'runXQueryXir', 'runXQueryIdentity'
     source 'src/main/xspec/selftest.xspec'
     outputDir.set(layout.buildDirectory.dir('reports/xspec'))

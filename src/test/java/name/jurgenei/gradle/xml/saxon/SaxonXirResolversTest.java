@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.xml.saxon;
+package org.flowdigger.gradle.xml.saxon;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -64,7 +64,7 @@ public class SaxonXirResolversTest {
     }
 
     private static Object newResolver() throws Exception {
-        Class<?> resolverClass = Class.forName("name.jurgenei.gradle.xml.saxon.SaxonXirResolvers$DualXirResolver");
+        Class<?> resolverClass = Class.forName("org.flowdigger.gradle.xml.saxon.SaxonXirResolvers$DualXirResolver");
         Constructor<?> constructor = resolverClass.getDeclaredConstructor();
         constructor.setAccessible(true);
         Object resolver = constructor.newInstance();

@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.xml.sax.SAXException;
 final class SelStylesheetCompiler {
     private static final String XSL_NS = "http://www.w3.org/1999/XSL/Transform";
     private static final String XS_NS = "http://www.w3.org/2001/XMLSchema";
-    private static final String SX_NS = "urn:name.jurgenei.gradle.xml:sel-support";
+    private static final String SX_NS = "urn:org.flowdigger.gradle.xml:sel-support";
     private static final String C_NS = "http://jurgenei.name/canonical";
 
     private SelStylesheetCompiler() {}

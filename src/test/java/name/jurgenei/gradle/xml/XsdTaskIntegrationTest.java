@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertTrue;
 
@@ -30,14 +30,14 @@ public class XsdTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXsd', name.jurgenei.gradle.xml.XsdTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXsd', org.flowdigger.gradle.xml.XsdTask) {
               schema 'src/main/xsd/schema.xsd'
               source 'src/main/xml/invalid.xml'
               outputDir.set(layout.buildDirectory.dir('out/xsd'))
-              format(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+              format(org.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
               failOnError.set(false)
-              engine.set(name.jurgenei.gradle.xml.validation.XsdEngine.AUTO)
+              engine.set(org.flowdigger.gradle.xml.validation.XsdEngine.AUTO)
             }
             """);
 
@@ -90,14 +90,14 @@ public class XsdTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
-            tasks.register('runXsd', name.jurgenei.gradle.xml.XsdTask) {
+            plugins { id 'org.flowdigger.gradle.xml' }
+            tasks.register('runXsd', org.flowdigger.gradle.xml.XsdTask) {
               schema 'src/main/xsd/schema.xir'
               source 'src/main/xir/invalid.xir'
               outputDir.set(layout.buildDirectory.dir('out/xsd'))
-              reportFormat.set(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+              reportFormat.set(org.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
               failOnError.set(false)
-              engine.set(name.jurgenei.gradle.xml.validation.XsdEngine.JAXP)
+              engine.set(org.flowdigger.gradle.xml.validation.XsdEngine.JAXP)
             }
             """);
 

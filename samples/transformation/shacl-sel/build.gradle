@@ -1,15 +1,15 @@
 plugins {
-    id 'name.jurgenei.gradle.xml'
+    id 'org.flowdigger.gradle.xml'
 }
 
-tasks.register('compileShaclSel', name.jurgenei.gradle.xml.ShaclSelCompileTask) {
+tasks.register('compileShaclSel', org.flowdigger.gradle.xml.ShaclSelCompileTask) {
     schema 'src/main/shacl/collibra-model.shacl.xml'
     output 'build/generated/sel/shacl-sel.xsl'
     outputSchematron 'build/generated/sel/shacl-sel.sch'
     groupOutput 'relations', 'sel/relations.xml'
 }
 
-tasks.register('extractShaclSel', name.jurgenei.gradle.xml.ShaclSelExtractTask) {
+tasks.register('extractShaclSel', org.flowdigger.gradle.xml.ShaclSelExtractTask) {
     dependsOn tasks.named('compileShaclSel')
     schema 'build/generated/sel/shacl-sel.sch'
     style 'build/generated/sel/shacl-sel.xsl'
@@ -19,7 +19,7 @@ tasks.register('extractShaclSel', name.jurgenei.gradle.xml.ShaclSelExtractTask) 
     failOnError.set(true)
 }
 
-tasks.register('runSelfTest', name.jurgenei.gradle.xml.XSpecTask) {
+tasks.register('runSelfTest', org.flowdigger.gradle.xml.XSpecTask) {
     dependsOn 'extractShaclSel'
     source 'src/main/xspec/selftest.xspec'
     outputDir.set(layout.buildDirectory.dir('reports/xspec'))

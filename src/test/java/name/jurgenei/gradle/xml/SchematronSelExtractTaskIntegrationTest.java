@@ -1,5 +1,5 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml;
+package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertTrue;
 
@@ -26,9 +26,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               source 'src/main/xml/canonical.xml'
               outputDir.set(layout.buildDirectory.dir('out/sel'))
@@ -110,15 +110,15 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+            tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
               output 'build/generated/sel/sel.xsl'
               groupOutput 'knowledge', 'sel/knowledge.xml'
             }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               dependsOn tasks.named('compileSel')
               schema 'src/main/schematron/sel.sch'
               style 'build/generated/sel/sel.xsl'
@@ -170,9 +170,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               style 'src/main/xslt/extract.xsl'
               source 'src/main/xml/canonical.xml'
@@ -216,9 +216,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               source 'src/main/json/canonical.json'
               outputMode 'canonical'
@@ -279,9 +279,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               source 'src/main/xir/canonical.xir'
               outputDir.set(layout.buildDirectory.dir('out/sel'))
@@ -341,9 +341,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               source('src/main/xml') {
                 include '**/*.xml'
@@ -394,9 +394,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               outputDir.set(layout.buildDirectory.dir('out/sel'))
             }
@@ -421,9 +421,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               source 'src/main/json/input.json'
               jsonMode 'native'
@@ -452,9 +452,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               source 'src/main/json/input.json'
               jsonMode 'invalid'
@@ -482,9 +482,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               source 'src/main/xml/canonical.xml'
               phase 'architecture-phase'
@@ -552,9 +552,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               source 'src/main/xml/canonical.xml'
               phase 'missing-phase'
@@ -603,9 +603,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               source 'src/main/xml/canonical.xml'
               outputDir.set(layout.buildDirectory.dir('out/sel'))
@@ -666,9 +666,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               source 'src/main/xml/canonical.xml'
               outputDir.set(layout.buildDirectory.dir('out/sel'))
@@ -723,9 +723,9 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'name.jurgenei.gradle.xml' }
+            plugins { id 'org.flowdigger.gradle.xml' }
 
-            tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+            tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
               source 'src/main/xml/canonical.xml'
               outputDir.set(layout.buildDirectory.dir('out/sel'))

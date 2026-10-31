@@ -1,13 +1,13 @@
 /* (C)2026 */
-package name.jurgenei.gradle.xml.xir;
+package org.flowdigger.gradle.xml.xir;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
-import name.jurgenei.xir.XirParser;
-import name.jurgenei.xir.XirSerializer;
+import org.flowdigger.xir.XirParser;
+import org.flowdigger.xir.XirSerializer;
 import org.junit.Assert;
 import org.junit.Test;
 import org.xml.sax.Attributes;
