@@ -1,4 +1,7 @@
+<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/validation/ValidationIssue.java
 /* (C)2026 */
+=======
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/validation/ValidationIssue.java
 package org.flowdigger.gradle.xml.validation;
 
 /**

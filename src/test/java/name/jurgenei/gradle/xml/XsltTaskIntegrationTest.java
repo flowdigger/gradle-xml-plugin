@@ -1,4 +1,7 @@
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
 /* (C)2026 */
+=======
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
 package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertEquals;
@@ -30,9 +33,13 @@ public class XsltTaskIntegrationTest {
         write("settings.gradle", """
             rootProject.name = 'xslt-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -85,9 +92,13 @@ public class XsltTaskIntegrationTest {
                 """
             rootProject.name = 'xslt-json-method-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -136,9 +147,13 @@ public class XsltTaskIntegrationTest {
                 """
             rootProject.name = 'xslt-json-auto-hierarchical-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -185,9 +200,13 @@ public class XsltTaskIntegrationTest {
                 """
             rootProject.name = 'xslt-json-native-hierarchical-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -237,9 +256,13 @@ public class XsltTaskIntegrationTest {
                 """
             rootProject.name = 'xslt-text-method-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -292,9 +315,13 @@ public class XsltTaskIntegrationTest {
                 """
             rootProject.name = 'xslt-explicit-io-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -345,9 +372,13 @@ public class XsltTaskIntegrationTest {
                 """
             rootProject.name = 'xslt-tree-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -412,9 +443,13 @@ public class XsltTaskIntegrationTest {
                 """
             rootProject.name = 'xslt-skip-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -473,9 +508,13 @@ public class XsltTaskIntegrationTest {
                 """
             rootProject.name = 'xslt-param-fingerprint-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -517,9 +556,13 @@ public class XsltTaskIntegrationTest {
         long futureTimestamp = System.currentTimeMillis() + 60_000;
         assertTrue(output.setLastModified(futureTimestamp));
 
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -560,11 +603,17 @@ public class XsltTaskIntegrationTest {
                 """
             rootProject.name = 'indexer-refactor-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
             plugins { id 'org.flowdigger.gradle.xml' }
 
+=======
+        write("build.gradle", """
+            plugins { id 'org.flowdigger.gradle.xml' }
+            
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             // Input configuration
             def seedFile = file('src/seed/schema-index-seed.xml')
             def indexerStyle = file('src/xslt/indexer.xsl')
@@ -650,6 +699,7 @@ public class XsltTaskIntegrationTest {
                 """
             rootProject.name = 'multi-schema-indexer'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
@@ -658,6 +708,14 @@ public class XsltTaskIntegrationTest {
             def seedDir = file('src/seeds')
             def indexerStyle = file('src/xslt/indexer.xsl')
 
+=======
+        write("build.gradle", """
+            plugins { id 'org.flowdigger.gradle.xml' }
+            
+            def seedDir = file('src/seeds')
+            def indexerStyle = file('src/xslt/indexer.xsl')
+            
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             tasks.register('indexSchemas', org.flowdigger.gradle.xml.XsltTask) {
               // File-tree with include/exclude for batch processing
               source(fileTree(seedDir) {
@@ -722,9 +780,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsXirInputToXml() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-input-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -760,9 +822,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void resolvesXirViaDocFunction() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-doc-xir-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -803,9 +869,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void resolvesXirViaCollectionFunction() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-collection-xir-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -855,9 +925,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsXmlToXirOutput() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-output-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -895,9 +969,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsXmlToBeautifiedXirOutput() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-output-beautified-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -936,9 +1014,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsXmlToPrettyAliasXirOutput() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-output-pretty-alias-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -977,9 +1059,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void failsOnUnsupportedXirFormat() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-format-invalid-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -1016,9 +1102,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void roundtripsXmlThroughXir() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-roundtrip-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('xmlToXir', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -1061,9 +1151,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void roundtripsDefaultNamespaceThroughXir() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-default-ns-roundtrip-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('xmlToXir', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -1115,9 +1209,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsWithXirStylesheetAndXirInputOutput() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-style-roundtrip-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xir'
@@ -1155,9 +1253,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsCanonicalJsonInputToXml() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-json-input-canonical-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -1212,9 +1314,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsXmlToCanonicalJsonOutputWithBeautifiedFormat() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-json-output-canonical-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -1257,9 +1363,13 @@ public class XsltTaskIntegrationTest {
     @Test
     public void roundtripsXmlThroughCanonicalJson() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-json-roundtrip-canonical-test'");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/XsltTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/XsltTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('xmlToJson', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'

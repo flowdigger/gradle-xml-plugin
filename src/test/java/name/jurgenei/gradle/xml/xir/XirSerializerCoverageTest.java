@@ -1,5 +1,14 @@
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/xir/XirSerializerCoverageTest.java
 /* (C)2026 */
 package org.flowdigger.gradle.xml.xir;
+=======
+package org.flowdigger.gradle.xml.xir;
+
+import org.flowdigger.xir.XirParser;
+import org.flowdigger.xir.XirSerializer;
+import org.junit.Assert;
+import org.junit.Test;
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/xir/XirSerializerCoverageTest.java
 
 import java.io.StringReader;
 import java.io.StringWriter;
