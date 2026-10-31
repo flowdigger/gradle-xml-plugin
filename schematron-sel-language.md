@@ -39,14 +39,14 @@ Output namespace/prefix no longer fixed to `sel:*`.
 
 Configuration precedence:
 
-`task override -> schema default -> built-in default (http://jurgenei.name/sel, sel)`
+`task override -> schema default -> built-in default (http://flowdigger.name/sel, sel)`
 
 Schema defaults:
 
 ```xml
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            xmlns:sel="http://jurgenei.name/sel"
-            sel:outputNamespaceUri="http://jurgenei.name/sel"
+            xmlns:sel="http://flowdigger.name/sel"
+            sel:outputNamespaceUri="http://flowdigger.name/sel"
             sel:outputNamespacePrefix="sel">
 ```
 
@@ -62,7 +62,7 @@ outputNamespacePrefix 'obs'   // or '' for default namespace output
 ### Input
 
 ```lisp
-(c:Document {xmlns:c "http://jurgenei.name/canonical"}
+(c:Document {xmlns:c "http://flowdigger.name/canonical"}
   (c:Body
     (c:Section
       (c:Title "Interfaces")
@@ -73,7 +73,7 @@ outputNamespacePrefix 'obs'   // or '' for default namespace output
 <summary>XML view</summary>
 
 ```xml
-<Document xmlns="http://jurgenei.name/canonical">
+<Document xmlns="http://flowdigger.name/canonical">
   <Body>
     <Section>
       <Title>Interfaces</Title>
@@ -91,8 +91,8 @@ outputNamespacePrefix 'obs'   // or '' for default namespace output
 (sch:rule
   {context "c:Paragraph"
    xmlns:sch "http://purl.oclc.org/dsdl/schematron"
-   xmlns:c "http://jurgenei.name/canonical"
-   xmlns:sel "http://jurgenei.name/sel"}
+   xmlns:c "http://flowdigger.name/canonical"
+   xmlns:sel "http://flowdigger.name/sel"}
   (sch:report
     {test "normalize-space(.)"
      sel:type "paragraph"
@@ -108,8 +108,8 @@ outputNamespacePrefix 'obs'   // or '' for default namespace output
 ```xml
 <sch:rule context="c:Paragraph"
           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-          xmlns:c="http://jurgenei.name/canonical"
-          xmlns:sel="http://jurgenei.name/sel">
+          xmlns:c="http://flowdigger.name/canonical"
+          xmlns:sel="http://flowdigger.name/sel">
   <sch:report test="normalize-space(.)"
               sel:type="paragraph"
               sel:group="knowledge"
@@ -125,13 +125,13 @@ outputNamespacePrefix 'obs'   // or '' for default namespace output
 ### Output
 
 ```lisp
-(sel:Observations {xmlns:sel "http://jurgenei.name/sel" group "knowledge"}
+(sel:Observations {xmlns:sel "http://flowdigger.name/sel" group "knowledge"}
   (sel:Observation
     {type "paragraph" group "knowledge" source "report" ruleContext "c:Paragraph"}
     (sel:Evidence
-      (c:Paragraph {xmlns:c "http://jurgenei.name/canonical"} "Hello from source"))
+      (c:Paragraph {xmlns:c "http://flowdigger.name/canonical"} "Hello from source"))
     (sel:Context
-      (c:Title {xmlns:c "http://jurgenei.name/canonical"} "Interfaces"))
+      (c:Title {xmlns:c "http://flowdigger.name/canonical"} "Interfaces"))
     (sel:Source
       {document "canonical.xml"
        path "/c:Document[1]/c:Body[1]/c:Section[1]/c:Paragraph[1]"})))
@@ -141,13 +141,13 @@ outputNamespacePrefix 'obs'   // or '' for default namespace output
 <summary>XML view</summary>
 
 ```xml
-<sel:Observations xmlns:sel="http://jurgenei.name/sel" group="knowledge">
+<sel:Observations xmlns:sel="http://flowdigger.name/sel" group="knowledge">
   <sel:Observation type="paragraph" group="knowledge" source="report" ruleContext="c:Paragraph">
     <sel:Evidence>
-      <c:Paragraph xmlns:c="http://jurgenei.name/canonical">Hello from source</c:Paragraph>
+      <c:Paragraph xmlns:c="http://flowdigger.name/canonical">Hello from source</c:Paragraph>
     </sel:Evidence>
     <sel:Context>
-      <c:Title xmlns:c="http://jurgenei.name/canonical">Interfaces</c:Title>
+      <c:Title xmlns:c="http://flowdigger.name/canonical">Interfaces</c:Title>
     </sel:Context>
     <sel:Source document="canonical.xml" path="/c:Document[1]/c:Body[1]/c:Section[1]/c:Paragraph[1]"/>
   </sel:Observation>
@@ -183,7 +183,7 @@ outputNamespacePrefix 'obs'   // or '' for default namespace output
 ```lisp
 (sch:schema
   {xmlns:sch "http://purl.oclc.org/dsdl/schematron"
-   xmlns:sel "http://jurgenei.name/sel"}
+   xmlns:sel "http://flowdigger.name/sel"}
   (sel:presets
     (sel:preset {id "id-required" type "missing-id" group "quality" copy "."}))
   (sch:pattern
@@ -199,7 +199,7 @@ outputNamespacePrefix 'obs'   // or '' for default namespace output
 
 ```xml
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            xmlns:sel="http://jurgenei.name/sel">
+            xmlns:sel="http://flowdigger.name/sel">
   <sel:presets>
     <sel:preset id="id-required" type="missing-id" group="quality" copy="."/>
   </sel:presets>
@@ -220,7 +220,7 @@ outputNamespacePrefix 'obs'   // or '' for default namespace output
 ### Output
 
 ```lisp
-(sel:Observations {xmlns:sel "http://jurgenei.name/sel" group "quality"}
+(sel:Observations {xmlns:sel "http://flowdigger.name/sel" group "quality"}
   (sel:Observation {type "missing-id" group "quality" source "assert" ruleContext "person"} "...")
   (sel:Observation {type "missing-id" group "quality" source "assert" ruleContext "employee"} "..."))
 ```
@@ -229,7 +229,7 @@ outputNamespacePrefix 'obs'   // or '' for default namespace output
 <summary>XML view</summary>
 
 ```xml
-<sel:Observations xmlns:sel="http://jurgenei.name/sel" group="quality">
+<sel:Observations xmlns:sel="http://flowdigger.name/sel" group="quality">
   <sel:Observation type="missing-id" group="quality" source="assert" ruleContext="person">...</sel:Observation>
   <sel:Observation type="missing-id" group="quality" source="assert" ruleContext="employee">...</sel:Observation>
 </sel:Observations>
@@ -245,7 +245,7 @@ current matched rule context.
 ### Input
 
 ```lisp
-(c:Document {xmlns:c "http://jurgenei.name/canonical"}
+(c:Document {xmlns:c "http://flowdigger.name/canonical"}
   (c:Body
     (c:Section
       (c:Title "Interfaces")
@@ -256,7 +256,7 @@ current matched rule context.
 <summary>XML view</summary>
 
 ```xml
-<Document xmlns="http://jurgenei.name/canonical">
+<Document xmlns="http://flowdigger.name/canonical">
   <Body>
     <Section>
       <Title>Interfaces</Title>
@@ -273,8 +273,8 @@ current matched rule context.
 ```lisp
 (sch:schema
   {xmlns:sch "http://purl.oclc.org/dsdl/schematron"
-   xmlns:c "http://jurgenei.name/canonical"
-   xmlns:sel "http://jurgenei.name/sel"}
+   xmlns:c "http://flowdigger.name/canonical"
+   xmlns:sel "http://flowdigger.name/sel"}
   (sel:presets
     (sel:preset {id "paragraph-template" type "paragraph" group "knowledge" copy "."}
       (sel:template
@@ -292,8 +292,8 @@ current matched rule context.
 
 ```xml
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            xmlns:c="http://jurgenei.name/canonical"
-            xmlns:sel="http://jurgenei.name/sel">
+            xmlns:c="http://flowdigger.name/canonical"
+            xmlns:sel="http://flowdigger.name/sel">
   <sel:presets>
     <sel:preset id="paragraph-template" type="paragraph" group="knowledge" copy=".">
       <sel:template>
@@ -320,11 +320,11 @@ current matched rule context.
 ### Output
 
 ```lisp
-(sel:Observations {xmlns:sel "http://jurgenei.name/sel" group "knowledge"}
+(sel:Observations {xmlns:sel "http://flowdigger.name/sel" group "knowledge"}
   (sel:Observation
     {type "paragraph" group "knowledge" source "report" ruleContext "c:Paragraph"}
     (sel:Evidence
-      (c:Paragraph {xmlns:c "http://jurgenei.name/canonical" code "p-1"} "Source payload"))
+      (c:Paragraph {xmlns:c "http://flowdigger.name/canonical" code "p-1"} "Source payload"))
     (sel:Meta {code "p-1"}
       (sel:Summary "Paragraph:Source payload")
       (sel:Section "Interfaces"))
@@ -337,10 +337,10 @@ current matched rule context.
 <summary>XML view</summary>
 
 ```xml
-<sel:Observations xmlns:sel="http://jurgenei.name/sel" group="knowledge">
+<sel:Observations xmlns:sel="http://flowdigger.name/sel" group="knowledge">
   <sel:Observation type="paragraph" group="knowledge" source="report" ruleContext="c:Paragraph">
     <sel:Evidence>
-      <c:Paragraph xmlns:c="http://jurgenei.name/canonical" code="p-1">Source payload</c:Paragraph>
+      <c:Paragraph xmlns:c="http://flowdigger.name/canonical" code="p-1">Source payload</c:Paragraph>
     </sel:Evidence>
     <sel:Meta code="p-1">
       <sel:Summary>Paragraph:Source payload</sel:Summary>

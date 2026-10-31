@@ -2,16 +2,16 @@
 
 ![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
 
-[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/name.jurgenei.gradle.xml?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/name.jurgenei.gradle.xml)
-[![Build and Test](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/gradle-build.yml)
-[![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/gradle-build.yml)
-[![Coverage CI](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/coverage.yml)
-[![CodeQL](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/codeql.yml/badge.svg)](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/codeql.yml)
-[![Dependency Check](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/dependency-check.yml/badge.svg)](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/dependency-check.yml)
-[![SpotBugs Security](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/spotbugs-security.yml/badge.svg)](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/spotbugs-security.yml)
-[![Checkstyle](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/checkstyle.yml/badge.svg)](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/checkstyle.yml)
-[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/jurgenei/gradle-xml-plugin/security/dependabot)
-[![Coverage](https://codecov.io/gh/jurgenei/gradle-xml-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/jurgenei/gradle-xml-plugin)
+[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/name.flowdigger.gradle.xml?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/name.flowdigger.gradle.xml)
+[![Build and Test](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/gradle-build.yml)
+[![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/gradle-build.yml)
+[![Coverage CI](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/coverage.yml)
+[![CodeQL](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/codeql.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/codeql.yml)
+[![Dependency Check](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/dependency-check.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/dependency-check.yml)
+[![SpotBugs Security](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/spotbugs-security.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/spotbugs-security.yml)
+[![Checkstyle](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/checkstyle.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/checkstyle.yml)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/flowdigger/gradle-xml-plugin/security/dependabot)
+[![Coverage](https://codecov.io/gh/flowdigger/gradle-xml-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/flowdigger/gradle-xml-plugin)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/java-21+-green.svg)](https://www.oracle.com/java/)
 [![Gradle](https://img.shields.io/badge/gradle-9.5+-blue.svg)](https://gradle.org/)
@@ -29,7 +29,7 @@ It supports XML, XIR, and canonical JSON routing, with one orthogonal DSL across
 Structured Knowledge -> XIR -> Observation -> Derivation -> Knowledge -> Applications
 ```
 
-Next repository in reading path: [example-lineage-plsql](https://github.com/jurgenei/example-lineage-plsql).
+Next repository in reading path: [example-lineage-plsql](https://github.com/flowdigger/example-lineage-plsql).
 
 ## Introduction and Overview
 
@@ -43,23 +43,23 @@ Use this plugin when project needs repeatable XML processing in build pipeline:
 
 Main task types:
 
-- `name.jurgenei.gradle.xml.XsltTask`
-- `name.jurgenei.gradle.xml.XQueryTask`
-- `name.jurgenei.gradle.xml.SchematronTask`
-- `name.jurgenei.gradle.xml.XsdTask`
-- `name.jurgenei.gradle.xml.SchematronBootstrapTask`
-- `name.jurgenei.gradle.xml.SchematronSelCompileTask`
-- `name.jurgenei.gradle.xml.SchematronSelExtractTask`
-- `name.jurgenei.gradle.xml.ShaclSelCompileTask`
-- `name.jurgenei.gradle.xml.ShaclSelExtractTask`
-- `name.jurgenei.gradle.xml.XSpecCompileTask`
-- `name.jurgenei.gradle.xml.XSpecTask`
+- `name.flowdigger.gradle.xml.XsltTask`
+- `name.flowdigger.gradle.xml.XQueryTask`
+- `name.flowdigger.gradle.xml.SchematronTask`
+- `name.flowdigger.gradle.xml.XsdTask`
+- `name.flowdigger.gradle.xml.SchematronBootstrapTask`
+- `name.flowdigger.gradle.xml.SchematronSelCompileTask`
+- `name.flowdigger.gradle.xml.SchematronSelExtractTask`
+- `name.flowdigger.gradle.xml.ShaclSelCompileTask`
+- `name.flowdigger.gradle.xml.ShaclSelExtractTask`
+- `name.flowdigger.gradle.xml.XSpecCompileTask`
+- `name.flowdigger.gradle.xml.XSpecTask`
 
-Plugin ID: `name.jurgenei.gradle.xml`
+Plugin ID: `name.flowdigger.gradle.xml`
 
 ```kotlin
 plugins {
-    id("name.jurgenei.gradle.xml")
+    id("name.flowdigger.gradle.xml")
 }
 ```
 
@@ -168,7 +168,7 @@ Transformations use `XsltTask` and `XQueryTask`.
 <summary>Groovy Task Def (XSLT)</summary>
 
 ```groovy
-tasks.register('xmlToXir', name.jurgenei.gradle.xml.XsltTask) {
+tasks.register('xmlToXir', name.flowdigger.gradle.xml.XsltTask) {
   style 'src/main/xslt/identity.xsl'
   source(fileTree('src/main/xml') { include '**/*.xml' })
   outputDir.set(layout.buildDirectory.dir('out/xslt'))
@@ -185,7 +185,7 @@ tasks.register('xmlToXir', name.jurgenei.gradle.xml.XsltTask) {
 <summary>Kotlin Task Def (XSLT)</summary>
 
 ```kotlin
-tasks.register<name.jurgenei.gradle.xml.XsltTask>("xmlToXir") {
+tasks.register<name.flowdigger.gradle.xml.XsltTask>("xmlToXir") {
     style("src/main/xslt/identity.xsl")
     source(fileTree("src/main/xml") { include("**/*.xml") })
     outputDir.set(layout.buildDirectory.dir("out/xslt"))
@@ -216,7 +216,7 @@ tasks.register<name.jurgenei.gradle.xml.XsltTask>("xmlToXir") {
 <summary>Groovy Task Def (XQuery)</summary>
 
 ```groovy
-tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+tasks.register('runXQuery', name.flowdigger.gradle.xml.XQueryTask) {
   query 'src/main/xquery/main.xq'
   source 'src/main/xml/input.xml'
   outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -231,7 +231,7 @@ tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
 <summary>Kotlin Task Def (XQuery)</summary>
 
 ```kotlin
-tasks.register<name.jurgenei.gradle.xml.XQueryTask>("runXQuery") {
+tasks.register<name.flowdigger.gradle.xml.XQueryTask>("runXQuery") {
     query("src/main/xquery/main.xq")
     source("src/main/xml/input.xml")
     outputDir.set(layout.buildDirectory.dir("out/xquery"))
@@ -295,12 +295,12 @@ Engine options:
 <summary>Groovy Task Def (XSD validation)</summary>
 
 ```groovy
-tasks.register('validateXsd', name.jurgenei.gradle.xml.XsdTask) {
+tasks.register('validateXsd', name.flowdigger.gradle.xml.XsdTask) {
   schema 'src/main/xsd/schema.xsd'
   source(fileTree('src/main/xml') { include '**/*.xml' })
   outputDir.set(layout.buildDirectory.dir('reports/xsd'))
-  format(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
-  engine.set(name.jurgenei.gradle.xml.validation.XsdEngine.AUTO)
+  format(name.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+  engine.set(name.flowdigger.gradle.xml.validation.XsdEngine.AUTO)
   failOnError.set(false)
 }
 ```
@@ -310,12 +310,12 @@ tasks.register('validateXsd', name.jurgenei.gradle.xml.XsdTask) {
 <summary>Kotlin Task Def (XSD validation)</summary>
 
 ```kotlin
-tasks.register<name.jurgenei.gradle.xml.XsdTask>("validateXsd") {
+tasks.register<name.flowdigger.gradle.xml.XsdTask>("validateXsd") {
     schema("src/main/xsd/schema.xsd")
     source(fileTree("src/main/xml") { include("**/*.xml") })
     outputDir.set(layout.buildDirectory.dir("reports/xsd"))
-    format(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
-    engine.set(name.jurgenei.gradle.xml.validation.XsdEngine.AUTO)
+    format(name.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+    engine.set(name.flowdigger.gradle.xml.validation.XsdEngine.AUTO)
     failOnError.set(false)
 }
 ```
@@ -333,12 +333,12 @@ Schematron options include:
 <summary>Groovy Task Def (Schematron validation)</summary>
 
 ```groovy
-tasks.register('validateSchematron', name.jurgenei.gradle.xml.SchematronTask) {
+tasks.register('validateSchematron', name.flowdigger.gradle.xml.SchematronTask) {
   schema 'src/main/schematron/rules.sch'
   style 'build/generated/schematron/rules.compiled.xsl'
   source(fileTree('src/main/xml') { include '**/*.xml' })
   outputDir.set(layout.buildDirectory.dir('reports/schematron'))
-  format(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+  format(name.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
   phase.set('#ALL')
   severityThreshold.set('warning')
   workers.set(4)
@@ -351,12 +351,12 @@ tasks.register('validateSchematron', name.jurgenei.gradle.xml.SchematronTask) {
 <summary>Kotlin Task Def (Schematron validation)</summary>
 
 ```kotlin
-tasks.register<name.jurgenei.gradle.xml.SchematronTask>("validateSchematron") {
+tasks.register<name.flowdigger.gradle.xml.SchematronTask>("validateSchematron") {
     schema("src/main/schematron/rules.sch")
     style("build/generated/schematron/rules.compiled.xsl")
     source(fileTree("src/main/xml") { include("**/*.xml") })
     outputDir.set(layout.buildDirectory.dir("reports/schematron"))
-    format(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+    format(name.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
     phase.set("#ALL")
     severityThreshold.set("warning")
     workers.set(4)
@@ -388,13 +388,13 @@ tasks.register<name.jurgenei.gradle.xml.SchematronTask>("validateSchematron") {
 <summary>Groovy Task Def (XSpec compile + run)</summary>
 
 ```groovy
-tasks.register('compileXSpec', name.jurgenei.gradle.xml.XSpecCompileTask) {
+tasks.register('compileXSpec', name.flowdigger.gradle.xml.XSpecCompileTask) {
   source(fileTree('src/main/xspec') { include '**/*.xspec' })
   outputDir.set(layout.buildDirectory.dir('generated/xspec'))
   outputExtension.set('.xspec.xsl')
 }
 
-tasks.register('runXSpec', name.jurgenei.gradle.xml.XSpecTask) {
+tasks.register('runXSpec', name.flowdigger.gradle.xml.XSpecTask) {
   dependsOn tasks.named('compileXSpec')
   source(fileTree('src/main/xspec') { include '**/*.xspec' })
   outputDir.set(layout.buildDirectory.dir('reports/xspec'))
@@ -408,13 +408,13 @@ tasks.register('runXSpec', name.jurgenei.gradle.xml.XSpecTask) {
 <summary>Kotlin Task Def (XSpec compile + run)</summary>
 
 ```kotlin
-tasks.register<name.jurgenei.gradle.xml.XSpecCompileTask>("compileXSpec") {
+tasks.register<name.flowdigger.gradle.xml.XSpecCompileTask>("compileXSpec") {
     source(fileTree("src/main/xspec") { include("**/*.xspec") })
     outputDir.set(layout.buildDirectory.dir("generated/xspec"))
     outputExtension.set(".xspec.xsl")
 }
 
-tasks.register<name.jurgenei.gradle.xml.XSpecTask>("runXSpec") {
+tasks.register<name.flowdigger.gradle.xml.XSpecTask>("runXSpec") {
     dependsOn(tasks.named("compileXSpec"))
     source(fileTree("src/main/xspec") { include("**/*.xspec") })
     outputDir.set(layout.buildDirectory.dir("reports/xspec"))
