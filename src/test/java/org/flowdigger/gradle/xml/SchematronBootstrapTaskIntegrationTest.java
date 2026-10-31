@@ -1,4 +1,7 @@
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronBootstrapTaskIntegrationTest.java
 /* (C)2026 */
+=======
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronBootstrapTaskIntegrationTest.java
 package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertTrue;
@@ -28,9 +31,13 @@ public class SchematronBootstrapTaskIntegrationTest {
             rootProject.name = 'schematron-bootstrap-flow'
             """);
 
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronBootstrapTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronBootstrapTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
 
             tasks.register('bootstrapCanonicalSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
@@ -112,9 +119,13 @@ public class SchematronBootstrapTaskIntegrationTest {
     @Test
     public void doesNotOverwriteExistingSchematronAndLogsWarning() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-bootstrap-safe'\n");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronBootstrapTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronBootstrapTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
 
             tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
@@ -148,9 +159,13 @@ public class SchematronBootstrapTaskIntegrationTest {
     @Test
     public void emitsSelProfilesForNamedAndInlineComplexTypes() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-bootstrap-sel-profiles'\n");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronBootstrapTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronBootstrapTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
 
             tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
@@ -215,9 +230,13 @@ public class SchematronBootstrapTaskIntegrationTest {
     @Test
     public void failsWhenNeitherSchemaFileNorSchemaUrlConfigured() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-bootstrap-missing-source'\n");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronBootstrapTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronBootstrapTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
 
             tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {

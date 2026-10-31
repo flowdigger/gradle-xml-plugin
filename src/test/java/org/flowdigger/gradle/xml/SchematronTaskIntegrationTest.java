@@ -1,4 +1,7 @@
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronTaskIntegrationTest.java
 /* (C)2026 */
+=======
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronTaskIntegrationTest.java
 package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertNotNull;
@@ -34,9 +37,13 @@ public class SchematronTaskIntegrationTest {
                 """
             rootProject.name = 'schematron-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -88,9 +95,13 @@ public class SchematronTaskIntegrationTest {
                 """
             rootProject.name = 'schematron-tree-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -152,9 +163,13 @@ public class SchematronTaskIntegrationTest {
                 """
             rootProject.name = 'schematron-style-cache-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -206,9 +221,13 @@ public class SchematronTaskIntegrationTest {
                 "Expected compiled style timestamp to stay unchanged when nothing changed",
                 secondCompiledTimestamp == firstCompiledTimestamp);
 
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -245,9 +264,13 @@ public class SchematronTaskIntegrationTest {
                 """
             rootProject.name = 'schematron-debug-format-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -299,9 +322,13 @@ public class SchematronTaskIntegrationTest {
     @Test
     public void schematronTaskDoesNotUseTaskProjectAtExecutionTime() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-cc-warning-fail'\n");
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('schematronTask', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -372,9 +399,13 @@ public class SchematronTaskIntegrationTest {
                 """
             rootProject.name = 'schematron-xir-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.xir'
@@ -424,9 +455,13 @@ public class SchematronTaskIntegrationTest {
                 """
             rootProject.name = 'schematron-doc-xir-test'
             """);
+<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/SchematronTaskIntegrationTest.java
         write(
                 "build.gradle",
                 """
+=======
+        write("build.gradle", """
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/SchematronTaskIntegrationTest.java
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'

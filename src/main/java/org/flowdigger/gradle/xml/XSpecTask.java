@@ -8,6 +8,10 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
+<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/XSpecTask.java
+=======
+import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/XSpecTask.java
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.Serializer;

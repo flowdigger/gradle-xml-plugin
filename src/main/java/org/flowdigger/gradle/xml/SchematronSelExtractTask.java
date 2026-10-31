@@ -27,6 +27,13 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
+<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/SchematronSelExtractTask.java
+=======
+import org.flowdigger.gradle.xml.json.JsonCanonicalXmlReader;
+import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
+import org.flowdigger.xir.XirReader;
+import org.flowdigger.xir.XirSerializer;
+>>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/SchematronSelExtractTask.java
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.Serializer;
