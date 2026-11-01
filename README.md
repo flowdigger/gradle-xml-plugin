@@ -2,7 +2,7 @@
 
 ![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
 
-[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/name.jurgenei.gradle.xml?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/name.jurgenei.gradle.xml)
+[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/org.flowdigger.gradle.xml?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/org.flowdigger.gradle.xml)
 [![Build and Test](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/gradle-build.yml)
 [![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/gradle-build.yml)
 [![Coverage CI](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/jurgenei/gradle-xml-plugin/actions/workflows/coverage.yml)
@@ -43,23 +43,23 @@ Use this plugin when project needs repeatable XML processing in build pipeline:
 
 Main task types:
 
-- `name.jurgenei.gradle.xml.XsltTask`
-- `name.jurgenei.gradle.xml.XQueryTask`
-- `name.jurgenei.gradle.xml.SchematronTask`
-- `name.jurgenei.gradle.xml.XsdTask`
-- `name.jurgenei.gradle.xml.SchematronBootstrapTask`
-- `name.jurgenei.gradle.xml.SchematronSelCompileTask`
-- `name.jurgenei.gradle.xml.SchematronSelExtractTask`
-- `name.jurgenei.gradle.xml.ShaclSelCompileTask`
-- `name.jurgenei.gradle.xml.ShaclSelExtractTask`
-- `name.jurgenei.gradle.xml.XSpecCompileTask`
-- `name.jurgenei.gradle.xml.XSpecTask`
+- `org.flowdigger.gradle.xml.XsltTask`
+- `org.flowdigger.gradle.xml.XQueryTask`
+- `org.flowdigger.gradle.xml.SchematronTask`
+- `org.flowdigger.gradle.xml.XsdTask`
+- `org.flowdigger.gradle.xml.SchematronBootstrapTask`
+- `org.flowdigger.gradle.xml.SchematronSelCompileTask`
+- `org.flowdigger.gradle.xml.SchematronSelExtractTask`
+- `org.flowdigger.gradle.xml.ShaclSelCompileTask`
+- `org.flowdigger.gradle.xml.ShaclSelExtractTask`
+- `org.flowdigger.gradle.xml.XSpecCompileTask`
+- `org.flowdigger.gradle.xml.XSpecTask`
 
-Plugin ID: `name.jurgenei.gradle.xml`
+Plugin ID: `org.flowdigger.gradle.xml`
 
 ```kotlin
 plugins {
-    id("name.jurgenei.gradle.xml")
+    id("org.flowdigger.gradle.xml")
 }
 ```
 
@@ -168,7 +168,7 @@ Transformations use `XsltTask` and `XQueryTask`.
 <summary>Groovy Task Def (XSLT)</summary>
 
 ```groovy
-tasks.register('xmlToXir', name.jurgenei.gradle.xml.XsltTask) {
+tasks.register('xmlToXir', org.flowdigger.gradle.xml.XsltTask) {
   style 'src/main/xslt/identity.xsl'
   source(fileTree('src/main/xml') { include '**/*.xml' })
   outputDir.set(layout.buildDirectory.dir('out/xslt'))
@@ -185,7 +185,7 @@ tasks.register('xmlToXir', name.jurgenei.gradle.xml.XsltTask) {
 <summary>Kotlin Task Def (XSLT)</summary>
 
 ```kotlin
-tasks.register<name.jurgenei.gradle.xml.XsltTask>("xmlToXir") {
+tasks.register<org.flowdigger.gradle.xml.XsltTask>("xmlToXir") {
     style("src/main/xslt/identity.xsl")
     source(fileTree("src/main/xml") { include("**/*.xml") })
     outputDir.set(layout.buildDirectory.dir("out/xslt"))
@@ -216,7 +216,7 @@ tasks.register<name.jurgenei.gradle.xml.XsltTask>("xmlToXir") {
 <summary>Groovy Task Def (XQuery)</summary>
 
 ```groovy
-tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
+tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
   query 'src/main/xquery/main.xq'
   source 'src/main/xml/input.xml'
   outputDir.set(layout.buildDirectory.dir('out/xquery'))
@@ -231,7 +231,7 @@ tasks.register('runXQuery', name.jurgenei.gradle.xml.XQueryTask) {
 <summary>Kotlin Task Def (XQuery)</summary>
 
 ```kotlin
-tasks.register<name.jurgenei.gradle.xml.XQueryTask>("runXQuery") {
+tasks.register<org.flowdigger.gradle.xml.XQueryTask>("runXQuery") {
     query("src/main/xquery/main.xq")
     source("src/main/xml/input.xml")
     outputDir.set(layout.buildDirectory.dir("out/xquery"))
@@ -295,12 +295,12 @@ Engine options:
 <summary>Groovy Task Def (XSD validation)</summary>
 
 ```groovy
-tasks.register('validateXsd', name.jurgenei.gradle.xml.XsdTask) {
+tasks.register('validateXsd', org.flowdigger.gradle.xml.XsdTask) {
   schema 'src/main/xsd/schema.xsd'
   source(fileTree('src/main/xml') { include '**/*.xml' })
   outputDir.set(layout.buildDirectory.dir('reports/xsd'))
-  format(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
-  engine.set(name.jurgenei.gradle.xml.validation.XsdEngine.AUTO)
+  format(org.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+  engine.set(org.flowdigger.gradle.xml.validation.XsdEngine.AUTO)
   failOnError.set(false)
 }
 ```
@@ -310,12 +310,12 @@ tasks.register('validateXsd', name.jurgenei.gradle.xml.XsdTask) {
 <summary>Kotlin Task Def (XSD validation)</summary>
 
 ```kotlin
-tasks.register<name.jurgenei.gradle.xml.XsdTask>("validateXsd") {
+tasks.register<org.flowdigger.gradle.xml.XsdTask>("validateXsd") {
     schema("src/main/xsd/schema.xsd")
     source(fileTree("src/main/xml") { include("**/*.xml") })
     outputDir.set(layout.buildDirectory.dir("reports/xsd"))
-    format(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
-    engine.set(name.jurgenei.gradle.xml.validation.XsdEngine.AUTO)
+    format(org.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+    engine.set(org.flowdigger.gradle.xml.validation.XsdEngine.AUTO)
     failOnError.set(false)
 }
 ```
@@ -333,12 +333,12 @@ Schematron options include:
 <summary>Groovy Task Def (Schematron validation)</summary>
 
 ```groovy
-tasks.register('validateSchematron', name.jurgenei.gradle.xml.SchematronTask) {
+tasks.register('validateSchematron', org.flowdigger.gradle.xml.SchematronTask) {
   schema 'src/main/schematron/rules.sch'
   style 'build/generated/schematron/rules.compiled.xsl'
   source(fileTree('src/main/xml') { include '**/*.xml' })
   outputDir.set(layout.buildDirectory.dir('reports/schematron'))
-  format(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+  format(org.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
   phase.set('#ALL')
   severityThreshold.set('warning')
   workers.set(4)
@@ -351,12 +351,12 @@ tasks.register('validateSchematron', name.jurgenei.gradle.xml.SchematronTask) {
 <summary>Kotlin Task Def (Schematron validation)</summary>
 
 ```kotlin
-tasks.register<name.jurgenei.gradle.xml.SchematronTask>("validateSchematron") {
+tasks.register<org.flowdigger.gradle.xml.SchematronTask>("validateSchematron") {
     schema("src/main/schematron/rules.sch")
     style("build/generated/schematron/rules.compiled.xsl")
     source(fileTree("src/main/xml") { include("**/*.xml") })
     outputDir.set(layout.buildDirectory.dir("reports/schematron"))
-    format(name.jurgenei.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
+    format(org.flowdigger.gradle.xml.validation.ReportFormat.SVRL_AND_JUNIT)
     phase.set("#ALL")
     severityThreshold.set("warning")
     workers.set(4)
@@ -388,13 +388,13 @@ tasks.register<name.jurgenei.gradle.xml.SchematronTask>("validateSchematron") {
 <summary>Groovy Task Def (XSpec compile + run)</summary>
 
 ```groovy
-tasks.register('compileXSpec', name.jurgenei.gradle.xml.XSpecCompileTask) {
+tasks.register('compileXSpec', org.flowdigger.gradle.xml.XSpecCompileTask) {
   source(fileTree('src/main/xspec') { include '**/*.xspec' })
   outputDir.set(layout.buildDirectory.dir('generated/xspec'))
   outputExtension.set('.xspec.xsl')
 }
 
-tasks.register('runXSpec', name.jurgenei.gradle.xml.XSpecTask) {
+tasks.register('runXSpec', org.flowdigger.gradle.xml.XSpecTask) {
   dependsOn tasks.named('compileXSpec')
   source(fileTree('src/main/xspec') { include '**/*.xspec' })
   outputDir.set(layout.buildDirectory.dir('reports/xspec'))
@@ -408,13 +408,13 @@ tasks.register('runXSpec', name.jurgenei.gradle.xml.XSpecTask) {
 <summary>Kotlin Task Def (XSpec compile + run)</summary>
 
 ```kotlin
-tasks.register<name.jurgenei.gradle.xml.XSpecCompileTask>("compileXSpec") {
+tasks.register<org.flowdigger.gradle.xml.XSpecCompileTask>("compileXSpec") {
     source(fileTree("src/main/xspec") { include("**/*.xspec") })
     outputDir.set(layout.buildDirectory.dir("generated/xspec"))
     outputExtension.set(".xspec.xsl")
 }
 
-tasks.register<name.jurgenei.gradle.xml.XSpecTask>("runXSpec") {
+tasks.register<org.flowdigger.gradle.xml.XSpecTask>("runXSpec") {
     dependsOn(tasks.named("compileXSpec"))
     source(fileTree("src/main/xspec") { include("**/*.xspec") })
     outputDir.set(layout.buildDirectory.dir("reports/xspec"))

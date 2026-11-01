@@ -1,0 +1,213 @@
+/* (C)2026 */
+package org.flowdigger.gradle.xml;
+
+import java.io.File;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.List;
+import java.util.Map;
+import javax.inject.Inject;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.gradle.api.DefaultTask;
+import org.gradle.api.GradleException;
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.MapProperty;
+import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.Optional;
+import org.gradle.api.tasks.OutputFile;
+import org.gradle.api.tasks.PathSensitive;
+import org.gradle.api.tasks.PathSensitivity;
+import org.gradle.api.tasks.TaskAction;
+import org.gradle.work.DisableCachingByDefault;
+import org.w3c.dom.Document;
+
+/**
+ * Compiles annotation-bearing Schematron rules into an executable phase-2 SEL stylesheet.
+ */
+@DisableCachingByDefault(
+        because = "Compiler output depends on schema content and extraction annotation metadata")
+public abstract class SchematronSelCompileTask extends DefaultTask {
+
+    /**
+     * Input Schematron schema containing SEL annotations.
+     *
+     * @return schema file property
+     */
+    @InputFile
+    @PathSensitive(PathSensitivity.RELATIVE)
+    public abstract RegularFileProperty getSchema();
+
+    /**
+     * Destination compiled extraction stylesheet.
+     *
+     * @return output stylesheet property
+     */
+    @OutputFile
+    public abstract RegularFileProperty getOutputStylesheet();
+
+    /**
+     * Group-to-output-path mapping used by compiled stylesheet.
+     *
+     * @return group output mapping
+     */
+    @Input
+    public abstract MapProperty<String, String> getGroupOutputs();
+
+    /**
+     * Optional SEL output namespace URI override.
+     *
+     * <p>When set, overrides schema-level SEL output namespace defaults.</p>
+     *
+     * @return optional namespace URI
+     */
+    @Input
+    @Optional
+    public abstract org.gradle.api.provider.Property<String> getOutputNamespaceUri();
+
+    /**
+     * Optional SEL output namespace prefix override.
+     *
+     * <p>Use empty string to emit SEL elements in default namespace.</p>
+     *
+     * @return optional prefix
+     */
+    @Input
+    @Optional
+    public abstract org.gradle.api.provider.Property<String> getOutputNamespacePrefix();
+
+    /**
+     * Active Schematron phase used for rule selection.
+     *
+     * <p>Supported values:</p>
+     * <ul>
+     *     <li>{@code #DEFAULT} (default) — uses {@code sch:schema/@defaultPhase}, else all rules.</li>
+     *     <li>{@code #ALL} — includes all SEL-annotated rules.</li>
+     *     <li>explicit phase id — includes patterns activated by that phase.</li>
+     * </ul>
+     *
+     * @return optional phase selector
+     */
+    @Input
+    @Optional
+    public abstract org.gradle.api.provider.Property<String> getPhase();
+
+    /**
+     * Creates compile task.
+     */
+    @Inject
+    public SchematronSelCompileTask() {
+        getPhase().convention("#DEFAULT");
+    }
+
+    /**
+     * Sets the Schematron schema source in DSL-friendly form.
+     *
+     * @param path file notation accepted by {@code Project.file}.
+     */
+    public void schema(Object path) {
+        File file = getProject().file(path);
+        if (!file.exists()) {
+            throw new GradleException("Schematron schema does not exist: " + file);
+        }
+        getSchema().set(file);
+    }
+
+    /**
+     * Sets compiled extraction stylesheet output path.
+     *
+     * @param path file notation accepted by {@code Project.file}.
+     */
+    public void output(Object path) {
+        getOutputStylesheet().set(getProject().file(path));
+    }
+
+    /**
+     * Maps logical SEL group to output document path used by generated stylesheet.
+     *
+     * @param group logical group key.
+     * @param outputPath output path expression.
+     */
+    public void groupOutput(String group, String outputPath) {
+        getGroupOutputs().put(group, outputPath);
+    }
+
+    /**
+     * Sets SEL output namespace URI override.
+     *
+     * @param value namespace URI
+     */
+    public void outputNamespaceUri(String value) {
+        getOutputNamespaceUri().set(value);
+    }
+
+    /**
+     * Sets SEL output namespace prefix override.
+     *
+     * @param value prefix (empty string for default namespace output)
+     */
+    public void outputNamespacePrefix(String value) {
+        getOutputNamespacePrefix().set(value);
+    }
+
+    /**
+     * Sets Schematron phase used by SEL compilation.
+     *
+     * @param value phase id, {@code #DEFAULT}, or {@code #ALL}
+     */
+    public void phase(String value) {
+        getPhase().set(value);
+    }
+
+    /**
+     * Compiles SEL extraction stylesheet from Schematron source.
+     */
+    @TaskAction
+    public void compile() {
+        try {
+            Document document = parseSchema(getSchema().get().getAsFile());
+            SelRuleSet collected = SelRuleCollector.collect(document);
+            List<SelRuleDescriptor> rules = collected.rulesForPhase(normalizedPhase());
+            Map<String, String> groupOutputs = getGroupOutputs().getOrElse(Map.of());
+            SelOutputConfig outputConfig =
+                    SelOutputConfig.resolve(
+                            collected.outputConfig(),
+                            getOutputNamespaceUri().isPresent()
+                                    ? getOutputNamespaceUri().get()
+                                    : null,
+                            getOutputNamespacePrefix().isPresent()
+                                    ? getOutputNamespacePrefix().get()
+                                    : null);
+            String stylesheet = SelStylesheetCompiler.render(rules, groupOutputs, outputConfig);
+
+            File outputFile = getOutputStylesheet().get().getAsFile();
+            File parent = outputFile.getParentFile();
+            if (parent != null) {
+                Files.createDirectories(parent.toPath());
+            }
+            Files.writeString(outputFile.toPath(), stylesheet, StandardCharsets.UTF_8);
+            getLogger()
+                    .lifecycle(
+                            "Compiled SEL extraction stylesheet with {} rule(s): {}",
+                            rules.size(),
+                            outputFile);
+        } catch (Exception e) {
+            throw new GradleException("Failed to compile Schematron SEL stylesheet", e);
+        }
+    }
+
+    private String normalizedPhase() {
+        String configured = getPhase().getOrElse("#DEFAULT");
+        return configured.trim().isEmpty() ? "#DEFAULT" : configured.trim();
+    }
+
+    private Document parseSchema(File schemaFile) throws Exception {
+        try (InputStream input = Files.newInputStream(schemaFile.toPath())) {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            return factory.newDocumentBuilder().parse(input);
+        }
+    }
+}

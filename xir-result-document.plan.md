@@ -55,7 +55,7 @@ Deliverable:
 
 ## Phase 2 — Add XIR output method registry
 
-1. Create new integration class (e.g. `SaxonXirOutputMethods`) in `name.jurgenei.gradle.xml.saxon`.
+1. Create new integration class (e.g. `SaxonXirOutputMethods`) in `org.flowdigger.gradle.xml.saxon`.
 2. Define constants:
    - `XIR_OUTPUT_METHOD_NAMESPACE_URI`
    - `XIR_OUTPUT_METHOD_LOCAL_NAME = "xir"`

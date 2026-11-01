@@ -30,7 +30,7 @@ if (enableSpotbugs) {
 }
 
 group = "org.flowdigger.gradle"
-version = "0.1.15"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -216,7 +216,7 @@ dependencies {
 
     add("implementation", "net.sf.saxon:Saxon-HE:13.1")
     add("implementation", "io.xspec:xspec:4.1.2")
-    add("implementation", "name.jurgenei:xir-sax:0.1.4")
+    add("implementation", "org.flowdigger:xir-sax:1.0.0")
     add("implementation", "com.fasterxml.jackson.core:jackson-databind:2.22.4")
     add("implementation", "name.dmaus.schxslt:schxslt2:1.11.2")
 

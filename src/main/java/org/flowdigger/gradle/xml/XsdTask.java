@@ -1,0 +1,175 @@
+/* (C)2026 */
+package org.flowdigger.gradle.xml;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.xml.XMLConstants;
+import javax.xml.validation.SchemaFactory;
+import org.flowdigger.gradle.xml.validation.ValidationIssue;
+import org.flowdigger.gradle.xml.validation.ValidationResult;
+import org.flowdigger.gradle.xml.validation.XsdEngine;
+import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.SchemaManager;
+import net.sf.saxon.s9api.SchemaValidator;
+import org.gradle.api.GradleException;
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.Property;
+import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.PathSensitive;
+import org.gradle.api.tasks.PathSensitivity;
+import org.gradle.work.DisableCachingByDefault;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXParseException;
+
+/**
+ * Validates XML files against XSD and emits findings normalized as SVRL.
+ */
+@DisableCachingByDefault(
+        because = "XSD validation depends on external schema files and validator engine")
+public abstract class XsdTask extends AbstractXmlValidationTask {
+
+    /**
+     * Returns the XSD schema file used to validate input documents.
+     *
+     * @return XSD schema file used to validate each input XML
+     */
+    @InputFile
+    @PathSensitive(PathSensitivity.RELATIVE)
+    public abstract RegularFileProperty getSchema();
+
+    /**
+     * Returns which validation backend should be used for XSD checks.
+     *
+     * @return configured XSD validation engine selection
+     */
+    @Input
+    public abstract Property<XsdEngine> getEngine();
+
+    /**
+     * Creates an XSD validation task with AUTO engine selection.
+     */
+    public XsdTask() {
+        getEngine().convention(XsdEngine.AUTO);
+    }
+
+    /**
+     * Sets the XSD schema file using Gradle file notation.
+     *
+     * @param path file notation accepted by {@code Project.file}
+     */
+    public void schema(Object path) {
+        File file = getProject().file(path);
+        if (!file.exists()) {
+            throw new GradleException("XSD schema does not exist: " + file);
+        }
+        getSchema().set(file);
+    }
+
+    @Override
+    protected ValidationResult validate(File inputFile, Map<String, String> params)
+            throws Exception {
+        XsdEngine engine = resolveEngine();
+        List<ValidationIssue> issues =
+                engine == XsdEngine.SAXON
+                        ? validateWithSaxon(inputFile)
+                        : validateWithJaxp(inputFile);
+
+        return new ValidationResult(issues, null);
+    }
+
+    private XsdEngine resolveEngine() {
+        XsdEngine requested = getEngine().get();
+        if (requested == XsdEngine.JAXP) {
+            return XsdEngine.JAXP;
+        }
+        if (requested == XsdEngine.SAXON) {
+            if (!isSaxonSchemaAwareAvailable()) {
+                throw new GradleException(
+                        "Saxon schema-aware validation requires Saxon PE/EE; configure engine ="
+                                + " JAXP or AUTO");
+            }
+            return XsdEngine.SAXON;
+        }
+        return isSaxonSchemaAwareAvailable() ? XsdEngine.SAXON : XsdEngine.JAXP;
+    }
+
+    @SuppressWarnings("deprecation")
+    private boolean isSaxonSchemaAwareAvailable() {
+        try {
+            Processor processor = new Processor(false);
+            SchemaManager manager = processor.getSchemaManager();
+            return manager != null;
+        } catch (Throwable ignored) {
+            return false;
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private List<ValidationIssue> validateWithSaxon(File inputFile) {
+        List<ValidationIssue> issues = new ArrayList<>();
+        try {
+            Processor processor = new Processor(false);
+            SchemaManager manager = processor.getSchemaManager();
+            if (manager == null) {
+                throw new GradleException("Saxon SchemaManager unavailable in current runtime");
+            }
+            manager.load(sourceForValidation(getSchema().get().getAsFile()));
+            SchemaValidator validator = manager.newSchemaValidator();
+            validator.validate(sourceForValidation(inputFile));
+        } catch (SaxonApiException e) {
+            issues.add(ValidationIssue.error(e.getMessage(), inputFile.getPath()));
+        }
+        return issues;
+    }
+
+    private List<ValidationIssue> validateWithJaxp(File inputFile) throws Exception {
+        List<ValidationIssue> issues = new ArrayList<>();
+        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+        javax.xml.validation.Schema schema =
+                factory.newSchema(sourceForValidation(getSchema().get().getAsFile()));
+        javax.xml.validation.Validator validator = schema.newValidator();
+        validator.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        validator.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+        validator.setErrorHandler(
+                new ErrorHandler() {
+                    @Override
+                    public void warning(SAXParseException exception) {
+                        issues.add(
+                                ValidationIssue.error(
+                                        exception.getMessage(), location(inputFile, exception)));
+                    }
+
+                    @Override
+                    public void error(SAXParseException exception) {
+                        issues.add(
+                                ValidationIssue.error(
+                                        exception.getMessage(), location(inputFile, exception)));
+                    }
+
+                    @Override
+                    public void fatalError(SAXParseException exception) {
+                        issues.add(
+                                ValidationIssue.error(
+                                        exception.getMessage(), location(inputFile, exception)));
+                    }
+                });
+
+        try {
+            validator.validate(sourceForValidation(inputFile));
+        } catch (Exception ignored) {
+            // Findings are collected through ErrorHandler so we can continue and emit reports.
+        }
+        return issues;
+    }
+
+    private static String location(File input, SAXParseException exception) {
+        return input + ":" + exception.getLineNumber() + ":" + exception.getColumnNumber();
+    }
+}
