@@ -1,5 +1,3 @@
-import org.gradle.api.GradleException
-import java.security.MessageDigest
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -14,7 +12,8 @@ plugins {
     id("java-gradle-plugin")
     id("jacoco")
     id("maven-publish")
-    signing
+    // id("signing")
+    id("com.gradle.plugin-publish") version "2.2.1"
     id("org.owasp.dependencycheck") version "13.0.0"
     id("com.github.spotbugs") version "6.5.13" apply false
     id("org.sonarqube") version "7.5.0.8588"
@@ -31,7 +30,7 @@ if (enableSpotbugs) {
 }
 
 group = "org.flowdigger.gradle"
-version = "0.1.15"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -217,7 +216,7 @@ dependencies {
 
     add("implementation", "net.sf.saxon:Saxon-HE:13.1")
     add("implementation", "io.xspec:xspec:4.1.2")
-    add("implementation", "name.jurgenei:xir-sax:0.1.4")
+    add("implementation", "org.flowdigger:xir-sax:1.0.0")
     add("implementation", "com.fasterxml.jackson.core:jackson-databind:2.22.4")
     add("implementation", "name.dmaus.schxslt:schxslt2:1.11.2")
 
@@ -426,61 +425,4 @@ tasks.register("verifyXirSample") {
         "verifyShaclSelSample",
         "verifyBootstrapSample"
     )
-}
-
-
-val centralArtifactId = (findProperty("mavenArtifactId")?.toString() ?: project.name)
-val centralGroupPath = project.group.toString().replace('.', '/')
-
-val stageCentralBundleRepo by tasks.registering(Sync::class) {
-    dependsOn(tasks.named("publishToMavenLocal"))
-    val artifactBaseDir = file("${System.getProperty("user.home")}/.m2/repository/$centralGroupPath/$centralArtifactId")
-    val artifactVersionDir = file("$artifactBaseDir/${project.version}")
-    from(artifactVersionDir)
-    into(layout.buildDirectory.dir("central-staging-repo/$centralGroupPath/$centralArtifactId/${project.version}"))
-    doFirst {
-        if (!artifactVersionDir.exists()) {
-            throw GradleException("Expected local Maven artifact version directory not found: $artifactVersionDir")
-        }
-    }
-}
-
-val generateCentralBundleChecksums by tasks.registering {
-    dependsOn(stageCentralBundleRepo)
-    notCompatibleWithConfigurationCache("Generates checksum files by scanning staged output directory at execution time.")
-    doLast {
-        val stagedVersionDir = layout.buildDirectory.dir("central-staging-repo/$centralGroupPath/$centralArtifactId/${project.version}").get().asFile
-        if (!stagedVersionDir.exists()) {
-            throw GradleException("Expected staged version directory not found: $stagedVersionDir")
-        }
-
-        fun checksum(file: File, algorithm: String): String {
-            val digest = MessageDigest.getInstance(algorithm)
-            file.inputStream().use { input ->
-                val buffer = ByteArray(8192)
-                while (true) {
-                    val read = input.read(buffer)
-                    if (read < 0) break
-                    digest.update(buffer, 0, read)
-                }
-            }
-            return digest.digest().joinToString("") { "%02x".format(it.toInt() and 0xff) }
-        }
-
-        stagedVersionDir.walkTopDown()
-            .filter { it.isFile && !it.name.endsWith(".md5") && !it.name.endsWith(".sha1") }
-            .forEach { file ->
-                file.resolveSibling("${file.name}.md5").writeText("${checksum(file, "MD5")}\n")
-                file.resolveSibling("${file.name}.sha1").writeText("${checksum(file, "SHA-1")}\n")
-            }
-    }
-}
-
-tasks.register<Zip>("packageCentralBundle") {
-    dependsOn(generateCentralBundleChecksums)
-    archiveBaseName.set(project.name)
-    archiveVersion.set(project.version.toString())
-    archiveClassifier.set("central-bundle")
-    destinationDirectory.set(layout.buildDirectory.dir("central-bundle"))
-    from(layout.buildDirectory.dir("central-staging-repo"))
 }

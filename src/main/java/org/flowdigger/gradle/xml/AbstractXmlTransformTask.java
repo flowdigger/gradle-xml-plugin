@@ -188,6 +188,14 @@ public abstract class AbstractXmlTransformTask extends SourceTask {
     public abstract MapProperty<String, String> getParams();
 
     /**
+     * Project directory used during execution-time path resolution.
+     *
+     * @return project directory property
+     */
+    @Internal
+    public abstract DirectoryProperty getProjectDir();
+
+    /**
      * Number of worker threads used when processing multiple files.
      *
      * @return worker-count property, defaults to {@code 1}
@@ -212,6 +220,7 @@ public abstract class AbstractXmlTransformTask extends SourceTask {
         getJsonMode().convention("auto");
         getWorkers().convention(1);
         getFailOnError().convention(true);
+        getProjectDir().convention(getProject().getLayout().getProjectDirectory());
     }
 
     /**
@@ -688,7 +697,7 @@ public abstract class AbstractXmlTransformTask extends SourceTask {
 
     private File outputFileFor(File inputFile, File outputRoot, Map<Path, String> relativePaths) {
         Path inputPath = inputFile.toPath().toAbsolutePath().normalize();
-        Path projectPath = getProject().getProjectDir().toPath().toAbsolutePath().normalize();
+        Path projectPath = getProjectDir().get().getAsFile().toPath().toAbsolutePath().normalize();
 
         String relative = relativePaths.get(inputPath);
         if (relative == null) {

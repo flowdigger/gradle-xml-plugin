@@ -67,22 +67,22 @@ node_bootstrap_task -->|"writes schema"| node_generated_outputs
 node_sel_compile -->|"writes skeleton"| node_generated_outputs
 node_sel_extract -->|"writes SEL"| node_generated_outputs
 
-click node_xml_plugin "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/XmlTransformPlugin.java"
-click node_transform_base "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/AbstractXmlTransformTask.java"
-click node_validation_base "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/AbstractXmlValidationTask.java"
-click node_xslt_task "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/XsltTask.java"
-click node_xquery_task "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/XQueryTask.java"
-click node_xir_resolvers "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/saxon/SaxonXirResolvers.java"
-click node_json_parser "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/json/JsonCanonicalParser.java"
-click node_json_reader "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/json/JsonCanonicalXmlReader.java"
-click node_json_serializer "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/json/JsonCanonicalSerializer.java"
-click node_xsd_engine "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/validation/XsdEngine.java"
-click node_svrl_support "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/validation/SvrlSupport.java"
-click node_schematron_task "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/SchematronTask.java"
-click node_xsd_task "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/XsdTask.java"
-click node_bootstrap_task "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/SchematronBootstrapTask.java"
-click node_sel_compile "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/SchematronSelCompileTask.java"
-click node_sel_extract "https://github.com/flowdigger/gradle-xml-plugin/blob/main/src/main/java/name/flowdigger/gradle/xml/SchematronSelExtractTask.java"
+click node_xml_plugin "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/XmlTransformPlugin.java"
+click node_transform_base "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/AbstractXmlTransformTask.java"
+click node_validation_base "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/AbstractXmlValidationTask.java"
+click node_xslt_task "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/XsltTask.java"
+click node_xquery_task "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/XQueryTask.java"
+click node_xir_resolvers "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/saxon/SaxonXirResolvers.java"
+click node_json_parser "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/json/JsonCanonicalParser.java"
+click node_json_reader "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/json/JsonCanonicalXmlReader.java"
+click node_json_serializer "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/json/JsonCanonicalSerializer.java"
+click node_xsd_engine "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/validation/XsdEngine.java"
+click node_svrl_support "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/validation/SvrlSupport.java"
+click node_schematron_task "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/SchematronTask.java"
+click node_xsd_task "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/XsdTask.java"
+click node_bootstrap_task "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/SchematronBootstrapTask.java"
+click node_sel_compile "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/SchematronSelCompileTask.java"
+click node_sel_extract "https://github.com/jurgenei/gradle-xml-plugin/blob/main/src/main/java/org/flowdigger/gradle/xml/SchematronSelExtractTask.java"
 
 classDef toneNeutral fill:#f8fafc,stroke:#334155,stroke-width:1.5px,color:#0f172a
 classDef toneBlue fill:#dbeafe,stroke:#2563eb,stroke-width:1.5px,color:#172554
