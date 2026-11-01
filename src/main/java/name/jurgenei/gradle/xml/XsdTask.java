@@ -7,12 +7,6 @@ import java.util.List;
 import java.util.Map;
 import javax.xml.XMLConstants;
 import javax.xml.validation.SchemaFactory;
-<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/XsdTask.java
-=======
-import org.flowdigger.gradle.xml.validation.ValidationIssue;
-import org.flowdigger.gradle.xml.validation.ValidationResult;
-import org.flowdigger.gradle.xml.validation.XsdEngine;
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/XsdTask.java
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.SchemaManager;

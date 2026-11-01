@@ -1,7 +1,4 @@
-<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/json/JsonCanonicalXmlReader.java
 /* (C)2026 */
-=======
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/json/JsonCanonicalXmlReader.java
 package org.flowdigger.gradle.xml.json;
 
 import java.io.IOException;

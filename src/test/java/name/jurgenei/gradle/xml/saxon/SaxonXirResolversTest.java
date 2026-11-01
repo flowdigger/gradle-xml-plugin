@@ -1,4 +1,3 @@
-<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/saxon/SaxonXirResolversTest.java
 /* (C)2026 */
 package org.flowdigger.gradle.xml.saxon;
 
@@ -6,9 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-=======
-package org.flowdigger.gradle.xml.saxon;
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/saxon/SaxonXirResolversTest.java
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -70,12 +66,8 @@ public class SaxonXirResolversTest {
     }
 
     private static Object newResolver() throws Exception {
-<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/saxon/SaxonXirResolversTest.java
         Class<?> resolverClass =
                 Class.forName("org.flowdigger.gradle.xml.saxon.SaxonXirResolvers$DualXirResolver");
-=======
-        Class<?> resolverClass = Class.forName("org.flowdigger.gradle.xml.saxon.SaxonXirResolvers$DualXirResolver");
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/saxon/SaxonXirResolversTest.java
         Constructor<?> constructor = resolverClass.getDeclaredConstructor();
         constructor.setAccessible(true);
         Object resolver = constructor.newInstance();

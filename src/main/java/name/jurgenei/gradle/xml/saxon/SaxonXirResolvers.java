@@ -7,10 +7,6 @@ import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.sax.SAXSource;
-<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/saxon/SaxonXirResolvers.java
-=======
-import org.flowdigger.xir.XirReader;
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/saxon/SaxonXirResolvers.java
 import net.sf.saxon.Configuration;
 import net.sf.saxon.lib.ResourceRequest;
 import net.sf.saxon.lib.ResourceResolver;

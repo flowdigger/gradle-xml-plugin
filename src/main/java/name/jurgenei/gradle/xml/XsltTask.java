@@ -1,7 +1,4 @@
-<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/XsltTask.java
 /* (C)2026 */
-=======
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/XsltTask.java
 package org.flowdigger.gradle.xml;
 
 import java.io.File;
@@ -11,14 +8,6 @@ import java.util.Map;
 import javax.xml.transform.Source;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
-<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/XsltTask.java
-=======
-import org.flowdigger.gradle.xml.json.JsonCanonicalSerializer;
-import org.flowdigger.gradle.xml.json.JsonCanonicalXmlReader;
-import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
-import org.flowdigger.xir.XirSerializer;
-import org.flowdigger.xir.XirReader;
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/XsltTask.java
 import net.sf.saxon.s9api.Destination;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
