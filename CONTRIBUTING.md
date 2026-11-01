@@ -12,7 +12,7 @@ Requirements:
 Clone and run tests:
 
 ```bash
-git clone https://github.com/jurgenei/GradleXmlTransform.git
+git clone https://github.com/flowdigger/GradleXmlTransform.git
 cd GradleXmlTransform
 ./gradlew test
 ```

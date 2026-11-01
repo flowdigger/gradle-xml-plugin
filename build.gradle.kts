@@ -216,7 +216,7 @@ dependencies {
 
     add("implementation", "net.sf.saxon:Saxon-HE:13.1")
     add("implementation", "io.xspec:xspec:4.1.2")
-    add("implementation", "org.flowdigger:xir-sax:1.0.0")
+    add("implementation", "org.flowdigger:xir-sax:1.0.1")
     add("implementation", "com.fasterxml.jackson.core:jackson-databind:2.22.4")
     add("implementation", "name.dmaus.schxslt:schxslt2:1.11.2")
 
@@ -379,6 +379,10 @@ tasks.register<Exec>("verifyBootstrapSample") {
     group = "verification"
     description = "Runs Schematron bootstrap sample self-tests."
     workingDir = projectDir
+    val ooxmlBuild = file("../gradle-ooxml-plugin")
+    onlyIf("OOXML sample requires local ../gradle-ooxml-plugin composite build") {
+        ooxmlBuild.exists()
+    }
     commandLine(
         "./gradlew",
         "--no-daemon",
