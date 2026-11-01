@@ -1,4 +1,3 @@
-<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/xir/XirReaderTest.java
 /* (C)2026 */
 package org.flowdigger.gradle.xml.xir;
 
@@ -8,10 +7,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-=======
-package org.flowdigger.gradle.xml.xir;
-
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/xir/XirReaderTest.java
 import org.flowdigger.xir.XirReader;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,7 +1,4 @@
-<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/SchematronTask.java
 /* (C)2026 */
-=======
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/SchematronTask.java
 package org.flowdigger.gradle.xml;
 
 import java.io.File;
@@ -19,10 +16,6 @@ import java.util.Map;
 import java.util.Set;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/SchematronTask.java
-=======
-import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/SchematronTask.java
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.Serializer;
@@ -30,10 +23,7 @@ import net.sf.saxon.s9api.XdmAtomicValue;
 import net.sf.saxon.s9api.XsltCompiler;
 import net.sf.saxon.s9api.XsltExecutable;
 import net.sf.saxon.s9api.XsltTransformer;
-<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/SchematronTask.java
 import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
-=======
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/SchematronTask.java
 import org.flowdigger.gradle.xml.validation.SvrlSupport;
 import org.flowdigger.gradle.xml.validation.ValidationResult;
 import org.gradle.api.GradleException;
@@ -359,12 +349,8 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
         validator.transform();
 
         String svrlXml = output.toString();
-<<<<<<< HEAD:src/main/java/org/flowdigger/gradle/xml/SchematronTask.java
         List<org.flowdigger.gradle.xml.validation.ValidationIssue> issues =
                 SvrlSupport.parseSvrlIssues(svrlXml);
-=======
-        List<org.flowdigger.gradle.xml.validation.ValidationIssue> issues = SvrlSupport.parseSvrlIssues(svrlXml);
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/main/java/name/jurgenei/gradle/xml/SchematronTask.java
         return new ValidationResult(issues, svrlXml);
     }
 

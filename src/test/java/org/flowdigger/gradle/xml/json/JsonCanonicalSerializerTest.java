@@ -1,14 +1,5 @@
-<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/json/JsonCanonicalSerializerTest.java
 /* (C)2026 */
 package org.flowdigger.gradle.xml.json;
-=======
-package org.flowdigger.gradle.xml.json;
-
-import java.io.StringWriter;
-import org.flowdigger.xir.XirSerializer;
-import org.junit.Test;
-import org.xml.sax.helpers.AttributesImpl;
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/json/JsonCanonicalSerializerTest.java
 
 import static org.junit.Assert.assertTrue;
 

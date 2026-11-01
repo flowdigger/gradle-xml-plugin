@@ -1,7 +1,4 @@
-<<<<<<< HEAD:src/test/java/org/flowdigger/gradle/xml/TestKitCoverageSupport.java
 /* (C)2026 */
-=======
->>>>>>> 7a2c54f (refactor: migrate package prefix to org.flowdigger):src/test/java/name/jurgenei/gradle/xml/TestKitCoverageSupport.java
 package org.flowdigger.gradle.xml;
 
 import java.io.File;
