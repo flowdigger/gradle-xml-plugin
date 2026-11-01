@@ -379,6 +379,10 @@ tasks.register<Exec>("verifyBootstrapSample") {
     group = "verification"
     description = "Runs Schematron bootstrap sample self-tests."
     workingDir = projectDir
+    val ooxmlBuild = file("../gradle-ooxml-plugin")
+    onlyIf("OOXML sample requires local ../gradle-ooxml-plugin composite build") {
+        ooxmlBuild.exists()
+    }
     commandLine(
         "./gradlew",
         "--no-daemon",
