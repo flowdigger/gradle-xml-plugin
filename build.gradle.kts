@@ -29,7 +29,7 @@ if (enableSpotbugs) {
     apply(plugin = "com.github.spotbugs")
 }
 
-group = "name.jurgenei.gradle"
+group = "org.flowdigger.gradle"
 version = "0.1.15"
 
 repositories {
@@ -50,8 +50,8 @@ extensions.configure<GradlePluginDevelopmentExtension> {
 
     plugins {
         create("xmlTransformPlugin") {
-            id = "name.jurgenei.gradle.xml"
-            implementationClass = "name.jurgenei.gradle.xml.XmlTransformPlugin"
+            id = "org.flowdigger.gradle.xml"
+            implementationClass = "org.flowdigger.gradle.xml.XmlTransformPlugin"
             displayName = "XML Transform & Validate Plugin"
             description = "Saxon based XSLT, XQuery, Schematron, XSD, and XSpec tasks with SVRL/JUnit reporting"
             tags.set(

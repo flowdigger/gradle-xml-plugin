@@ -1,8 +1,8 @@
 plugins {
-    id 'name.jurgenei.gradle.xml'
+    id 'org.flowdigger.gradle.xml'
 }
 
-tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
     schema 'src/main/schematron/sel.sch'
     phase '#ALL'
     output 'build/generated/sel/sel.xsl'
@@ -11,7 +11,7 @@ tasks.register('compileSel', name.jurgenei.gradle.xml.SchematronSelCompileTask) 
     groupOutput 'terminology', 'sel/terminology.xml'
 }
 
-tasks.register('compileSelPreset', name.jurgenei.gradle.xml.SchematronSelCompileTask) {
+tasks.register('compileSelPreset', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
     schema 'src/main/schematron/sel-preset.sch'
     phase '#ALL'
     output 'build/generated/sel/sel-preset.xsl'
@@ -20,7 +20,7 @@ tasks.register('compileSelPreset', name.jurgenei.gradle.xml.SchematronSelCompile
     groupOutput 'terminology', 'sel/terminology.xml'
 }
 
-tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
     dependsOn tasks.named('compileSel')
     schema 'src/main/schematron/sel.sch'
     style 'build/generated/sel/sel.xsl'
@@ -32,7 +32,7 @@ tasks.register('extractSel', name.jurgenei.gradle.xml.SchematronSelExtractTask) 
     failOnError.set(true)
 }
 
-tasks.register('extractSelPreset', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+tasks.register('extractSelPreset', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
     dependsOn tasks.named('compileSelPreset')
     schema 'src/main/schematron/sel-preset.sch'
     style 'build/generated/sel/sel-preset.xsl'
@@ -44,7 +44,7 @@ tasks.register('extractSelPreset', name.jurgenei.gradle.xml.SchematronSelExtract
     failOnError.set(true)
 }
 
-tasks.register('extractTerminologySel', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+tasks.register('extractTerminologySel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
     schema 'src/main/schematron/sel.sch'
     source(fileTree('src/main/xml') { include '*.xml' })
     outputDir.set(layout.buildDirectory.dir('out/sel-terminology'))
@@ -53,7 +53,7 @@ tasks.register('extractTerminologySel', name.jurgenei.gradle.xml.SchematronSelEx
     failOnError.set(true)
 }
 
-tasks.register('extractSelXir', name.jurgenei.gradle.xml.SchematronSelExtractTask) {
+tasks.register('extractSelXir', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
     dependsOn tasks.named('compileSel')
     schema 'src/main/schematron/sel.sch'
     style 'build/generated/sel/sel.xsl'
@@ -66,7 +66,7 @@ tasks.register('extractSelXir', name.jurgenei.gradle.xml.SchematronSelExtractTas
     failOnError.set(true)
 }
 
-tasks.register('runSelfTest', name.jurgenei.gradle.xml.XSpecTask) {
+tasks.register('runSelfTest', org.flowdigger.gradle.xml.XSpecTask) {
     dependsOn 'extractSel', 'extractSelXir', 'extractSelPreset', 'extractTerminologySel'
     source 'src/main/xspec/selftest.xspec'
     outputDir.set(layout.buildDirectory.dir('reports/xspec'))
