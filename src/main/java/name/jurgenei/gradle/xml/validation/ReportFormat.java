@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml.validation;
 
 /**
@@ -29,4 +30,3 @@ public enum ReportFormat {
         return this == JUNIT || this == SVRL_AND_JUNIT;
     }
 }
-

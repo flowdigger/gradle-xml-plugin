@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml.json;
 
 import java.io.IOException;
@@ -23,12 +24,17 @@ import org.xml.sax.helpers.DefaultHandler;
 public final class JsonCanonicalXmlReader implements XMLReader {
 
     private static final String FEATURE_NAMESPACES = "http://xml.org/sax/features/namespaces";
-    private static final String FEATURE_NAMESPACE_PREFIXES = "http://xml.org/sax/features/namespace-prefixes";
+    private static final String FEATURE_NAMESPACE_PREFIXES =
+            "http://xml.org/sax/features/namespace-prefixes";
     private static final String FEATURE_VALIDATION = "http://xml.org/sax/features/validation";
-    private static final String FEATURE_EXTERNAL_GENERAL_ENTITIES = "http://xml.org/sax/features/external-general-entities";
-    private static final String FEATURE_EXTERNAL_PARAMETER_ENTITIES = "http://xml.org/sax/features/external-parameter-entities";
-    private static final String PROPERTY_LEXICAL_HANDLER = "http://xml.org/sax/properties/lexical-handler";
-    private static final String PROPERTY_DECLARATION_HANDLER = "http://xml.org/sax/properties/declaration-handler";
+    private static final String FEATURE_EXTERNAL_GENERAL_ENTITIES =
+            "http://xml.org/sax/features/external-general-entities";
+    private static final String FEATURE_EXTERNAL_PARAMETER_ENTITIES =
+            "http://xml.org/sax/features/external-parameter-entities";
+    private static final String PROPERTY_LEXICAL_HANDLER =
+            "http://xml.org/sax/properties/lexical-handler";
+    private static final String PROPERTY_DECLARATION_HANDLER =
+            "http://xml.org/sax/properties/declaration-handler";
 
     private final JsonCanonicalParser parser = new JsonCanonicalParser();
 
@@ -42,8 +48,7 @@ public final class JsonCanonicalXmlReader implements XMLReader {
     /**
      * Creates XMLReader facade for canonical JSON input.
      */
-    public JsonCanonicalXmlReader() {
-    }
+    public JsonCanonicalXmlReader() {}
 
     @Override
     public boolean getFeature(String name) throws SAXNotRecognizedException {
@@ -54,15 +59,16 @@ public final class JsonCanonicalXmlReader implements XMLReader {
             return false;
         }
         if (FEATURE_VALIDATION.equals(name)
-            || FEATURE_EXTERNAL_GENERAL_ENTITIES.equals(name)
-            || FEATURE_EXTERNAL_PARAMETER_ENTITIES.equals(name)) {
+                || FEATURE_EXTERNAL_GENERAL_ENTITIES.equals(name)
+                || FEATURE_EXTERNAL_PARAMETER_ENTITIES.equals(name)) {
             return false;
         }
         throw new SAXNotRecognizedException(name);
     }
 
     @Override
-    public void setFeature(String name, boolean value) throws SAXNotRecognizedException, SAXNotSupportedException {
+    public void setFeature(String name, boolean value)
+            throws SAXNotRecognizedException, SAXNotSupportedException {
         if (FEATURE_NAMESPACES.equals(name) && value) {
             return;
         }
@@ -70,15 +76,16 @@ public final class JsonCanonicalXmlReader implements XMLReader {
             return;
         }
         if ((FEATURE_VALIDATION.equals(name)
-            || FEATURE_EXTERNAL_GENERAL_ENTITIES.equals(name)
-            || FEATURE_EXTERNAL_PARAMETER_ENTITIES.equals(name))
-            && !value) {
+                        || FEATURE_EXTERNAL_GENERAL_ENTITIES.equals(name)
+                        || FEATURE_EXTERNAL_PARAMETER_ENTITIES.equals(name))
+                && !value) {
             return;
         }
-        if (FEATURE_NAMESPACES.equals(name) || FEATURE_NAMESPACE_PREFIXES.equals(name)
-            || FEATURE_VALIDATION.equals(name)
-            || FEATURE_EXTERNAL_GENERAL_ENTITIES.equals(name)
-            || FEATURE_EXTERNAL_PARAMETER_ENTITIES.equals(name)) {
+        if (FEATURE_NAMESPACES.equals(name)
+                || FEATURE_NAMESPACE_PREFIXES.equals(name)
+                || FEATURE_VALIDATION.equals(name)
+                || FEATURE_EXTERNAL_GENERAL_ENTITIES.equals(name)
+                || FEATURE_EXTERNAL_PARAMETER_ENTITIES.equals(name)) {
             throw new SAXNotSupportedException("Unsupported value for feature: " + name);
         }
         throw new SAXNotRecognizedException(name);
@@ -177,4 +184,3 @@ public final class JsonCanonicalXmlReader implements XMLReader {
         return new InputStreamReader(stream, StandardCharsets.UTF_8);
     }
 }
-

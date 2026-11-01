@@ -1,11 +1,12 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml.json;
+
+import static org.junit.Assert.assertTrue;
 
 import java.io.StringWriter;
 import org.flowdigger.xir.XirSerializer;
 import org.junit.Test;
 import org.xml.sax.helpers.AttributesImpl;
-
-import static org.junit.Assert.assertTrue;
 
 public class JsonCanonicalSerializerTest {
 
@@ -36,7 +37,8 @@ public class JsonCanonicalSerializerTest {
     @Test
     public void writesBeautifiedOutputWhenRequested() throws Exception {
         StringWriter writer = new StringWriter();
-        JsonCanonicalSerializer serializer = new JsonCanonicalSerializer(writer, XirSerializer.OutputFormat.BEAUTIFIED);
+        JsonCanonicalSerializer serializer =
+                new JsonCanonicalSerializer(writer, XirSerializer.OutputFormat.BEAUTIFIED);
 
         serializer.startDocument();
         serializer.startElement("", "root", "root", new AttributesImpl());

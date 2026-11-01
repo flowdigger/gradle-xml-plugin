@@ -1,9 +1,15 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml.xir;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import org.flowdigger.xir.XirReader;
 import org.junit.Assert;
 import org.junit.Test;
-import org.xml.sax.ContentHandler;
 import org.xml.sax.DTDHandler;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
@@ -12,13 +18,6 @@ import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.ext.LexicalHandler;
 import org.xml.sax.helpers.DefaultHandler;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 
 public class XirReaderTest {
 
@@ -30,8 +29,9 @@ public class XirReaderTest {
         Assert.assertFalse(reader.getFeature("http://xml.org/sax/features/namespace-prefixes"));
         Assert.assertFalse(reader.getFeature("http://xml.org/sax/features/validation"));
 
-        Assert.assertThrows(SAXNotRecognizedException.class,
-            () -> reader.getFeature("urn:test:unknown-feature"));
+        Assert.assertThrows(
+                SAXNotRecognizedException.class,
+                () -> reader.getFeature("urn:test:unknown-feature"));
     }
 
     @Test
@@ -42,12 +42,15 @@ public class XirReaderTest {
         reader.setFeature("http://xml.org/sax/features/namespace-prefixes", false);
         reader.setFeature("http://xml.org/sax/features/validation", false);
 
-        Assert.assertThrows(SAXNotSupportedException.class,
-            () -> reader.setFeature("http://xml.org/sax/features/namespaces", false));
-        Assert.assertThrows(SAXNotSupportedException.class,
-            () -> reader.setFeature("http://xml.org/sax/features/namespace-prefixes", true));
-        Assert.assertThrows(SAXNotSupportedException.class,
-            () -> reader.setFeature("http://xml.org/sax/features/validation", true));
+        Assert.assertThrows(
+                SAXNotSupportedException.class,
+                () -> reader.setFeature("http://xml.org/sax/features/namespaces", false));
+        Assert.assertThrows(
+                SAXNotSupportedException.class,
+                () -> reader.setFeature("http://xml.org/sax/features/namespace-prefixes", true));
+        Assert.assertThrows(
+                SAXNotSupportedException.class,
+                () -> reader.setFeature("http://xml.org/sax/features/validation", true));
     }
 
     @Test
@@ -59,11 +62,15 @@ public class XirReaderTest {
         reader.setProperty("http://xml.org/sax/properties/lexical-handler", lexical);
         reader.setProperty("http://xml.org/sax/properties/declaration-handler", declaration);
 
-        Assert.assertSame(lexical, reader.getProperty("http://xml.org/sax/properties/lexical-handler"));
-        Assert.assertSame(declaration, reader.getProperty("http://xml.org/sax/properties/declaration-handler"));
+        Assert.assertSame(
+                lexical, reader.getProperty("http://xml.org/sax/properties/lexical-handler"));
+        Assert.assertSame(
+                declaration,
+                reader.getProperty("http://xml.org/sax/properties/declaration-handler"));
 
-        Assert.assertThrows(SAXNotRecognizedException.class,
-            () -> reader.getProperty("urn:test:unknown-property"));
+        Assert.assertThrows(
+                SAXNotRecognizedException.class,
+                () -> reader.getProperty("urn:test:unknown-property"));
     }
 
     @Test
@@ -100,7 +107,8 @@ public class XirReaderTest {
         XirReader fromBytes = new XirReader();
         RecordingHandler bytesHandler = new RecordingHandler();
         fromBytes.setContentHandler(bytesHandler);
-        fromBytes.parse(new InputSource(new ByteArrayInputStream(xir.getBytes(StandardCharsets.UTF_8))));
+        fromBytes.parse(
+                new InputSource(new ByteArrayInputStream(xir.getBytes(StandardCharsets.UTF_8))));
         Assert.assertTrue(bytesHandler.sawStartBook);
 
         File temp = File.createTempFile("xir-reader", ".xir");
@@ -117,9 +125,10 @@ public class XirReaderTest {
     @Test
     public void failsWithoutCharacterByteOrSystemId() {
         XirReader reader = new XirReader();
-        IOException error = Assert.assertThrows(IOException.class,
-            () -> reader.parse(new InputSource()));
-        Assert.assertTrue(error.getMessage().contains("requires character stream, byte stream, or systemId"));
+        IOException error =
+                Assert.assertThrows(IOException.class, () -> reader.parse(new InputSource()));
+        Assert.assertTrue(
+                error.getMessage().contains("requires character stream, byte stream, or systemId"));
     }
 
     private static final class RecordingHandler extends DefaultHandler implements LexicalHandler {
@@ -127,7 +136,8 @@ public class XirReaderTest {
         private boolean sawComment;
 
         @Override
-        public void startElement(String uri, String localName, String qName, org.xml.sax.Attributes attributes) {
+        public void startElement(
+                String uri, String localName, String qName, org.xml.sax.Attributes attributes) {
             if ("book".equals(qName) || "book".equals(localName)) {
                 sawStartBook = true;
             }
@@ -139,28 +149,21 @@ public class XirReaderTest {
         }
 
         @Override
-        public void startDTD(String name, String publicId, String systemId) {
-        }
+        public void startDTD(String name, String publicId, String systemId) {}
 
         @Override
-        public void endDTD() {
-        }
+        public void endDTD() {}
 
         @Override
-        public void startEntity(String name) {
-        }
+        public void startEntity(String name) {}
 
         @Override
-        public void endEntity(String name) {
-        }
+        public void endEntity(String name) {}
 
         @Override
-        public void startCDATA() {
-        }
+        public void startCDATA() {}
 
         @Override
-        public void endCDATA() {
-        }
+        public void endCDATA() {}
     }
 }
-

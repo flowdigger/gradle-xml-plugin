@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml.validation;
 
 /**
@@ -19,4 +20,3 @@ public record ValidationIssue(String severity, String message, String location) 
         return new ValidationIssue("error", message, location == null ? "" : location);
     }
 }
-

@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml;
 
 import java.io.File;
@@ -14,10 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.Serializer;
@@ -25,6 +23,7 @@ import net.sf.saxon.s9api.XdmAtomicValue;
 import net.sf.saxon.s9api.XsltCompiler;
 import net.sf.saxon.s9api.XsltExecutable;
 import net.sf.saxon.s9api.XsltTransformer;
+import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
 import org.flowdigger.gradle.xml.validation.SvrlSupport;
 import org.flowdigger.gradle.xml.validation.ValidationResult;
 import org.gradle.api.GradleException;
@@ -36,36 +35,35 @@ import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
-
 import org.gradle.work.DisableCachingByDefault;
 
 /**
  * Validates XML files via Schematron by compiling .sch to XSLT and producing SVRL output.
  */
-@DisableCachingByDefault(because = "Schematron compilation and validation depends on external schema files")
+@DisableCachingByDefault(
+        because = "Schematron compilation and validation depends on external schema files")
 public abstract class SchematronTask extends AbstractXmlValidationTask {
 
     private static final String SCHXSLT_NS = "http://dmaus.name/ns/2023/schxslt";
-    private static final Set<String> STATIC_TRANSPILER_PARAMS = Set.of(
-        "debug",
-        "streamable",
-        "location-function",
-        "fail-early",
-        "terminate-validation-on-error",
-        "report-active-pattern",
-        "report-fired-rule",
-        "report-suppressed-rule",
-        "report-skipped-assertion",
-        "compact-report",
-        "check-assembled-schema"
-    );
+    private static final Set<String> STATIC_TRANSPILER_PARAMS =
+            Set.of(
+                    "debug",
+                    "streamable",
+                    "location-function",
+                    "fail-early",
+                    "terminate-validation-on-error",
+                    "report-active-pattern",
+                    "report-fired-rule",
+                    "report-suppressed-rule",
+                    "report-skipped-assertion",
+                    "compact-report",
+                    "check-assembled-schema");
     private final Object transpilerCompileLock = new Object();
 
     /**
      * Creates a Schematron validation task.
      */
-    public SchematronTask() {
-    }
+    public SchematronTask() {}
 
     /**
      * Returns the Schematron rules file used for validation.
@@ -327,7 +325,8 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
     }
 
     @Override
-    protected ValidationResult validate(File inputFile, Map<String, String> params) throws Exception {
+    protected ValidationResult validate(File inputFile, Map<String, String> params)
+            throws Exception {
         Map<String, Object> transpilerParameters = collectTranspilerParameters();
         File compiledFile = resolveCompiledStylesheet(transpilerParameters);
 
@@ -350,12 +349,13 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
         validator.transform();
 
         String svrlXml = output.toString();
-        List<org.flowdigger.gradle.xml.validation.ValidationIssue> issues = SvrlSupport.parseSvrlIssues(svrlXml);
+        List<org.flowdigger.gradle.xml.validation.ValidationIssue> issues =
+                SvrlSupport.parseSvrlIssues(svrlXml);
         return new ValidationResult(issues, svrlXml);
     }
 
-
-    private File resolveCompiledStylesheet(Map<String, Object> transpilerParameters) throws Exception {
+    private File resolveCompiledStylesheet(Map<String, Object> transpilerParameters)
+            throws Exception {
         if (!getStyle().isPresent()) {
             File compiledFile = Files.createTempFile("schematron-compiled-", ".xsl").toFile();
             compiledFile.deleteOnExit();
@@ -367,7 +367,9 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
         synchronized (transpilerCompileLock) {
             if (needsRecompile(compiledFile, transpilerParameters)) {
                 compileSchematron(compiledFile, transpilerParameters);
-                writeFingerprint(fingerprintMarkerFor(compiledFile), computeTranspilerFingerprint(transpilerParameters));
+                writeFingerprint(
+                        fingerprintMarkerFor(compiledFile),
+                        computeTranspilerFingerprint(transpilerParameters));
             }
         }
         return compiledFile;
@@ -395,7 +397,8 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
         return !isFingerprintCurrent(fingerprintMarkerFor(compiledFile), currentFingerprint);
     }
 
-    private void compileSchematron(File compiledFile, Map<String, Object> transpilerParameters) throws Exception {
+    private void compileSchematron(File compiledFile, Map<String, Object> transpilerParameters)
+            throws Exception {
         File parent = compiledFile.getParentFile();
         if (parent != null) {
             Files.createDirectories(parent.toPath());
@@ -410,7 +413,8 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
         for (Map.Entry<String, Object> entry : transpilerParameters.entrySet()) {
             String localName = localNameFromClarkName(entry.getKey());
             if (STATIC_TRANSPILER_PARAMS.contains(localName)) {
-                compiler.setParameter(qNameFromClarkName(entry.getKey()), toAtomicValue(entry.getValue()));
+                compiler.setParameter(
+                        qNameFromClarkName(entry.getKey()), toAtomicValue(entry.getValue()));
             }
         }
 
@@ -420,7 +424,8 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
         for (Map.Entry<String, Object> entry : transpilerParameters.entrySet()) {
             String localName = localNameFromClarkName(entry.getKey());
             if (!STATIC_TRANSPILER_PARAMS.contains(localName)) {
-                transpilerTransformer.setParameter(qNameFromClarkName(entry.getKey()), toAtomicValue(entry.getValue()));
+                transpilerTransformer.setParameter(
+                        qNameFromClarkName(entry.getKey()), toAtomicValue(entry.getValue()));
             }
         }
 
@@ -458,7 +463,8 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
     }
 
     private File fingerprintMarkerFor(File compiledFile) {
-        return new File(compiledFile.getParentFile(), compiledFile.getName() + ".transpiler.sha256");
+        return new File(
+                compiledFile.getParentFile(), compiledFile.getName() + ".transpiler.sha256");
     }
 
     private boolean isFingerprintCurrent(File markerFile, String currentFingerprint) {
@@ -479,13 +485,21 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
 
     private String computeTranspilerFingerprint(Map<String, Object> transpilerParameters) {
         StringBuilder builder = new StringBuilder();
-        builder.append("schema=").append(getSchema().get().getAsFile().toPath().toAbsolutePath().normalize()).append('\n');
-        builder.append("schemaTimestamp=").append(getSchema().get().getAsFile().lastModified()).append('\n');
+        builder.append("schema=")
+                .append(getSchema().get().getAsFile().toPath().toAbsolutePath().normalize())
+                .append('\n');
+        builder.append("schemaTimestamp=")
+                .append(getSchema().get().getAsFile().lastModified())
+                .append('\n');
 
         if (getTranspilerStylesheet().isPresent()) {
             File transpilerFile = getTranspilerStylesheet().get().getAsFile();
-            builder.append("transpiler=").append(transpilerFile.toPath().toAbsolutePath().normalize()).append('\n');
-            builder.append("transpilerTimestamp=").append(transpilerFile.lastModified()).append('\n');
+            builder.append("transpiler=")
+                    .append(transpilerFile.toPath().toAbsolutePath().normalize())
+                    .append('\n');
+            builder.append("transpilerTimestamp=")
+                    .append(transpilerFile.lastModified())
+                    .append('\n');
         } else {
             builder.append("transpiler=classpath:content/transpile.xsl\n");
         }
@@ -494,7 +508,11 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
         Collections.sort(names);
         for (String name : names) {
             Object value = transpilerParameters.get(name);
-            builder.append("transpilerParam:").append(name).append('=').append(value == null ? "" : value).append('\n');
+            builder.append("transpilerParam:")
+                    .append(name)
+                    .append('=')
+                    .append(value == null ? "" : value)
+                    .append('\n');
         }
 
         return sha256(builder.toString());
@@ -532,43 +550,55 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
             transpilerParams.put("{" + SCHXSLT_NS + "}streamable", getStreamable().get());
         }
         if (getLocationFunction().isPresent()) {
-            transpilerParams.put("{" + SCHXSLT_NS + "}location-function", getLocationFunction().get());
+            transpilerParams.put(
+                    "{" + SCHXSLT_NS + "}location-function", getLocationFunction().get());
         }
         if (getFailEarly().isPresent()) {
             transpilerParams.put("{" + SCHXSLT_NS + "}fail-early", getFailEarly().get());
         }
         if (getTerminateValidationOnError().isPresent()) {
-            transpilerParams.put("{" + SCHXSLT_NS + "}terminate-validation-on-error", getTerminateValidationOnError().get());
+            transpilerParams.put(
+                    "{" + SCHXSLT_NS + "}terminate-validation-on-error",
+                    getTerminateValidationOnError().get());
         }
         if (getReportActivePattern().isPresent()) {
-            transpilerParams.put("{" + SCHXSLT_NS + "}report-active-pattern", getReportActivePattern().get());
+            transpilerParams.put(
+                    "{" + SCHXSLT_NS + "}report-active-pattern", getReportActivePattern().get());
         }
         if (getReportFiredRule().isPresent()) {
-            transpilerParams.put("{" + SCHXSLT_NS + "}report-fired-rule", getReportFiredRule().get());
+            transpilerParams.put(
+                    "{" + SCHXSLT_NS + "}report-fired-rule", getReportFiredRule().get());
         }
         if (getReportSuppressedRule().isPresent()) {
-            transpilerParams.put("{" + SCHXSLT_NS + "}report-suppressed-rule", getReportSuppressedRule().get());
+            transpilerParams.put(
+                    "{" + SCHXSLT_NS + "}report-suppressed-rule", getReportSuppressedRule().get());
         }
         if (getReportSkippedAssertion().isPresent()) {
-            transpilerParams.put("{" + SCHXSLT_NS + "}report-skipped-assertion", getReportSkippedAssertion().get());
+            transpilerParams.put(
+                    "{" + SCHXSLT_NS + "}report-skipped-assertion",
+                    getReportSkippedAssertion().get());
         }
         if (getCompactReport().isPresent()) {
             transpilerParams.put("{" + SCHXSLT_NS + "}compact-report", getCompactReport().get());
         }
         if (getSeverityThreshold().isPresent()) {
-            transpilerParams.put("{" + SCHXSLT_NS + "}severity-threshold", getSeverityThreshold().get());
+            transpilerParams.put(
+                    "{" + SCHXSLT_NS + "}severity-threshold", getSeverityThreshold().get());
         }
         if (getDefaultSeverity().isPresent()) {
-            transpilerParams.put("{" + SCHXSLT_NS + "}default-severity", getDefaultSeverity().get());
+            transpilerParams.put(
+                    "{" + SCHXSLT_NS + "}default-severity", getDefaultSeverity().get());
         }
         if (getDefaultFrom().isPresent()) {
             transpilerParams.put("{" + SCHXSLT_NS + "}default-from", getDefaultFrom().get());
         }
         if (getCheckAssembledSchema().isPresent()) {
-            transpilerParams.put("{" + SCHXSLT_NS + "}check-assembled-schema", getCheckAssembledSchema().get());
+            transpilerParams.put(
+                    "{" + SCHXSLT_NS + "}check-assembled-schema", getCheckAssembledSchema().get());
         }
         if (getHandleDynamicErrors().isPresent()) {
-            transpilerParams.put("{" + SCHXSLT_NS + "}handle-dynamic-errors", getHandleDynamicErrors().get());
+            transpilerParams.put(
+                    "{" + SCHXSLT_NS + "}handle-dynamic-errors", getHandleDynamicErrors().get());
         }
 
         return transpilerParams;
@@ -579,9 +609,12 @@ public abstract class SchematronTask extends AbstractXmlValidationTask {
             return sourceForValidation(getTranspilerStylesheet().get().getAsFile());
         }
 
-        try (java.io.InputStream stream = getClass().getClassLoader().getResourceAsStream("content/transpile.xsl")) {
+        try (java.io.InputStream stream =
+                getClass().getClassLoader().getResourceAsStream("content/transpile.xsl")) {
             if (stream == null) {
-                throw new GradleException("Could not find SchXslt transpiler at classpath resource content/transpile.xsl");
+                throw new GradleException(
+                        "Could not find SchXslt transpiler at classpath resource"
+                                + " content/transpile.xsl");
             }
             String xsl = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
             return new StreamSource(new StringReader(xsl));

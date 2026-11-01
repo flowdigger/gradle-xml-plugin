@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml.validation;
 
 import org.gradle.api.file.DirectoryProperty;
@@ -71,4 +72,3 @@ public interface ValidationTaskSpec {
      */
     MapProperty<String, String> getParams();
 }
-

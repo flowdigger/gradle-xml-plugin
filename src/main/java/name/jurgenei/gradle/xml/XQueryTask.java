@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml;
 
 import java.io.File;
@@ -7,11 +8,6 @@ import java.util.Map;
 import javax.xml.transform.Source;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
-import org.flowdigger.gradle.xml.json.JsonCanonicalSerializer;
-import org.flowdigger.gradle.xml.json.JsonCanonicalXmlReader;
-import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
-import org.flowdigger.xir.XirSerializer;
-import org.flowdigger.xir.XirReader;
 import net.sf.saxon.s9api.Destination;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
@@ -22,14 +18,18 @@ import net.sf.saxon.s9api.XQueryEvaluator;
 import net.sf.saxon.s9api.XQueryExecutable;
 import net.sf.saxon.s9api.XdmAtomicValue;
 import net.sf.saxon.s9api.XdmNode;
+import org.flowdigger.gradle.xml.json.JsonCanonicalSerializer;
+import org.flowdigger.gradle.xml.json.JsonCanonicalXmlReader;
+import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
+import org.flowdigger.xir.XirReader;
+import org.flowdigger.xir.XirSerializer;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
-import org.xml.sax.InputSource;
-
 import org.gradle.work.DisableCachingByDefault;
+import org.xml.sax.InputSource;
 
 /**
  * Transforms XML input files using a Saxon XQuery script.
@@ -37,14 +37,14 @@ import org.gradle.work.DisableCachingByDefault;
  * <p>Task behavior (sources, output mapping, parameters, and concurrency) is inherited
  * from {@link AbstractXmlTransformTask}.</p>
  */
-@DisableCachingByDefault(because = "XQuery transformations depend on external query files and input XML")
+@DisableCachingByDefault(
+        because = "XQuery transformations depend on external query files and input XML")
 public abstract class XQueryTask extends AbstractXmlTransformTask {
 
     /**
      * Creates an XQuery transformation task.
      */
-    public XQueryTask() {
-    }
+    public XQueryTask() {}
 
     /**
      * XQuery file used to compile the transformation.
@@ -56,7 +56,8 @@ public abstract class XQueryTask extends AbstractXmlTransformTask {
     public abstract RegularFileProperty getQueryFile();
 
     @Override
-    protected void transform(File inputFile, File outputFile, Map<String, String> params) throws Exception {
+    protected void transform(File inputFile, File outputFile, Map<String, String> params)
+            throws Exception {
         Processor processor = new Processor(false);
         SaxonXirResolvers.configure(processor);
         XQueryCompiler compiler = processor.newXQueryCompiler();
@@ -67,9 +68,12 @@ public abstract class XQueryTask extends AbstractXmlTransformTask {
             if (outputFile.getParentFile() != null) {
                 Files.createDirectories(outputFile.getParentFile().toPath());
             }
-            try (java.io.Writer writer = Files.newBufferedWriter(outputFile.toPath(), StandardCharsets.UTF_8)) {
-                XQueryEvaluator evaluator = createEvaluator(executable, processor, inputFile, params);
-                Destination destination = new SAXDestination(new XirSerializer(writer, resolveXirOutputFormat()));
+            try (java.io.Writer writer =
+                    Files.newBufferedWriter(outputFile.toPath(), StandardCharsets.UTF_8)) {
+                XQueryEvaluator evaluator =
+                        createEvaluator(executable, processor, inputFile, params);
+                Destination destination =
+                        new SAXDestination(new XirSerializer(writer, resolveXirOutputFormat()));
                 evaluator.run(destination);
             }
             return;
@@ -80,9 +84,13 @@ public abstract class XQueryTask extends AbstractXmlTransformTask {
             if (outputFile.getParentFile() != null) {
                 Files.createDirectories(outputFile.getParentFile().toPath());
             }
-            try (java.io.Writer writer = Files.newBufferedWriter(outputFile.toPath(), StandardCharsets.UTF_8)) {
-                XQueryEvaluator evaluator = createEvaluator(executable, processor, inputFile, params);
-                Destination destination = new SAXDestination(new JsonCanonicalSerializer(writer, resolveXirOutputFormat()));
+            try (java.io.Writer writer =
+                    Files.newBufferedWriter(outputFile.toPath(), StandardCharsets.UTF_8)) {
+                XQueryEvaluator evaluator =
+                        createEvaluator(executable, processor, inputFile, params);
+                Destination destination =
+                        new SAXDestination(
+                                new JsonCanonicalSerializer(writer, resolveXirOutputFormat()));
                 evaluator.run(destination);
                 return;
             } catch (Exception e) {
@@ -94,17 +102,24 @@ public abstract class XQueryTask extends AbstractXmlTransformTask {
 
         XQueryEvaluator evaluator = createEvaluator(executable, processor, inputFile, params);
         Serializer serializer = processor.newSerializer(outputFile);
-        serializer.setOutputProperty(Serializer.Property.METHOD, resolveSerializerMethod(outputFile));
+        serializer.setOutputProperty(
+                Serializer.Property.METHOD, resolveSerializerMethod(outputFile));
         evaluator.run(serializer);
     }
 
-    private XQueryEvaluator createEvaluator(XQueryExecutable executable, Processor processor, File inputFile, Map<String, String> params) throws Exception {
+    private XQueryEvaluator createEvaluator(
+            XQueryExecutable executable,
+            Processor processor,
+            File inputFile,
+            Map<String, String> params)
+            throws Exception {
         XQueryEvaluator evaluator = executable.load();
         XdmNode context = processor.newDocumentBuilder().build(sourceFor(inputFile));
         evaluator.setContextItem(context);
 
         for (Map.Entry<String, String> entry : params.entrySet()) {
-            evaluator.setExternalVariable(new QName(entry.getKey()), new XdmAtomicValue(entry.getValue()));
+            evaluator.setExternalVariable(
+                    new QName(entry.getKey()), new XdmAtomicValue(entry.getValue()));
         }
         return evaluator;
     }
@@ -114,11 +129,11 @@ public abstract class XQueryTask extends AbstractXmlTransformTask {
             return new SAXSource(new XirReader(), new InputSource(inputFile.toURI().toString()));
         }
         if (useCanonicalJsonInput(inputFile)) {
-            return new SAXSource(new JsonCanonicalXmlReader(), new InputSource(inputFile.toURI().toString()));
+            return new SAXSource(
+                    new JsonCanonicalXmlReader(), new InputSource(inputFile.toURI().toString()));
         }
         return new StreamSource(inputFile);
     }
-
 
     @Override
     protected long latestDependencyTimestamp(File inputFile) {
@@ -140,5 +155,3 @@ public abstract class XQueryTask extends AbstractXmlTransformTask {
         getQueryFile().set(file);
     }
 }
-
-

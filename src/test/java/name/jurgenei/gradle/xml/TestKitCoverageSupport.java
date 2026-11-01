@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml;
 
 import java.io.File;
@@ -12,8 +13,7 @@ import org.gradle.testkit.runner.GradleRunner;
  */
 final class TestKitCoverageSupport {
 
-    private TestKitCoverageSupport() {
-    }
+    private TestKitCoverageSupport() {}
 
     static GradleRunner newGradleRunner(File projectDir) {
         configureProjectJvmArgs(projectDir);
@@ -26,16 +26,24 @@ final class TestKitCoverageSupport {
         if (isBlank(agentPath) || isBlank(destFile)) {
             return;
         }
-        String javaAgent = "-javaagent:" + new File(agentPath).getAbsolutePath()
-            + "=destfile=" + new File(destFile).getAbsolutePath() + ",append=true";
+        String javaAgent =
+                "-javaagent:"
+                        + new File(agentPath).getAbsolutePath()
+                        + "=destfile="
+                        + new File(destFile).getAbsolutePath()
+                        + ",append=true";
         File gradleProperties = new File(projectDir, "gradle.properties");
         String propertyLine = "org.gradle.jvmargs=" + javaAgent;
         try {
             if (!gradleProperties.exists()) {
-                Files.writeString(gradleProperties.toPath(), propertyLine + System.lineSeparator(), StandardCharsets.UTF_8);
+                Files.writeString(
+                        gradleProperties.toPath(),
+                        propertyLine + System.lineSeparator(),
+                        StandardCharsets.UTF_8);
                 return;
             }
-            List<String> lines = Files.readAllLines(gradleProperties.toPath(), StandardCharsets.UTF_8);
+            List<String> lines =
+                    Files.readAllLines(gradleProperties.toPath(), StandardCharsets.UTF_8);
             boolean replaced = false;
             for (int i = 0; i < lines.size(); i++) {
                 if (lines.get(i).startsWith("org.gradle.jvmargs=")) {
@@ -49,7 +57,8 @@ final class TestKitCoverageSupport {
             }
             Files.write(gradleProperties.toPath(), lines, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new IllegalStateException("Failed to configure gradle.properties for TestKit coverage", e);
+            throw new IllegalStateException(
+                    "Failed to configure gradle.properties for TestKit coverage", e);
         }
     }
 

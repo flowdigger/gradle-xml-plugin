@@ -7,7 +7,6 @@ import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.sax.SAXSource;
-import org.flowdigger.xir.XirReader;
 import net.sf.saxon.Configuration;
 import net.sf.saxon.lib.ResourceRequest;
 import net.sf.saxon.lib.ResourceResolver;
@@ -15,6 +14,7 @@ import net.sf.saxon.resource.SuppliedItemResource;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.trans.XPathException;
+import org.flowdigger.xir.XirReader;
 import org.xml.sax.InputSource;
 
 /**

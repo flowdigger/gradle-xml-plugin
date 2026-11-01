@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml;
 
 import java.io.File;
@@ -7,11 +8,6 @@ import java.util.Map;
 import javax.xml.transform.Source;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
-import org.flowdigger.gradle.xml.json.JsonCanonicalSerializer;
-import org.flowdigger.gradle.xml.json.JsonCanonicalXmlReader;
-import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
-import org.flowdigger.xir.XirSerializer;
-import org.flowdigger.xir.XirReader;
 import net.sf.saxon.s9api.Destination;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
@@ -22,14 +18,18 @@ import net.sf.saxon.s9api.XdmAtomicValue;
 import net.sf.saxon.s9api.XsltCompiler;
 import net.sf.saxon.s9api.XsltExecutable;
 import net.sf.saxon.s9api.XsltTransformer;
+import org.flowdigger.gradle.xml.json.JsonCanonicalSerializer;
+import org.flowdigger.gradle.xml.json.JsonCanonicalXmlReader;
+import org.flowdigger.gradle.xml.saxon.SaxonXirResolvers;
+import org.flowdigger.xir.XirReader;
+import org.flowdigger.xir.XirSerializer;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
-import org.xml.sax.InputSource;
-
 import org.gradle.work.DisableCachingByDefault;
+import org.xml.sax.InputSource;
 
 /**
  * Transforms XML input files using a Saxon XSLT stylesheet.
@@ -37,14 +37,14 @@ import org.gradle.work.DisableCachingByDefault;
  * <p>Task behavior (sources, output mapping, parameters, and concurrency) is inherited
  * from {@link AbstractXmlTransformTask}.</p>
  */
-@DisableCachingByDefault(because = "XSLT transformations depend on external stylesheet and input files")
+@DisableCachingByDefault(
+        because = "XSLT transformations depend on external stylesheet and input files")
 public abstract class XsltTask extends AbstractXmlTransformTask {
 
     /**
      * Creates an XSLT transformation task.
      */
-    public XsltTask() {
-    }
+    public XsltTask() {}
 
     /**
      * Stylesheet file used to compile the XSLT transformation.
@@ -56,7 +56,8 @@ public abstract class XsltTask extends AbstractXmlTransformTask {
     public abstract RegularFileProperty getStylesheet();
 
     @Override
-    protected void transform(File inputFile, File outputFile, Map<String, String> params) throws SaxonApiException {
+    protected void transform(File inputFile, File outputFile, Map<String, String> params)
+            throws SaxonApiException {
         Processor processor = new Processor(false);
         SaxonXirResolvers.configure(processor);
         XsltCompiler compiler = processor.newXsltCompiler();
@@ -69,9 +70,11 @@ public abstract class XsltTask extends AbstractXmlTransformTask {
                 if (outputFile.getParentFile() != null) {
                     Files.createDirectories(outputFile.getParentFile().toPath());
                 }
-                try (java.io.Writer writer = Files.newBufferedWriter(outputFile.toPath(), StandardCharsets.UTF_8)) {
+                try (java.io.Writer writer =
+                        Files.newBufferedWriter(outputFile.toPath(), StandardCharsets.UTF_8)) {
                     XsltTransformer transformer = createTransformer(executable, inputFile, params);
-                    Destination destination = new SAXDestination(new XirSerializer(writer, resolveXirOutputFormat()));
+                    Destination destination =
+                            new SAXDestination(new XirSerializer(writer, resolveXirOutputFormat()));
                     transformer.setDestination(destination);
                     transformer.transform();
                 }
@@ -87,9 +90,12 @@ public abstract class XsltTask extends AbstractXmlTransformTask {
                 if (outputFile.getParentFile() != null) {
                     Files.createDirectories(outputFile.getParentFile().toPath());
                 }
-                try (java.io.Writer writer = Files.newBufferedWriter(outputFile.toPath(), StandardCharsets.UTF_8)) {
+                try (java.io.Writer writer =
+                        Files.newBufferedWriter(outputFile.toPath(), StandardCharsets.UTF_8)) {
                     XsltTransformer transformer = createTransformer(executable, inputFile, params);
-                    Destination destination = new SAXDestination(new JsonCanonicalSerializer(writer, resolveXirOutputFormat()));
+                    Destination destination =
+                            new SAXDestination(
+                                    new JsonCanonicalSerializer(writer, resolveXirOutputFormat()));
                     transformer.setDestination(destination);
                     transformer.transform();
                 }
@@ -103,16 +109,19 @@ public abstract class XsltTask extends AbstractXmlTransformTask {
 
         XsltTransformer transformer = createTransformer(executable, inputFile, params);
         Serializer serializer = processor.newSerializer(outputFile);
-        serializer.setOutputProperty(Serializer.Property.METHOD, resolveSerializerMethod(outputFile));
+        serializer.setOutputProperty(
+                Serializer.Property.METHOD, resolveSerializerMethod(outputFile));
         transformer.setDestination(serializer);
         transformer.transform();
     }
 
-    private XsltTransformer createTransformer(XsltExecutable executable, File inputFile, Map<String, String> params) {
+    private XsltTransformer createTransformer(
+            XsltExecutable executable, File inputFile, Map<String, String> params) {
         XsltTransformer transformer = executable.load();
         transformer.setSource(sourceFor(inputFile));
         for (Map.Entry<String, String> entry : params.entrySet()) {
-            transformer.setParameter(new QName(entry.getKey()), new XdmAtomicValue(entry.getValue()));
+            transformer.setParameter(
+                    new QName(entry.getKey()), new XdmAtomicValue(entry.getValue()));
         }
         return transformer;
     }
@@ -122,7 +131,8 @@ public abstract class XsltTask extends AbstractXmlTransformTask {
             return new SAXSource(new XirReader(), new InputSource(inputFile.toURI().toString()));
         }
         if (useCanonicalJsonInput(inputFile)) {
-            return new SAXSource(new JsonCanonicalXmlReader(), new InputSource(inputFile.toURI().toString()));
+            return new SAXSource(
+                    new JsonCanonicalXmlReader(), new InputSource(inputFile.toURI().toString()));
         }
         return new StreamSource(inputFile);
     }
@@ -130,11 +140,11 @@ public abstract class XsltTask extends AbstractXmlTransformTask {
     private Source stylesheetSource() {
         File stylesheetFile = getStylesheet().get().getAsFile();
         if (isXirFile(stylesheetFile)) {
-            return new SAXSource(new XirReader(), new InputSource(stylesheetFile.toURI().toString()));
+            return new SAXSource(
+                    new XirReader(), new InputSource(stylesheetFile.toURI().toString()));
         }
         return new StreamSource(stylesheetFile);
     }
-
 
     @Override
     protected long latestDependencyTimestamp(File inputFile) {
@@ -156,4 +166,3 @@ public abstract class XsltTask extends AbstractXmlTransformTask {
         getStylesheet().set(file);
     }
 }
-

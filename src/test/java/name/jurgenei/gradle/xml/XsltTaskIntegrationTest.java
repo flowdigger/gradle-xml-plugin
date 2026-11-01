@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertEquals;
@@ -19,8 +20,7 @@ import org.junit.rules.TemporaryFolder;
  */
 public class XsltTaskIntegrationTest {
 
-    @Rule
-    public final TemporaryFolder testProjectDir = new TemporaryFolder();
+    @Rule public final TemporaryFolder testProjectDir = new TemporaryFolder();
 
     /**
      * Verifies parameter passing for a single source file transformation.
@@ -30,7 +30,9 @@ public class XsltTaskIntegrationTest {
         write("settings.gradle", """
             rootProject.name = 'xslt-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -40,10 +42,14 @@ public class XsltTaskIntegrationTest {
             }
             """);
 
-        write("src/main/xml/input.xml", """
+        write(
+                "src/main/xml/input.xml",
+                """
             <root><value>Gradle</value></root>
             """);
-        write("src/main/xslt/main.xsl", """
+        write(
+                "src/main/xslt/main.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:param name='prefix'/>
@@ -53,13 +59,14 @@ public class XsltTaskIntegrationTest {
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
 
@@ -73,10 +80,14 @@ public class XsltTaskIntegrationTest {
      */
     @Test
     public void infersJsonOutputMethodFromExtension() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'xslt-json-method-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -86,10 +97,14 @@ public class XsltTaskIntegrationTest {
             }
             """);
 
-        write("src/main/xml/input.xml", """
+        write(
+                "src/main/xml/input.xml",
+                """
             <root><value>Gradle</value></root>
             """);
-        write("src/main/xslt/main.xsl", """
+        write(
+                "src/main/xslt/main.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:template match='/'>
@@ -98,13 +113,14 @@ public class XsltTaskIntegrationTest {
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
 
@@ -115,10 +131,14 @@ public class XsltTaskIntegrationTest {
 
     @Test
     public void autoModeWritesHierarchicalJsonForXmlNodeResults() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'xslt-json-auto-hierarchical-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -130,24 +150,29 @@ public class XsltTaskIntegrationTest {
             """);
 
         write("src/main/xml/input.xml", "<book><title>XML</title></book>");
-        write("src/main/xslt/main.xsl", """
+        write(
+                "src/main/xslt/main.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xslt/input.json"));
-        assertTrue(output.contains("\"type\":\"element\"") || output.contains("\"type\" : \"element\""));
+        assertTrue(
+                output.contains("\"type\":\"element\"")
+                        || output.contains("\"type\" : \"element\""));
         assertTrue(output.contains("\"name\":\"book\"") || output.contains("\"name\" : \"book\""));
         assertTrue(!output.contains("\"attributes\" : { }"));
         assertTrue(!output.contains("\"attributes\":{}"));
@@ -155,10 +180,14 @@ public class XsltTaskIntegrationTest {
 
     @Test
     public void nativeModeWritesHierarchicalJsonForXmlNodeResults() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'xslt-json-native-hierarchical-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -170,24 +199,29 @@ public class XsltTaskIntegrationTest {
             """);
 
         write("src/main/xml/input.xml", "<book><title>XML</title></book>");
-        write("src/main/xslt/main.xsl", """
+        write(
+                "src/main/xslt/main.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xslt/input.json"));
-        assertTrue(output.contains("\"type\":\"element\"") || output.contains("\"type\" : \"element\""));
+        assertTrue(
+                output.contains("\"type\":\"element\"")
+                        || output.contains("\"type\" : \"element\""));
         assertTrue(output.contains("\"name\":\"book\"") || output.contains("\"name\" : \"book\""));
         assertTrue(!output.contains("\"attributes\" : { }"));
         assertTrue(!output.contains("\"attributes\":{}"));
@@ -198,10 +232,14 @@ public class XsltTaskIntegrationTest {
      */
     @Test
     public void usesExplicitTextOutputMethod() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'xslt-text-method-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -212,10 +250,14 @@ public class XsltTaskIntegrationTest {
             }
             """);
 
-        write("src/main/xml/input.xml", """
+        write(
+                "src/main/xml/input.xml",
+                """
             <root><value>Gradle</value></root>
             """);
-        write("src/main/xslt/main.xsl", """
+        write(
+                "src/main/xslt/main.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:template match='/'>
@@ -224,13 +266,14 @@ public class XsltTaskIntegrationTest {
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
 
@@ -244,10 +287,14 @@ public class XsltTaskIntegrationTest {
      */
     @Test
     public void transformsSingleFileWithExplicitInputOutput() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'xslt-explicit-io-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -256,10 +303,14 @@ public class XsltTaskIntegrationTest {
             }
             """);
 
-        write("src/main/xml/a.xml", """
+        write(
+                "src/main/xml/a.xml",
+                """
             <root><value>Gradle</value></root>
             """);
-        write("src/main/xslt/main.xsl", """
+        write(
+                "src/main/xslt/main.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:template match='/'>
@@ -268,13 +319,14 @@ public class XsltTaskIntegrationTest {
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
 
@@ -288,10 +340,14 @@ public class XsltTaskIntegrationTest {
      */
     @Test
     public void transformsFileTreeWithPatternsAndWorkers() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'xslt-tree-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -308,13 +364,19 @@ public class XsltTaskIntegrationTest {
         write("src/main/xml/a.xml", """
             <root><value>A</value></root>
             """);
-        write("src/main/xml/foo/bar.xml", """
+        write(
+                "src/main/xml/foo/bar.xml",
+                """
             <root><value>B</value></root>
             """);
-        write("src/main/xml/skip.xml", """
+        write(
+                "src/main/xml/skip.xml",
+                """
             <root><value>SKIP</value></root>
             """);
-        write("src/main/xslt/main.xsl", """
+        write(
+                "src/main/xslt/main.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:template match='/'>
@@ -324,10 +386,10 @@ public class XsltTaskIntegrationTest {
             """);
 
         newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build();
+                .withProjectDir(testProjectDir.getRoot())
+                .withPluginClasspath()
+                .withArguments("runXslt")
+                .build();
 
         File outputA = new File(testProjectDir.getRoot(), "build/out/xslt/a.out.xml");
         File outputB = new File(testProjectDir.getRoot(), "build/out/xslt/foo/bar.out.xml");
@@ -345,10 +407,14 @@ public class XsltTaskIntegrationTest {
      */
     @Test
     public void skipsTransformationWhenOutputIsNewerThanSourceAndStylesheet() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'xslt-skip-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -357,10 +423,14 @@ public class XsltTaskIntegrationTest {
             }
             """);
 
-        write("src/main/xml/input.xml", """
+        write(
+                "src/main/xml/input.xml",
+                """
             <root><value>Gradle</value></root>
             """);
-        write("src/main/xslt/main.xsl", """
+        write(
+                "src/main/xslt/main.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:template match='/'>
@@ -369,11 +439,12 @@ public class XsltTaskIntegrationTest {
             </xsl:stylesheet>
             """);
 
-        BuildResult firstRun = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt", "--rerun-tasks")
-            .build();
+        BuildResult firstRun =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt", "--rerun-tasks")
+                        .build();
 
         File output = new File(testProjectDir.getRoot(), "build/out/xslt/input.xml");
         assertTrue(output.exists());
@@ -382,11 +453,12 @@ public class XsltTaskIntegrationTest {
         long futureTimestamp = System.currentTimeMillis() + 60_000;
         assertTrue(output.setLastModified(futureTimestamp));
 
-        BuildResult secondRun = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt", "--rerun-tasks")
-            .build();
+        BuildResult secondRun =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt", "--rerun-tasks")
+                        .build();
 
         assertTrue(secondRun.getOutput().contains("[SKIP]"));
     }
@@ -396,10 +468,14 @@ public class XsltTaskIntegrationTest {
      */
     @Test
     public void skipsTransformationWhenOutputIsNewerEvenIfParamsChange() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'xslt-param-fingerprint-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -409,10 +485,14 @@ public class XsltTaskIntegrationTest {
             }
             """);
 
-        write("src/main/xml/input.xml", """
+        write(
+                "src/main/xml/input.xml",
+                """
             <root><value>Gradle</value></root>
             """);
-        write("src/main/xslt/main.xsl", """
+        write(
+                "src/main/xslt/main.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:param name='prefix'/>
@@ -422,11 +502,12 @@ public class XsltTaskIntegrationTest {
             </xsl:stylesheet>
             """);
 
-        BuildResult firstRun = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt", "--rerun-tasks")
-            .build();
+        BuildResult firstRun =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt", "--rerun-tasks")
+                        .build();
 
         File output = new File(testProjectDir.getRoot(), "build/out/xslt/input.xml");
         assertTrue(output.exists());
@@ -436,7 +517,9 @@ public class XsltTaskIntegrationTest {
         long futureTimestamp = System.currentTimeMillis() + 60_000;
         assertTrue(output.setLastModified(futureTimestamp));
 
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -446,11 +529,12 @@ public class XsltTaskIntegrationTest {
             }
             """);
 
-        BuildResult secondRun = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt", "--rerun-tasks")
-            .build();
+        BuildResult secondRun =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt", "--rerun-tasks")
+                        .build();
 
         assertTrue(secondRun.getOutput().contains("[SKIP]"));
         assertTrue(read(output).contains("<result>Hello Gradle</result>"));
@@ -471,25 +555,29 @@ public class XsltTaskIntegrationTest {
      */
     @Test
     public void refactorsOutOfProcessSaxonToXsltTask() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'indexer-refactor-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
-            
+
             // Input configuration
             def seedFile = file('src/seed/schema-index-seed.xml')
             def indexerStyle = file('src/xslt/indexer.xsl')
             def schemaDir = file('src/schemas')
             def schemaName = 'OpenAPI'
-            
+
             // Old way (commented out for reference):
-            // exec { setArgs(["-s:" + seedFile.absolutePath, 
-            //                  "-xsl:" + indexerStyle.absolutePath, 
+            // exec { setArgs(["-s:" + seedFile.absolutePath,
+            //                  "-xsl:" + indexerStyle.absolutePath,
             //                  "-o:" + file('build/indexes/schema-index.xml').absolutePath,
             //                  "input-dir=" + schemaDir.absolutePath,
             //                  "schema-name=" + schemaName]) }
-            
+
             // New way: gradle-xml-plugin (in-process, incremental, cleaner)
             tasks.register('buildSchemaIndex', org.flowdigger.gradle.xml.XsltTask) {
               style indexerStyle
@@ -501,7 +589,9 @@ public class XsltTaskIntegrationTest {
             """);
 
         // Setup input files
-        write("src/seed/schema-index-seed.xml", """
+        write(
+                "src/seed/schema-index-seed.xml",
+                """
             <?xml version='1.0'?>
             <index>
               <title>Schema Index</title>
@@ -512,13 +602,15 @@ public class XsltTaskIntegrationTest {
         write("src/schemas/api.yaml", "# mock schema file");
 
         // XSLT with parameter declarations
-        write("src/xslt/indexer.xsl", """
+        write(
+                "src/xslt/indexer.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <!-- Key adjustment: Use xsl:param for external parameters -->
               <xsl:param name='inputDir'/>
               <xsl:param name='schemaName'/>
-              
+
               <xsl:template match='/'>
                 <index>
                   <title><xsl:value-of select='/index/title'/></title>
@@ -533,11 +625,12 @@ public class XsltTaskIntegrationTest {
             """);
 
         // Execute the gradle-xml-plugin task
-        BuildResult result = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("buildSchemaIndex")
-            .build();
+        BuildResult result =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("buildSchemaIndex")
+                        .build();
 
         assertEquals(TaskOutcome.SUCCESS, result.task(":buildSchemaIndex").getOutcome());
 
@@ -552,15 +645,19 @@ public class XsltTaskIntegrationTest {
      */
     @Test
     public void indexesMultipleSchemasWithIncludeExcludePatterns() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'multi-schema-indexer'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
-            
+
             def seedDir = file('src/seeds')
             def indexerStyle = file('src/xslt/indexer.xsl')
-            
+
             tasks.register('indexSchemas', org.flowdigger.gradle.xml.XsltTask) {
               // File-tree with include/exclude for batch processing
               source(fileTree(seedDir) {
@@ -576,17 +673,25 @@ public class XsltTaskIntegrationTest {
             """);
 
         // Setup multiple seed files
-        write("src/seeds/openapi-seed.xml", """
+        write(
+                "src/seeds/openapi-seed.xml",
+                """
             <schema type='openapi'><title>OpenAPI</title></schema>
             """);
-        write("src/seeds/asyncapi-seed.xml", """
+        write(
+                "src/seeds/asyncapi-seed.xml",
+                """
             <schema type='asyncapi'><title>AsyncAPI</title></schema>
             """);
-        write("src/seeds/deprecated-v1-seed.xml", """
+        write(
+                "src/seeds/deprecated-v1-seed.xml",
+                """
             <schema type='deprecated'><title>Legacy</title></schema>
             """);
 
-        write("src/xslt/indexer.xsl", """
+        write(
+                "src/xslt/indexer.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:param name='indexVersion'/>
@@ -599,22 +704,27 @@ public class XsltTaskIntegrationTest {
             """);
 
         // Process all files
-        BuildResult result = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("indexSchemas", "--rerun-tasks")
-            .build();
+        BuildResult result =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("indexSchemas", "--rerun-tasks")
+                        .build();
 
         assertEquals(TaskOutcome.SUCCESS, result.task(":indexSchemas").getOutcome());
 
         // Verify successful execution (files would exist but exact paths depend on implementation)
-        assertTrue("Build should succeed with fileTree patterns", result.getOutput().contains("BUILD SUCCESSFUL"));
+        assertTrue(
+                "Build should succeed with fileTree patterns",
+                result.getOutput().contains("BUILD SUCCESSFUL"));
     }
 
     @Test
     public void transformsXirInputToXml() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-input-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -623,20 +733,23 @@ public class XsltTaskIntegrationTest {
             }
             """);
         write("src/main/xir/input.xir", "(book { id \"b1\" } (title \"XML\"))");
-        write("src/main/xslt/identity.xsl", """
+        write(
+                "src/main/xslt/identity.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xslt/input.xml"));
@@ -647,7 +760,9 @@ public class XsltTaskIntegrationTest {
     @Test
     public void resolvesXirViaDocFunction() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-doc-xir-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -657,23 +772,28 @@ public class XsltTaskIntegrationTest {
             """);
         write("src/main/xml/input.xml", "<root/>");
         write("src/main/xir/lookup.xir", "(lookup (value \"from-xir\"))");
-        String lookupUri = new File(testProjectDir.getRoot(), "src/main/xir/lookup.xir").toURI().toString();
-        write("src/main/xslt/main.xsl", """
+        String lookupUri =
+                new File(testProjectDir.getRoot(), "src/main/xir/lookup.xir").toURI().toString();
+        write(
+                "src/main/xslt/main.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:template match='/'>
                 <result><xsl:value-of select="doc('%s')/lookup/value"/></result>
               </xsl:template>
             </xsl:stylesheet>
-            """.formatted(lookupUri));
+            """
+                        .formatted(lookupUri));
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xslt/input.xml"));
@@ -683,7 +803,9 @@ public class XsltTaskIntegrationTest {
     @Test
     public void resolvesXirViaCollectionFunction() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-collection-xir-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
@@ -694,9 +816,12 @@ public class XsltTaskIntegrationTest {
         write("src/main/xml/input.xml", "<root/>");
         write("src/main/xir/a.xir", "(item (name \"A\"))");
         write("src/main/xir/b.xir", "(item (name \"B\"))");
-        String collectionUri = new File(testProjectDir.getRoot(), "src/main/xir/").toURI().toString()
-            + "?select=*.xir;recurse=no";
-        write("src/main/xslt/main.xsl", """
+        String collectionUri =
+                new File(testProjectDir.getRoot(), "src/main/xir/").toURI().toString()
+                        + "?select=*.xir;recurse=no";
+        write(
+                "src/main/xslt/main.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:template match='/'>
@@ -708,15 +833,17 @@ public class XsltTaskIntegrationTest {
                 </result>
               </xsl:template>
             </xsl:stylesheet>
-            """.formatted(collectionUri));
+            """
+                        .formatted(collectionUri));
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xslt/input.xml"));
@@ -728,7 +855,9 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsXmlToXirOutput() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-output-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -738,20 +867,23 @@ public class XsltTaskIntegrationTest {
             }
             """);
         write("src/main/xml/input.xml", "<book id='b1'><title>XML</title></book>");
-        write("src/main/xslt/identity.xsl", """
+        write(
+                "src/main/xslt/identity.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xslt/input.xir"));
@@ -763,7 +895,9 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsXmlToBeautifiedXirOutput() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-output-beautified-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -774,20 +908,23 @@ public class XsltTaskIntegrationTest {
             }
             """);
         write("src/main/xml/input.xml", "<book id='b1'><title>XML</title></book>");
-        write("src/main/xslt/identity.xsl", """
+        write(
+                "src/main/xslt/identity.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xslt/input.xir"));
@@ -799,7 +936,9 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsXmlToPrettyAliasXirOutput() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-output-pretty-alias-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -810,20 +949,23 @@ public class XsltTaskIntegrationTest {
             }
             """);
         write("src/main/xml/input.xml", "<book id='b1'><title>XML</title></book>");
-        write("src/main/xslt/identity.xsl", """
+        write(
+                "src/main/xslt/identity.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xslt/input.xir"));
@@ -835,7 +977,9 @@ public class XsltTaskIntegrationTest {
     @Test
     public void failsOnUnsupportedXirFormat() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-format-invalid-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -846,26 +990,35 @@ public class XsltTaskIntegrationTest {
             }
             """);
         write("src/main/xml/input.xml", "<book id='b1'><title>XML</title></book>");
-        write("src/main/xslt/identity.xsl", """
+        write(
+                "src/main/xslt/identity.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        BuildResult result = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .buildAndFail();
+        BuildResult result =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .buildAndFail();
 
-        assertTrue(result.getOutput().contains("Unsupported xirFormat 'invalid-mode'. Supported values: compact, beautified"));
+        assertTrue(
+                result.getOutput()
+                        .contains(
+                                "Unsupported xirFormat 'invalid-mode'. Supported values: compact,"
+                                        + " beautified"));
     }
 
     @Test
     public void roundtripsXmlThroughXir() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-roundtrip-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('xmlToXir', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -881,20 +1034,23 @@ public class XsltTaskIntegrationTest {
             }
             """);
         write("src/main/xml/input.xml", "<book id='b1'><title>XML</title></book>");
-        write("src/main/xslt/identity.xsl", """
+        write(
+                "src/main/xslt/identity.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("xirToXml")
-            .build()
-            .task(":xirToXml")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("xirToXml")
+                        .build()
+                        .task(":xirToXml")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xml/result.xml"));
@@ -905,7 +1061,9 @@ public class XsltTaskIntegrationTest {
     @Test
     public void roundtripsDefaultNamespaceThroughXir() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-default-ns-roundtrip-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('xmlToXir', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -921,25 +1079,30 @@ public class XsltTaskIntegrationTest {
               output 'build/out/xml/result.xml'
             }
             """);
-        write("src/main/xml/input.xml", """
+        write(
+                "src/main/xml/input.xml",
+                """
             <math xmlns='http://www.w3.org/1998/Math/MathML'>
               <mfrac><mi>a</mi><mi>b</mi></mfrac>
             </math>
             """);
-        write("src/main/xslt/identity.xsl", """
+        write(
+                "src/main/xslt/identity.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("xirToXml")
-            .build()
-            .task(":xirToXml")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("xirToXml")
+                        .build()
+                        .task(":xirToXml")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String xir = read(new File(testProjectDir.getRoot(), "build/out/xir/input.xir"));
@@ -952,7 +1115,9 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsWithXirStylesheetAndXirInputOutput() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-xir-style-roundtrip-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xir'
@@ -963,19 +1128,22 @@ public class XsltTaskIntegrationTest {
             }
             """);
         write("src/main/xir/input.xir", "(book { id \"b1\" } (title \"XML\"))");
-        write("src/main/xslt/identity.xir", """
+        write(
+                "src/main/xslt/identity.xir",
+                """
             (xsl:stylesheet
               { version "3.0" xmlns:xsl "http://www.w3.org/1999/XSL/Transform" }
               (xsl:mode { on-no-match "shallow-copy" }))
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xslt/input.xir"));
@@ -987,7 +1155,9 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsCanonicalJsonInputToXml() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-json-input-canonical-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -996,7 +1166,9 @@ public class XsltTaskIntegrationTest {
               jsonMode.set('canonical')
             }
             """);
-        write("src/main/json/input.json", """
+        write(
+                "src/main/json/input.json",
+                """
             {
               "type": "element",
               "name": "book",
@@ -1013,20 +1185,23 @@ public class XsltTaskIntegrationTest {
               ]
             }
             """);
-        write("src/main/xslt/identity.xsl", """
+        write(
+                "src/main/xslt/identity.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xslt/input.xml"));
@@ -1037,7 +1212,9 @@ public class XsltTaskIntegrationTest {
     @Test
     public void transformsXmlToCanonicalJsonOutputWithBeautifiedFormat() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-json-output-canonical-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -1049,20 +1226,23 @@ public class XsltTaskIntegrationTest {
             }
             """);
         write("src/main/xml/input.xml", "<book id='b1'><title>XML</title></book>");
-        write("src/main/xslt/identity.xsl", """
+        write(
+                "src/main/xslt/identity.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runXslt")
-            .build()
-            .task(":runXslt")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runXslt")
+                        .build()
+                        .task(":runXslt")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xslt/input.json"));
@@ -1077,7 +1257,9 @@ public class XsltTaskIntegrationTest {
     @Test
     public void roundtripsXmlThroughCanonicalJson() throws IOException {
         write("settings.gradle", "rootProject.name = 'xslt-json-roundtrip-canonical-test'");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('xmlToJson', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
@@ -1095,27 +1277,29 @@ public class XsltTaskIntegrationTest {
             }
             """);
         write("src/main/xml/input.xml", "<book id='b1'><title>XML</title></book>");
-        write("src/main/xslt/identity.xsl", """
+        write(
+                "src/main/xslt/identity.xsl",
+                """
             <?xml version='1.0'?>
             <xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
               <xsl:mode on-no-match='shallow-copy'/>
             </xsl:stylesheet>
             """);
 
-        TaskOutcome outcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("jsonToXml")
-            .build()
-            .task(":jsonToXml")
-            .getOutcome();
+        TaskOutcome outcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("jsonToXml")
+                        .build()
+                        .task(":jsonToXml")
+                        .getOutcome();
 
         assertEquals(TaskOutcome.SUCCESS, outcome);
         String output = read(new File(testProjectDir.getRoot(), "build/out/xml/result.xml"));
         assertTrue(output.contains("<book id=\"b1\">"));
         assertTrue(output.contains("<title>XML</title>"));
     }
-
 
     private void write(String relativePath, String content) throws IOException {
         File file = new File(testProjectDir.getRoot(), relativePath);
