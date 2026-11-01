@@ -1,5 +1,17 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml;
 
+import java.io.File;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;
@@ -17,22 +29,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * Bootstraps a Schematron SEL schema from an XSD file or URL.
  */
-@DisableCachingByDefault(because = "Bootstrap generation is typically one-time setup and may consume remote URLs")
+@DisableCachingByDefault(
+        because = "Bootstrap generation is typically one-time setup and may consume remote URLs")
 public abstract class SchematronBootstrapTask extends DefaultTask {
 
     private static final String XS_NS = "http://www.w3.org/2001/XMLSchema";
@@ -117,7 +118,11 @@ public abstract class SchematronBootstrapTask extends DefaultTask {
     public void bootstrap() {
         File output = getOutputFile().get().getAsFile();
         if (output.exists()) {
-            getLogger().lifecycle("Schematron bootstrap skipped: output already exists and will not be overwritten: {}", output);
+            getLogger()
+                    .lifecycle(
+                            "Schematron bootstrap skipped: output already exists and will not be"
+                                    + " overwritten: {}",
+                            output);
             return;
         }
 
@@ -150,7 +155,8 @@ public abstract class SchematronBootstrapTask extends DefaultTask {
             }
         }
 
-        throw new GradleException("Configure either schema(...) or schemaUrl(...) for Schematron bootstrap");
+        throw new GradleException(
+                "Configure either schema(...) or schemaUrl(...) for Schematron bootstrap");
     }
 
     private Document parse(InputStream input) throws Exception {
@@ -172,34 +178,50 @@ public abstract class SchematronBootstrapTask extends DefaultTask {
         StringBuilder sb = new StringBuilder();
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         sb.append("<sch:schema xmlns:sch=\"http://purl.oclc.org/dsdl/schematron\"\n");
-        sb.append("            xmlns:").append(prefix).append("=\"").append(escapeXml(targetNamespace)).append("\">\n");
+        sb.append("            xmlns:")
+                .append(prefix)
+                .append("=\"")
+                .append(escapeXml(targetNamespace))
+                .append("\">\n");
         sb.append("  <sch:title>Bootstrap SEL Schematron</sch:title>\n");
-        sb.append("  <sch:ns prefix=\"").append(prefix).append("\" uri=\"").append(escapeXml(targetNamespace)).append("\"/>\n");
+        sb.append("  <sch:ns prefix=\"")
+                .append(prefix)
+                .append("\" uri=\"")
+                .append(escapeXml(targetNamespace))
+                .append("\"/>\n");
         sb.append("  <sch:p>generated-from: ").append(escapeXml(schemaSource)).append("</sch:p>\n");
-        sb.append("  <sch:p>generated-at: ").append(escapeXml(Instant.now().toString())).append("</sch:p>\n");
+        sb.append("  <sch:p>generated-at: ")
+                .append(escapeXml(Instant.now().toString()))
+                .append("</sch:p>\n");
 
         for (ElementSelProfile selProfile : globalElements) {
-            sb.append("\n  <sch:pattern id=\"").append(escapeXml(selProfile.patternId())).append("\">\n");
-            sb.append("    <sch:title>").append(escapeXml(selProfile.context())).append(" SEL</sch:title>\n");
-            sb.append("    <sch:rule context=\"").append(escapeXml(selProfile.context())).append("\">\n");
+            sb.append("\n  <sch:pattern id=\"")
+                    .append(escapeXml(selProfile.patternId()))
+                    .append("\">\n");
+            sb.append("    <sch:title>")
+                    .append(escapeXml(selProfile.context()))
+                    .append(" SEL</sch:title>\n");
+            sb.append("    <sch:rule context=\"")
+                    .append(escapeXml(selProfile.context()))
+                    .append("\">\n");
             sb.append("      <sch:assert test=\"true()\">Bootstrap rule for ")
-                .append(escapeXml(selProfile.context()))
-                .append(" (always passing until customized)</sch:assert>\n");
+                    .append(escapeXml(selProfile.context()))
+                    .append(" (always passing until customized)</sch:assert>\n");
 
             if (!selProfile.requiredChildren().isEmpty()) {
                 sb.append("      <sch:p>required-children: ")
-                    .append(escapeXml(String.join(", ", selProfile.requiredChildren())))
-                    .append("</sch:p>\n");
+                        .append(escapeXml(String.join(", ", selProfile.requiredChildren())))
+                        .append("</sch:p>\n");
             }
             if (!selProfile.optionalChildren().isEmpty()) {
                 sb.append("      <sch:p>optional-children: ")
-                    .append(escapeXml(String.join(", ", selProfile.optionalChildren())))
-                    .append("</sch:p>\n");
+                        .append(escapeXml(String.join(", ", selProfile.optionalChildren())))
+                        .append("</sch:p>\n");
             }
             if (!selProfile.requiredAttributes().isEmpty()) {
                 sb.append("      <sch:p>required-attributes: ")
-                    .append(escapeXml(String.join(", ", selProfile.requiredAttributes())))
-                    .append("</sch:p>\n");
+                        .append(escapeXml(String.join(", ", selProfile.requiredAttributes())))
+                        .append("</sch:p>\n");
             }
 
             sb.append("    </sch:rule>\n");
@@ -212,7 +234,8 @@ public abstract class SchematronBootstrapTask extends DefaultTask {
 
     private Map<String, ElementSelProfile> collectComplexTypes(Document xsd) {
         Map<String, ElementSelProfile> map = new LinkedHashMap<>();
-        NodeList complexTypeNodes = xsd.getDocumentElement().getElementsByTagNameNS(XS_NS, "complexType");
+        NodeList complexTypeNodes =
+                xsd.getDocumentElement().getElementsByTagNameNS(XS_NS, "complexType");
         for (int i = 0; i < complexTypeNodes.getLength(); i++) {
             Element complexType = (Element) complexTypeNodes.item(i);
             if (complexType.getParentNode() != xsd.getDocumentElement()) {
@@ -227,7 +250,8 @@ public abstract class SchematronBootstrapTask extends DefaultTask {
         return map;
     }
 
-    private List<ElementSelProfile> collectGlobalElements(Document xsd, Map<String, ElementSelProfile> complexTypes) {
+    private List<ElementSelProfile> collectGlobalElements(
+            Document xsd, Map<String, ElementSelProfile> complexTypes) {
         List<ElementSelProfile> selProfiles = new ArrayList<>();
         NodeList elementNodes = xsd.getDocumentElement().getElementsByTagNameNS(XS_NS, "element");
         for (int i = 0; i < elementNodes.getLength(); i++) {
@@ -246,13 +270,21 @@ public abstract class SchematronBootstrapTask extends DefaultTask {
         return selProfiles;
     }
 
-    private ElementSelProfile fromElementType(String elementName, Element element, Map<String, ElementSelProfile> complexTypes) {
+    private ElementSelProfile fromElementType(
+            String elementName, Element element, Map<String, ElementSelProfile> complexTypes) {
         String declaredType = element.getAttribute("type");
         if (!declaredType.isEmpty()) {
-            String localType = declaredType.contains(":") ? declaredType.substring(declaredType.indexOf(':') + 1) : declaredType;
+            String localType =
+                    declaredType.contains(":")
+                            ? declaredType.substring(declaredType.indexOf(':') + 1)
+                            : declaredType;
             ElementSelProfile fromType = complexTypes.get(localType);
             if (fromType != null) {
-                return new ElementSelProfile(elementName, fromType.requiredChildren(), fromType.optionalChildren(), fromType.requiredAttributes());
+                return new ElementSelProfile(
+                        elementName,
+                        fromType.requiredChildren(),
+                        fromType.optionalChildren(),
+                        fromType.requiredAttributes());
             }
         }
 
@@ -275,10 +307,12 @@ public abstract class SchematronBootstrapTask extends DefaultTask {
         requiredChildren.sort(String::compareTo);
         optionalChildren.sort(String::compareTo);
         requiredAttributes.sort(String::compareTo);
-        return new ElementSelProfile(context, requiredChildren, optionalChildren, requiredAttributes);
+        return new ElementSelProfile(
+                context, requiredChildren, optionalChildren, requiredAttributes);
     }
 
-    private void collectChildElements(Element complexType, List<String> requiredChildren, List<String> optionalChildren) {
+    private void collectChildElements(
+            Element complexType, List<String> requiredChildren, List<String> optionalChildren) {
         NodeList descendants = complexType.getElementsByTagNameNS(XS_NS, "element");
         for (int i = 0; i < descendants.getLength(); i++) {
             Element child = (Element) descendants.item(i);
@@ -359,21 +393,20 @@ public abstract class SchematronBootstrapTask extends DefaultTask {
     }
 
     private String escapeXml(String text) {
-        return text
-                .replace("&", "&amp;")
+        return text.replace("&", "&amp;")
                 .replace("<", "&lt;")
                 .replace(">", "&gt;")
                 .replace("\"", "&quot;")
                 .replace("'", "&apos;");
     }
 
-    private record LoadedSchema(Document document, String schemaSource) {
-    }
+    private record LoadedSchema(Document document, String schemaSource) {}
 
-    private record ElementSelProfile(String context,
-                                      List<String> requiredChildren,
-                                      List<String> optionalChildren,
-                                      List<String> requiredAttributes) {
+    private record ElementSelProfile(
+            String context,
+            List<String> requiredChildren,
+            List<String> optionalChildren,
+            List<String> requiredAttributes) {
         String patternId() {
             return "sel-" + context;
         }

@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml.validation;
 
 /**
@@ -11,4 +12,3 @@ public enum XsdEngine {
     /** Force JAXP/Xerces validation. */
     JAXP
 }
-

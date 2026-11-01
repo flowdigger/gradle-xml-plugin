@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml.validation;
 
 import java.util.List;
@@ -29,4 +30,3 @@ public record ValidationResult(List<ValidationIssue> issues, String svrlXml) {
         return !issues.isEmpty();
     }
 }
-

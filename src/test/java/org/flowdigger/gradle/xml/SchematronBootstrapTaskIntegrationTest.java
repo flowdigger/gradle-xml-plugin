@@ -1,33 +1,36 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml;
 
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-
-import static org.junit.Assert.assertTrue;
-
 /**
  * Integration tests for {@link SchematronBootstrapTask}.
  */
 public class SchematronBootstrapTaskIntegrationTest {
 
-    @Rule
-    public final TemporaryFolder testProjectDir = new TemporaryFolder();
+    @Rule public final TemporaryFolder testProjectDir = new TemporaryFolder();
 
     @Test
     public void bootstrapsFromOoXmlSchemaUrlAndValidatesCanonicalXml() throws Exception {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'schematron-bootstrap-flow'
             """);
 
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
 
             tasks.register('bootstrapCanonicalSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
@@ -50,7 +53,9 @@ public class SchematronBootstrapTaskIntegrationTest {
             }
             """);
 
-        write("src/main/xsd/canonical.xsd", """
+        write(
+                "src/main/xsd/canonical.xsd",
+                """
             <?xml version='1.0' encoding='UTF-8'?>
             <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='http://jurgenei.name/canonical' xmlns:c='http://jurgenei.name/canonical' elementFormDefault='qualified'>
               <xs:element name='Document'>
@@ -64,7 +69,9 @@ public class SchematronBootstrapTaskIntegrationTest {
             </xs:schema>
             """);
 
-        write("src/main/xml/canonical.xml", """
+        write(
+                "src/main/xml/canonical.xml",
+                """
             <Document xmlns='http://jurgenei.name/canonical'>
               <Metadata>
                 <DocumentId>sample</DocumentId>
@@ -81,13 +88,18 @@ public class SchematronBootstrapTaskIntegrationTest {
             """);
 
         newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withArguments("bootstrapCanonicalSchematron", "bootstrapFromLocalXsd", "validateCanonicalSchematron")
-            .withPluginClasspath()
-            .build();
+                .withProjectDir(testProjectDir.getRoot())
+                .withArguments(
+                        "bootstrapCanonicalSchematron",
+                        "bootstrapFromLocalXsd",
+                        "validateCanonicalSchematron")
+                .withPluginClasspath()
+                .build();
 
-        File generatedSch = new File(testProjectDir.getRoot(), "src/main/schematron/canonical-sel.sch");
-        File localSch = new File(testProjectDir.getRoot(), "src/main/schematron/canonical-local.sch");
+        File generatedSch =
+                new File(testProjectDir.getRoot(), "src/main/schematron/canonical-sel.sch");
+        File localSch =
+                new File(testProjectDir.getRoot(), "src/main/schematron/canonical-local.sch");
         File svrl = new File(testProjectDir.getRoot(), "build/out/schematron/canonical.svrl.xml");
 
         assertTrue(generatedSch.exists());
@@ -100,7 +112,9 @@ public class SchematronBootstrapTaskIntegrationTest {
     @Test
     public void doesNotOverwriteExistingSchematronAndLogsWarning() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-bootstrap-safe'\n");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
 
             tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
@@ -109,7 +123,9 @@ public class SchematronBootstrapTaskIntegrationTest {
             }
             """);
 
-        write("src/main/xsd/schema.xsd", """
+        write(
+                "src/main/xsd/schema.xsd",
+                """
             <?xml version='1.0' encoding='UTF-8'?>
             <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='http://example.com/sample' elementFormDefault='qualified'>
               <xs:element name='Root' type='xs:string'/>
@@ -117,11 +133,12 @@ public class SchematronBootstrapTaskIntegrationTest {
             """);
         write("src/main/schematron/rules.sch", "<sentinel/>\n");
 
-        BuildResult result = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withArguments("bootstrapSchematron")
-            .withPluginClasspath()
-            .build();
+        BuildResult result =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withArguments("bootstrapSchematron")
+                        .withPluginClasspath()
+                        .build();
 
         File output = new File(testProjectDir.getRoot(), "src/main/schematron/rules.sch");
         assertTrue(read(output).contains("<sentinel/>"));
@@ -131,7 +148,9 @@ public class SchematronBootstrapTaskIntegrationTest {
     @Test
     public void emitsSelProfilesForNamedAndInlineComplexTypes() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-bootstrap-sel-profiles'\n");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
 
             tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
@@ -140,7 +159,9 @@ public class SchematronBootstrapTaskIntegrationTest {
             }
             """);
 
-        write("src/main/xsd/schema.xsd", """
+        write(
+                "src/main/xsd/schema.xsd",
+                """
             <?xml version='1.0' encoding='UTF-8'?>
             <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
                        xmlns:tns='http://example.com/sample'
@@ -171,12 +192,16 @@ public class SchematronBootstrapTaskIntegrationTest {
             """);
 
         newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withArguments("bootstrapSchematron")
-            .withPluginClasspath()
-            .build();
+                .withProjectDir(testProjectDir.getRoot())
+                .withArguments("bootstrapSchematron")
+                .withPluginClasspath()
+                .build();
 
-        String generated = read(new File(testProjectDir.getRoot(), "build/generated/schematron/generated.sch"));
+        String generated =
+                read(
+                        new File(
+                                testProjectDir.getRoot(),
+                                "build/generated/schematron/generated.sch"));
         assertTrue(generated.contains("id=\"sel-Order\""));
         assertTrue(generated.contains("id=\"sel-Inline\""));
         assertTrue(generated.contains("<sch:title>Order SEL</sch:title>"));
@@ -190,7 +215,9 @@ public class SchematronBootstrapTaskIntegrationTest {
     @Test
     public void failsWhenNeitherSchemaFileNorSchemaUrlConfigured() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-bootstrap-missing-source'\n");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
 
             tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
@@ -198,15 +225,15 @@ public class SchematronBootstrapTaskIntegrationTest {
             }
             """);
 
-        BuildResult result = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withArguments("bootstrapSchematron")
-            .withPluginClasspath()
-            .buildAndFail();
+        BuildResult result =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withArguments("bootstrapSchematron")
+                        .withPluginClasspath()
+                        .buildAndFail();
 
         assertTrue(result.getOutput().contains(":bootstrapSchematron"));
     }
-
 
     private void write(String relativePath, String content) throws IOException {
         File file = new File(testProjectDir.getRoot(), relativePath);

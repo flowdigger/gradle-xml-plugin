@@ -1,4 +1,10 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml.saxon;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -10,11 +16,6 @@ import net.sf.saxon.lib.ResourceResolver;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.XsltCompiler;
 import org.junit.Test;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 public class SaxonXirResolversTest {
 
@@ -47,7 +48,8 @@ public class SaxonXirResolversTest {
         xml.uri = "file:/tmp/not-xir.xml";
         assertNull(resourceResolver.resolve(xml));
 
-        Source xirWithQueryAndFragment = uriResolver.resolve("lookup.xir?version=1#fragment", "file:/tmp/base/main.xsl");
+        Source xirWithQueryAndFragment =
+                uriResolver.resolve("lookup.xir?version=1#fragment", "file:/tmp/base/main.xsl");
         assertNotNull(xirWithQueryAndFragment);
         assertNull(uriResolver.resolve("lookup.xml", "file:/tmp/base/main.xsl"));
     }
@@ -64,7 +66,8 @@ public class SaxonXirResolversTest {
     }
 
     private static Object newResolver() throws Exception {
-        Class<?> resolverClass = Class.forName("org.flowdigger.gradle.xml.saxon.SaxonXirResolvers$DualXirResolver");
+        Class<?> resolverClass =
+                Class.forName("org.flowdigger.gradle.xml.saxon.SaxonXirResolvers$DualXirResolver");
         Constructor<?> constructor = resolverClass.getDeclaredConstructor();
         constructor.setAccessible(true);
         Object resolver = constructor.newInstance();

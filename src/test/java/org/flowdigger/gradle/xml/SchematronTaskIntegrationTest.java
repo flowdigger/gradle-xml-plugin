@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml;
 
 import static org.junit.Assert.assertNotNull;
@@ -21,18 +22,21 @@ import org.junit.rules.TemporaryFolder;
  */
 public class SchematronTaskIntegrationTest {
 
-    @Rule
-    public final TemporaryFolder testProjectDir = new TemporaryFolder();
+    @Rule public final TemporaryFolder testProjectDir = new TemporaryFolder();
 
     /**
      * Verifies Schematron transpilation and SVRL/JUnit generation.
      */
     @Test
     public void validatesWithCustomTranspilerAndGeneratesReports() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'schematron-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -44,22 +48,29 @@ public class SchematronTaskIntegrationTest {
             }
             """);
 
-        write("src/main/schematron/rules.sch", """
+        write(
+                "src/main/schematron/rules.sch",
+                """
             <schema xmlns='http://purl.oclc.org/dsdl/schematron'/>
             """);
         write("src/main/schematron/transpile.xsl", transpiler());
-        write("src/main/xml/invalid.xml", """
+        write(
+                "src/main/xml/invalid.xml",
+                """
             <root><value>BAD</value></root>
             """);
 
         newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runSchematron")
-            .build();
+                .withProjectDir(testProjectDir.getRoot())
+                .withPluginClasspath()
+                .withArguments("runSchematron")
+                .build();
 
         File svrl = new File(testProjectDir.getRoot(), "build/out/schematron/invalid.svrl.xml");
-        File junit = new File(testProjectDir.getRoot(), "build/reports/xml-validation/junit/invalid.junit.xml");
+        File junit =
+                new File(
+                        testProjectDir.getRoot(),
+                        "build/reports/xml-validation/junit/invalid.junit.xml");
 
         assertTrue(svrl.exists());
         assertTrue(junit.exists());
@@ -72,10 +83,14 @@ public class SchematronTaskIntegrationTest {
      */
     @Test
     public void validatesFileTreeWithPatternsAndWorkers() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'schematron-tree-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -90,25 +105,31 @@ public class SchematronTaskIntegrationTest {
             }
             """);
 
-        write("src/main/schematron/rules.sch", """
+        write(
+                "src/main/schematron/rules.sch",
+                """
             <schema xmlns='http://purl.oclc.org/dsdl/schematron'/>
             """);
         write("src/main/schematron/transpile.xsl", transpiler());
         write("src/main/xml/a.xml", """
             <root><value>OK</value></root>
             """);
-        write("src/main/xml/foo/b.xml", """
+        write(
+                "src/main/xml/foo/b.xml",
+                """
             <root><value>BAD</value></root>
             """);
-        write("src/main/xml/skip.xml", """
+        write(
+                "src/main/xml/skip.xml",
+                """
             <root><value>BAD</value></root>
             """);
 
         newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runSchematron")
-            .build();
+                .withProjectDir(testProjectDir.getRoot())
+                .withPluginClasspath()
+                .withArguments("runSchematron")
+                .build();
 
         File outputA = new File(testProjectDir.getRoot(), "build/out/schematron/a.svrl.xml");
         File outputB = new File(testProjectDir.getRoot(), "build/out/schematron/foo/b.svrl.xml");
@@ -126,10 +147,14 @@ public class SchematronTaskIntegrationTest {
      */
     @Test
     public void reusesCompiledStyleAndRecompilesWhenTranspilerParametersChange() throws Exception {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'schematron-style-cache-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -141,40 +166,49 @@ public class SchematronTaskIntegrationTest {
             }
             """);
 
-        write("src/main/schematron/rules.sch", """
+        write(
+                "src/main/schematron/rules.sch",
+                """
             <schema xmlns='http://purl.oclc.org/dsdl/schematron'/>
             """);
         write("src/main/schematron/transpile.xsl", transpiler());
-        write("src/main/xml/input.xml", """
+        write(
+                "src/main/xml/input.xml",
+                """
             <root><value>BAD</value></root>
             """);
 
         newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runSchematron")
-            .build();
+                .withProjectDir(testProjectDir.getRoot())
+                .withPluginClasspath()
+                .withArguments("runSchematron")
+                .build();
 
-        File compiledStyle = new File(testProjectDir.getRoot(), "build/generated/schematron/compiled.xsl");
+        File compiledStyle =
+                new File(testProjectDir.getRoot(), "build/generated/schematron/compiled.xsl");
         assertTrue(compiledStyle.exists());
         long firstCompiledTimestamp = compiledStyle.lastModified();
 
         Thread.sleep(1200L);
 
-        TaskOutcome secondOutcome = newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runSchematron")
-            .build()
-            .task(":runSchematron")
-            .getOutcome();
+        TaskOutcome secondOutcome =
+                newGradleRunner()
+                        .withProjectDir(testProjectDir.getRoot())
+                        .withPluginClasspath()
+                        .withArguments("runSchematron")
+                        .build()
+                        .task(":runSchematron")
+                        .getOutcome();
 
         long secondCompiledTimestamp = compiledStyle.lastModified();
         assertTrue(secondOutcome == TaskOutcome.SUCCESS || secondOutcome == TaskOutcome.UP_TO_DATE);
-        assertTrue("Expected compiled style timestamp to stay unchanged when nothing changed",
-            secondCompiledTimestamp == firstCompiledTimestamp);
+        assertTrue(
+                "Expected compiled style timestamp to stay unchanged when nothing changed",
+                secondCompiledTimestamp == firstCompiledTimestamp);
 
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -190,14 +224,15 @@ public class SchematronTaskIntegrationTest {
         Thread.sleep(1200L);
 
         newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runSchematron")
-            .build();
+                .withProjectDir(testProjectDir.getRoot())
+                .withPluginClasspath()
+                .withArguments("runSchematron")
+                .build();
 
         long thirdCompiledTimestamp = compiledStyle.lastModified();
-        assertTrue("Expected compiled style timestamp to increase after transpiler parameter change",
-            thirdCompiledTimestamp > secondCompiledTimestamp);
+        assertTrue(
+                "Expected compiled style timestamp to increase after transpiler parameter change",
+                thirdCompiledTimestamp > secondCompiledTimestamp);
     }
 
     /**
@@ -205,10 +240,14 @@ public class SchematronTaskIntegrationTest {
      */
     @Test
     public void debugProducesIndentedSvrlOutput() throws Exception {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'schematron-debug-format-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -220,7 +259,9 @@ public class SchematronTaskIntegrationTest {
             }
             """);
 
-        write("src/main/schematron/rules.sch", """
+        write(
+                "src/main/schematron/rules.sch",
+                """
             <schema xmlns='http://purl.oclc.org/dsdl/schematron'>
               <pattern id='value-is-ok'>
                 <rule context='/root'>
@@ -229,23 +270,27 @@ public class SchematronTaskIntegrationTest {
               </pattern>
             </schema>
             """);
-        write("src/main/xml/invalid.xml", """
+        write(
+                "src/main/xml/invalid.xml",
+                """
             <root><value>BAD</value></root>
             """);
 
         newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runSchematron")
-            .build();
+                .withProjectDir(testProjectDir.getRoot())
+                .withPluginClasspath()
+                .withArguments("runSchematron")
+                .build();
 
         File svrl = new File(testProjectDir.getRoot(), "build/out/schematron/invalid.svrl.xml");
         String svrlXml = read(svrl);
 
         assertTrue(svrl.exists());
         assertTrue(svrlXml.contains("failed-assert"));
-        assertTrue("Expected indented/debug-formatted SVRL with line breaks", svrlXml.contains("\n"));
-        assertTrue("Expected indented/debug-formatted SVRL elements", svrlXml.contains("\n   <svrl:"));
+        assertTrue(
+                "Expected indented/debug-formatted SVRL with line breaks", svrlXml.contains("\n"));
+        assertTrue(
+                "Expected indented/debug-formatted SVRL elements", svrlXml.contains("\n   <svrl:"));
     }
 
     /**
@@ -254,7 +299,9 @@ public class SchematronTaskIntegrationTest {
     @Test
     public void schematronTaskDoesNotUseTaskProjectAtExecutionTime() throws Exception {
         write("settings.gradle", "rootProject.name = 'schematron-cc-warning-fail'\n");
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('schematronTask', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -265,33 +312,41 @@ public class SchematronTaskIntegrationTest {
             }
             """);
 
-        write("src/main/schematron/rules.sch", """
+        write(
+                "src/main/schematron/rules.sch",
+                """
             <schema xmlns='http://purl.oclc.org/dsdl/schematron'/>
             """);
         write("src/main/schematron/transpile.xsl", transpiler());
-        write("src/main/xml/invalid.xml", """
+        write(
+                "src/main/xml/invalid.xml",
+                """
             <root><value>BAD</value></root>
             """);
 
         BuildResult firstBuild;
         BuildResult secondBuild;
         try {
-            firstBuild = newGradleRunner()
-                .withProjectDir(testProjectDir.getRoot())
-                .withPluginClasspath()
-                .withArguments("schematronTask", "--configuration-cache")
-                .build();
+            firstBuild =
+                    newGradleRunner()
+                            .withProjectDir(testProjectDir.getRoot())
+                            .withPluginClasspath()
+                            .withArguments("schematronTask", "--configuration-cache")
+                            .build();
 
-            secondBuild = newGradleRunner()
-                .withProjectDir(testProjectDir.getRoot())
-                .withPluginClasspath()
-                .withArguments("schematronTask", "--configuration-cache")
-                .build();
+            secondBuild =
+                    newGradleRunner()
+                            .withProjectDir(testProjectDir.getRoot())
+                            .withPluginClasspath()
+                            .withArguments("schematronTask", "--configuration-cache")
+                            .build();
         } catch (UnexpectedBuildFailure failure) {
             assertTrue(
-                "Unexpected configuration-cache failure: " + failure.getMessage(),
-                failure.getMessage().contains("support for using a Java agent with TestKit builds is not yet implemented")
-            );
+                    "Unexpected configuration-cache failure: " + failure.getMessage(),
+                    failure.getMessage()
+                            .contains(
+                                    "support for using a Java agent with TestKit builds is not yet"
+                                            + " implemented"));
             return;
         }
 
@@ -312,10 +367,14 @@ public class SchematronTaskIntegrationTest {
      */
     @Test
     public void validatesXirSchemaAndData() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'schematron-xir-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.xir'
@@ -327,23 +386,30 @@ public class SchematronTaskIntegrationTest {
             }
             """);
 
-        write("src/main/schematron/rules.xir", """
+        write(
+                "src/main/schematron/rules.xir",
+                """
             (schema { xmlns "http://purl.oclc.org/dsdl/schematron" })
             """);
         write("src/main/schematron/transpile.xsl", transpiler());
-        write("src/main/xir/invalid.xir", """
+        write(
+                "src/main/xir/invalid.xir",
+                """
             (root
               (value "BAD"))
             """);
 
         newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runSchematron")
-            .build();
+                .withProjectDir(testProjectDir.getRoot())
+                .withPluginClasspath()
+                .withArguments("runSchematron")
+                .build();
 
         File svrl = new File(testProjectDir.getRoot(), "build/out/schematron/invalid.svrl.xml");
-        File junit = new File(testProjectDir.getRoot(), "build/reports/xml-validation/junit/invalid.junit.xml");
+        File junit =
+                new File(
+                        testProjectDir.getRoot(),
+                        "build/reports/xml-validation/junit/invalid.junit.xml");
 
         assertTrue(svrl.exists());
         assertTrue(junit.exists());
@@ -353,10 +419,14 @@ public class SchematronTaskIntegrationTest {
 
     @Test
     public void resolvesXirViaDocFunctionInCompiledSchematronStylesheet() throws IOException {
-        write("settings.gradle", """
+        write(
+                "settings.gradle",
+                """
             rootProject.name = 'schematron-doc-xir-test'
             """);
-        write("build.gradle", """
+        write(
+                "build.gradle",
+                """
             plugins { id 'org.flowdigger.gradle.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
@@ -368,19 +438,22 @@ public class SchematronTaskIntegrationTest {
             }
             """);
 
-        write("src/main/schematron/rules.sch", """
+        write(
+                "src/main/schematron/rules.sch",
+                """
             <schema xmlns='http://purl.oclc.org/dsdl/schematron'/>
             """);
         write("src/main/xml/input.xml", "<root><value>BAD</value></root>");
         write("src/main/xir/lookup.xir", "(lookup (allowed \"yes\"))");
-        String lookupUri = new File(testProjectDir.getRoot(), "src/main/xir/lookup.xir").toURI().toString();
+        String lookupUri =
+                new File(testProjectDir.getRoot(), "src/main/xir/lookup.xir").toURI().toString();
         write("src/main/schematron/transpile.xsl", transpilerWithLookupDoc(lookupUri));
 
         newGradleRunner()
-            .withProjectDir(testProjectDir.getRoot())
-            .withPluginClasspath()
-            .withArguments("runSchematron")
-            .build();
+                .withProjectDir(testProjectDir.getRoot())
+                .withPluginClasspath()
+                .withArguments("runSchematron")
+                .build();
 
         File svrl = new File(testProjectDir.getRoot(), "build/out/schematron/input.svrl.xml");
         assertTrue(svrl.exists());
@@ -438,7 +511,8 @@ public class SchematronTaskIntegrationTest {
                 </axsl:stylesheet>
               </xsl:template>
             </xsl:stylesheet>
-            """.formatted(lookupUri, lookupUri);
+            """
+                .formatted(lookupUri, lookupUri);
     }
 
     private void write(String relativePath, String content) throws IOException {

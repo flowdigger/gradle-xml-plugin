@@ -1,3 +1,4 @@
+/* (C)2026 */
 package org.flowdigger.gradle.xml.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -50,12 +51,10 @@ public final class JsonCanonicalSerializer implements ContentHandler {
     }
 
     @Override
-    public void setDocumentLocator(Locator locator) {
-    }
+    public void setDocumentLocator(Locator locator) {}
 
     @Override
-    public void startDocument() {
-    }
+    public void startDocument() {}
 
     @Override
     public void endDocument() throws SAXException {
@@ -67,12 +66,10 @@ public final class JsonCanonicalSerializer implements ContentHandler {
     }
 
     @Override
-    public void startPrefixMapping(String prefix, String uri) {
-    }
+    public void startPrefixMapping(String prefix, String uri) {}
 
     @Override
-    public void endPrefixMapping(String prefix) {
-    }
+    public void endPrefixMapping(String prefix) {}
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes atts) {
@@ -111,16 +108,13 @@ public final class JsonCanonicalSerializer implements ContentHandler {
     }
 
     @Override
-    public void ignorableWhitespace(char[] ch, int start, int length) {
-    }
+    public void ignorableWhitespace(char[] ch, int start, int length) {}
 
     @Override
-    public void processingInstruction(String target, String data) {
-    }
+    public void processingInstruction(String target, String data) {}
 
     @Override
-    public void skippedEntity(String name) {
-    }
+    public void skippedEntity(String name) {}
 
     private void writeRoot(ElementFrame frame) throws SAXException {
         try {
@@ -194,4 +188,3 @@ public final class JsonCanonicalSerializer implements ContentHandler {
         }
     }
 }
-
