@@ -2,18 +2,15 @@
 
 ![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
 
-[![Release](https://img.shields.io/github/v/release/flowdigger/gradle-xml-plugin?sort=semver)](https://central.sonatype.com/search?q=g:org.flowdigger.gradle%20AND%20a:gradle-xml-plugin)
-[![Maven Central](https://img.shields.io/maven-central/v/org.flowdigger.gradle/gradle-xml-plugin?label=Maven%20Central)](https://central.sonatype.com/search?q=g:org.flowdigger.gradle%20AND%20a:gradle-xml-plugin)
-
-[![Build and Test](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/gradle-build.yml)
-[![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/gradle-build.yml)
+[![Build](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/ci.yml)
+[![Release](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/release.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/release.yml)
 [![Coverage CI](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/coverage.yml)
 [![CodeQL](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/codeql.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/codeql.yml)
 [![Dependency Check](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/dependency-check.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/dependency-check.yml)
 [![SpotBugs Security](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/spotbugs-security.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/spotbugs-security.yml)
-[![Checkstyle](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/checkstyle.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/checkstyle.yml)
 [![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/flowdigger/gradle-xml-plugin/security/dependabot)
-[![Coverage](https://codecov.io/gh/flowdigger/gradle-xml-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/flowdigger/gradle-xml-plugin)
+[![Coverage](https://codecov.io/gh/flowdigger/gradle-xml-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/flowdigger/gradle-xml-plugin?branch=main)
+[![Maven Central](https://img.shields.io/maven-central/v/org.flowdigger.gradle/gradle-xml-plugin.svg)](https://search.maven.org/artifact/org.flowdigger.gradle/gradle-xml-plugin)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/java-21+-green.svg)](https://www.oracle.com/java/)
 [![Gradle](https://img.shields.io/badge/gradle-9.5+-blue.svg)](https://gradle.org/)

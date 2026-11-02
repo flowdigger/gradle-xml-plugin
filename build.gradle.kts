@@ -46,8 +46,8 @@ extensions.configure<JavaPluginExtension> {
 }
 
 extensions.configure<GradlePluginDevelopmentExtension> {
-    website.set("https://github.com/jurgenei/gradle-xml-plugin")
-    vcsUrl.set("https://github.com/jurgenei/gradle-xml-plugin.git")
+    website.set("https://github.com/flowdigger/gradle-xml-plugin")
+    vcsUrl.set("https://github.com/flowdigger/gradle-xml-plugin.git")
 
     plugins {
         create("xmlTransformPlugin") {
@@ -88,7 +88,7 @@ extensions.configure<PublishingExtension> {
         pom {
             name.set("Gradle XML Plugin")
             description.set("Gradle plugin for XSLT, XQuery, Schematron, XSD, and XSpec")
-            url.set("https://github.com/jurgenei/gradle-xml-plugin.git")
+            url.set("https://github.com/flowdigger/gradle-xml-plugin.git")
 
             licenses {
                 license {
@@ -99,15 +99,15 @@ extensions.configure<PublishingExtension> {
 
             developers {
                 developer {
-                    id.set("jurgenei")
+                    id.set("flowdigger")
                     name.set("Jurgenei")
                 }
             }
 
             scm {
-                connection.set("scm:git:git://github.com/jurgenei/gradle-xml-plugin.git")
-                developerConnection.set("scm:git:ssh://github.com/jurgenei/gradle-xml-plugin.git")
-                url.set("https://github.com/jurgenei/gradle-xml-plugin")
+                connection.set("scm:git:git://github.com/flowdigger/gradle-xml-plugin.git")
+                developerConnection.set("scm:git:ssh://github.com/flowdigger/gradle-xml-plugin.git")
+                url.set("https://github.com/flowdigger/gradle-xml-plugin")
             }
         }
     }
@@ -436,7 +436,7 @@ tasks.register("verifyXirSample") {
 val centralArtifactId = (findProperty("mavenArtifactId")?.toString() ?: project.name)
 val centralGroupPath = project.group.toString().replace('.', '/')
 
-val stageCentralBundleRepo by tasks.registering(Sync::class) {
+val stageCentralBundleRepo = tasks.register<Sync>("stageCentralBundleRepo") {
     dependsOn(tasks.named("publishToMavenLocal"))
     val artifactBaseDir = file("${System.getProperty("user.home")}/.m2/repository/$centralGroupPath/$centralArtifactId")
     val artifactVersionDir = file("$artifactBaseDir/${project.version}")
@@ -449,7 +449,7 @@ val stageCentralBundleRepo by tasks.registering(Sync::class) {
     }
 }
 
-val generateCentralBundleChecksums by tasks.registering {
+val generateCentralBundleChecksums = tasks.register("generateCentralBundleChecksums") {
     dependsOn(stageCentralBundleRepo)
     notCompatibleWithConfigurationCache("Generates checksum files by scanning staged output directory at execution time.")
     doLast {
