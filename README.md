@@ -2,7 +2,9 @@
 
 ![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
 
-[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/name.flowdigger.gradle.xml?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/name.flowdigger.gradle.xml)
+[![Release](https://img.shields.io/github/v/release/flowdigger/gradle-xml-plugin?sort=semver)](https://central.sonatype.com/search?q=g:org.flowdigger.gradle%20AND%20a:gradle-xml-plugin)
+[![Maven Central](https://img.shields.io/maven-central/v/org.flowdigger.gradle/gradle-xml-plugin?label=Maven%20Central)](https://central.sonatype.com/search?q=g:org.flowdigger.gradle%20AND%20a:gradle-xml-plugin)
+
 [![Build and Test](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/gradle-build.yml)
 [![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/gradle-build.yml)
 [![Coverage CI](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/flowdigger/gradle-xml-plugin/actions/workflows/coverage.yml)
