@@ -218,7 +218,7 @@ dependencies {
     add("implementation", "io.xspec:xspec:4.1.2")
     add("implementation", "org.flowdigger:xir-sax:1.0.1")
     add("implementation", "com.fasterxml.jackson.core:jackson-databind:2.22.4")
-    add("implementation", "name.dmaus.schxslt:schxslt2:1.11.2")
+    add("implementation", "name.dmaus.schxslt:schxslt2:1.11.3")
 
     add("testImplementation", gradleTestKit())
     add("testImplementation", "junit:junit:4.13.2")
