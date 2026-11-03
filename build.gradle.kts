@@ -113,20 +113,7 @@ extensions.configure<PublishingExtension> {
     }
 }
 
-<<<<<<< Updated upstream
-//signing {
-//    useInMemoryPgpKeys(
-//        providers.gradleProperty("signingKey").orNull,
-//        providers.gradleProperty("signingPassword").orNull
-//    )
-//    sign(publishing.publications)
-//}
 
-//extensions.configure<SigningExtension> {
-//    useGpgCmd()
-//    sign(extensions.getByType(PublishingExtension::class.java).publications)
-//}
-=======
 extensions.configure<SigningExtension> {
     val signingKey = providers.gradleProperty("signingKey").orNull
     val signingPassword = providers.gradleProperty("signingPassword").orNull
@@ -148,8 +135,6 @@ extensions.configure<SigningExtension> {
     }
     sign(extensions.getByType(PublishingExtension::class.java).publications)
 }
->>>>>>> Stashed changes
-
 
 spotless {
     // Limit format enforcement to changed files even in shallow CI clones.
