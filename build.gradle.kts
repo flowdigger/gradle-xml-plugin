@@ -113,6 +113,7 @@ extensions.configure<PublishingExtension> {
     }
 }
 
+<<<<<<< Updated upstream
 //signing {
 //    useInMemoryPgpKeys(
 //        providers.gradleProperty("signingKey").orNull,
@@ -125,6 +126,29 @@ extensions.configure<PublishingExtension> {
 //    useGpgCmd()
 //    sign(extensions.getByType(PublishingExtension::class.java).publications)
 //}
+=======
+extensions.configure<SigningExtension> {
+    val signingKey = providers.gradleProperty("signingKey").orNull
+    val signingPassword = providers.gradleProperty("signingPassword").orNull
+    val signingKeyId = providers.gradleProperty("signingKeyId").orNull
+    val validKeyIdPattern = Regex("(?i)^[0-9a-f]{8}([0-9a-f]{8})?$")
+    val normalizedSigningKeyId = signingKeyId
+        ?.trim()
+        ?.removePrefix("0x")
+        ?.removePrefix("0X")
+        ?.takeIf { validKeyIdPattern.matches(it) }
+    if (signingKey != null && signingPassword != null) {
+        if (normalizedSigningKeyId != null) {
+            useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
+        } else {
+            useInMemoryPgpKeys(signingKey, signingPassword)
+        }
+    } else {
+        useGpgCmd()
+    }
+    sign(extensions.getByType(PublishingExtension::class.java).publications)
+}
+>>>>>>> Stashed changes
 
 
 spotless {
