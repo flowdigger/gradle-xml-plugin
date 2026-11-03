@@ -116,9 +116,15 @@ extensions.configure<SigningExtension> {
     val signingKey = providers.gradleProperty("signingKey").orNull
     val signingPassword = providers.gradleProperty("signingPassword").orNull
     val signingKeyId = providers.gradleProperty("signingKeyId").orNull
+    val validKeyIdPattern = Regex("(?i)^[0-9a-f]{8}([0-9a-f]{8})?$")
+    val normalizedSigningKeyId = signingKeyId
+        ?.trim()
+        ?.removePrefix("0x")
+        ?.removePrefix("0X")
+        ?.takeIf { validKeyIdPattern.matches(it) }
     if (signingKey != null && signingPassword != null) {
-        if (signingKeyId != null) {
-            useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+        if (normalizedSigningKeyId != null) {
+            useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
         } else {
             useInMemoryPgpKeys(signingKey, signingPassword)
         }
