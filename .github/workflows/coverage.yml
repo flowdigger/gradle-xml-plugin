@@ -10,22 +10,48 @@ on:
 permissions:
   contents: read
   pull-requests: read
-  id-token: write
 
 jobs:
   coverage:
     runs-on: ubuntu-latest
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
       - name: Set up Java 21
-        uses: actions/setup-java@v6
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
           cache: gradle
+
+      - name: Ensure composite build dependencies are available
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT_PARENT="$(dirname "$GITHUB_WORKSPACE")"
+          OWNER="${GITHUB_REPOSITORY_OWNER}"
+
+          clone_if_referenced() {
+            local includeExpr="$1"
+            local repoName="$2"
+            if ! grep -R -q "$includeExpr" settings.gradle* 2>/dev/null; then
+              return 0
+            fi
+            if [ -d "$ROOT_PARENT/$repoName/.git" ]; then
+              return 0
+            fi
+            if git clone --depth 1 "https://github.com/$OWNER/$repoName.git" "$ROOT_PARENT/$repoName"; then
+              return 0
+            fi
+            git clone --depth 1 "https://github.com/flowdigger/$repoName.git" "$ROOT_PARENT/$repoName"
+          }
+
+          clone_if_referenced 'includeBuild("../gradle-antlr-plugin")\|includeBuild('\''../gradle-antlr-plugin'\'')' gradle-antlr-plugin
+          clone_if_referenced 'includeBuild("../gradle-antlr-parse-plugin")\|includeBuild('\''../gradle-antlr-parse-plugin'\'')' gradle-antlr-parse-plugin
 
       - name: Grant execute permission for Gradle wrapper
         run: chmod +x ./gradlew
@@ -35,7 +61,7 @@ jobs:
 
       - name: Build coverage summary
         id: jacoco
-        uses: madrapps/jacoco-report@e51ce1f46f7f8b5331593f935e59cbaf44b84920
+        uses: madrapps/jacoco-report@50d3aff4548aa991e6753342d9ba291084e63848
         with:
           paths: build/reports/jacoco/test/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -44,24 +70,16 @@ jobs:
           min-coverage-changed-files: 0
           update-comment: false
 
-      - name: Add coverage summary to job output
-        run: |
-          echo "### Code Coverage" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Overall: ${{ steps.jacoco.outputs.coverage-overall }}%" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Changed files: ${{ steps.jacoco.outputs.coverage-changed-files }}%" >> "$GITHUB_STEP_SUMMARY"
-
       - name: Upload coverage HTML report
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: jacoco-html-report
           path: build/reports/jacoco/test/html/
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f
+        if: ${{ env.CODECOV_TOKEN != '' }}
+        uses: codecov/codecov-action@v5
         with:
-          use_oidc: true
+          token: ${{ env.CODECOV_TOKEN }}
+          slug: ${{ github.repository }}
           files: build/reports/jacoco/test/jacocoTestReport.xml
-          fail_ci_if_error: false
-
-
-
