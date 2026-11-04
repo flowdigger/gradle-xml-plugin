@@ -14,23 +14,20 @@ plugins {
     id("jacoco")
     id("maven-publish")
     id("signing")
+    id("checkstyle")
     id("org.owasp.dependencycheck") version "13.0.0"
-    id("com.github.spotbugs") version "6.5.13" apply false
+    id("com.github.spotbugs") version "6.5.13"
     id("org.sonarqube") version "7.5.0.8588"
     id("com.diffplug.spotless") version "8.10.4"
 }
 
-val enableSpotbugs =
-    gradle.startParameter.taskNames
-        .map { it.lowercase() }
-        .any { it.contains("spotbugs") || it.endsWith("allsecuritychecks") }
-
-if (enableSpotbugs) {
-    apply(plugin = "com.github.spotbugs")
-}
-
 group = "org.flowdigger.gradle"
 version = "1.0.0"
+
+extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
+    toolVersion = "10.26.1"
+    configFile = file("checkstyle.xml")
+}
 
 repositories {
     mavenCentral()
@@ -116,9 +113,15 @@ extensions.configure<SigningExtension> {
     val signingKey = providers.gradleProperty("signingKey").orNull
     val signingPassword = providers.gradleProperty("signingPassword").orNull
     val signingKeyId = providers.gradleProperty("signingKeyId").orNull
+    val validKeyIdPattern = Regex("(?i)^[0-9a-f]{8}([0-9a-f]{8})?$")
+    val normalizedSigningKeyId = signingKeyId
+        ?.trim()
+        ?.removePrefix("0x")
+        ?.removePrefix("0X")
+        ?.takeIf { validKeyIdPattern.matches(it) }
     if (signingKey != null && signingPassword != null) {
-        if (signingKeyId != null) {
-            useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+        if (normalizedSigningKeyId != null) {
+            useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
         } else {
             useInMemoryPgpKeys(signingKey, signingPassword)
         }
