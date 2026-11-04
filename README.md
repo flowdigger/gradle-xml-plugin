@@ -436,7 +436,7 @@ tasks.register<org.flowdigger.gradle.xml.XSpecTask>("runXSpec") {
 ./gradlew build
 ./gradlew test
 ./gradlew coverage
-./gradlew allSecurityChecks
+./gradlew -PenableSpotbugs=true allSecurityChecks
 ```
 
 Coverage outputs:

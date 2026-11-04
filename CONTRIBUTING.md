@@ -38,6 +38,7 @@ Run before opening a PR:
 ```bash
 ./gradlew test
 ./gradlew build
+./gradlew -PenableSpotbugs=true spotbugsMain
 ./gradlew -p samples/transformation/xslt runSelfTest
 ./gradlew -p samples/transformation/xquery runSelfTest
 ./gradlew -p samples/validation/schematron runSelfTest
