@@ -17,13 +17,14 @@ plugins {
     id("signing")
     id("checkstyle")
     id("org.owasp.dependencycheck") version "13.0.0"
-    id("com.github.spotbugs") version "6.5.13" apply false
+    id("com.github.spotbugs") version "6.5.13"
     id("org.sonarqube") version "7.5.0.8588"
     id("com.diffplug.spotless") version "8.10.4"
 }
 
 group = "org.flowdigger.gradle"
 version = "1.0.0"
+<<<<<<< HEAD
 
 val requestedTaskNames = gradle.startParameter.taskNames.map { it.lowercase() }
 val enableSpotbugs = providers.gradleProperty("enableSpotbugs")
@@ -37,6 +38,13 @@ val enableSpotbugs = providers.gradleProperty("enableSpotbugs")
 if (enableSpotbugs) {
     apply(plugin = "com.github.spotbugs")
 }
+
+extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
+    toolVersion = "10.26.1"
+    configFile = file("checkstyle.xml")
+}
+=======
+>>>>>>> 5ef3975 (maven central adjustments (#60))
 
 extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
     toolVersion = "10.26.1"
@@ -127,6 +135,7 @@ extensions.configure<SigningExtension> {
     val signingKey = providers.gradleProperty("signingKey").orNull
     val signingPassword = providers.gradleProperty("signingPassword").orNull
     val signingKeyId = providers.gradleProperty("signingKeyId").orNull
+<<<<<<< HEAD
     val pgpPrivateKeyHeader = "-----BEGIN PGP PRIVATE KEY BLOCK-----"
     val pgpPrivateKeyFooter = "-----END PGP PRIVATE KEY BLOCK-----"
     fun normalizeSigningKey(rawSigningKey: String): String? {
@@ -157,6 +166,8 @@ extensions.configure<SigningExtension> {
             it.contains(pgpPrivateKeyHeader) && it.contains(pgpPrivateKeyFooter)
         }
     }
+=======
+>>>>>>> 5ef3975 (maven central adjustments (#60))
     val validKeyIdPattern = Regex("(?i)^[0-9a-f]{8}([0-9a-f]{8})?$")
     val normalizedSigningKeyId = signingKeyId
         ?.trim()
@@ -164,12 +175,17 @@ extensions.configure<SigningExtension> {
         ?.removePrefix("0X")
         ?.takeIf { validKeyIdPattern.matches(it) }
     if (signingKey != null && signingPassword != null) {
+<<<<<<< HEAD
         val normalizedSigningKey = normalizeSigningKey(signingKey)
             ?: throw GradleException(
                 "Invalid signingKey format. Expected armored PGP private key text, escaped-newline key text, or base64-encoded armored key."
             )
         if (normalizedSigningKeyId != null) {
             useInMemoryPgpKeys(normalizedSigningKeyId, normalizedSigningKey, signingPassword)
+=======
+        if (normalizedSigningKeyId != null) {
+            useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
+>>>>>>> 5ef3975 (maven central adjustments (#60))
         } else {
             useInMemoryPgpKeys(normalizedSigningKey, signingPassword)
         }
