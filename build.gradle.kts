@@ -8,7 +8,6 @@ import org.gradle.testing.jacoco.plugins.JacocoPluginExtension
 import org.gradle.testing.jacoco.tasks.JacocoCoverageVerification
 import org.gradle.testing.jacoco.tasks.JacocoReport
 import java.security.MessageDigest
-import java.util.Base64
 
 plugins {
     id("java-gradle-plugin")
@@ -17,44 +16,13 @@ plugins {
     id("signing")
     id("checkstyle")
     id("org.owasp.dependencycheck") version "13.0.0"
-    id("com.github.spotbugs") version "6.5.13" apply false
+    id("com.github.spotbugs") version "6.5.13"
     id("org.sonarqube") version "7.5.0.8588"
     id("com.diffplug.spotless") version "8.10.4"
 }
 
 group = "org.flowdigger.gradle"
 version = "1.0.0"
-
-val requestedTaskNames = gradle.startParameter.taskNames.map { it.lowercase() }
-val enableSpotbugs = providers.gradleProperty("enableSpotbugs")
-    .map(String::toBoolean)
-    .orElse(
-        requestedTaskNames.any {
-            it.contains("spotbugs") || it.endsWith(":allsecuritychecks") || it == "allsecuritychecks"
-        }
-    )
-    .get()
-if (enableSpotbugs) {
-    pluginManager.apply("com.github.spotbugs")
-}
-
-extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
-    toolVersion = "10.26.1"
-    configFile = file("checkstyle.xml")
-}
-
-extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
-    toolVersion = "10.26.1"
-    configFile = file("checkstyle.xml")
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-    withSourcesJar()
-    withJavadocJar()
-}
 
 extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
     toolVersion = "10.26.1"
@@ -63,6 +31,14 @@ extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
 
 repositories {
     mavenCentral()
+}
+
+extensions.configure<JavaPluginExtension> {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+    withSourcesJar()
+    withJavadocJar()
 }
 
 extensions.configure<GradlePluginDevelopmentExtension> {
@@ -137,37 +113,6 @@ extensions.configure<SigningExtension> {
     val signingKey = providers.gradleProperty("signingKey").orNull
     val signingPassword = providers.gradleProperty("signingPassword").orNull
     val signingKeyId = providers.gradleProperty("signingKeyId").orNull
-
-    val pgpPrivateKeyHeader = "-----BEGIN PGP PRIVATE KEY BLOCK-----"
-    val pgpPrivateKeyFooter = "-----END PGP PRIVATE KEY BLOCK-----"
-    fun normalizeSigningKey(rawSigningKey: String): String? {
-        val normalizedLineEndings = rawSigningKey
-            .trim()
-            .replace("\r\n", "\n")
-            .replace("\r", "\n")
-            .replace("\\n", "\n")
-        if (normalizedLineEndings.contains(pgpPrivateKeyHeader) && normalizedLineEndings.contains(pgpPrivateKeyFooter)) {
-            return normalizedLineEndings
-        }
-        val compactCandidate = normalizedLineEndings.replace("\\s+".toRegex(), "")
-        if (compactCandidate.isEmpty() || compactCandidate.length % 4 != 0) {
-            return null
-        }
-        if (!compactCandidate.matches(Regex("^[A-Za-z0-9+/=]+$"))) {
-            return null
-        }
-        val decodedCandidate = runCatching {
-            String(Base64.getDecoder().decode(compactCandidate))
-        }.getOrNull()
-            ?: return null
-        val normalizedDecoded = decodedCandidate
-            .trim()
-            .replace("\r\n", "\n")
-            .replace("\r", "\n")
-        return normalizedDecoded.takeIf {
-            it.contains(pgpPrivateKeyHeader) && it.contains(pgpPrivateKeyFooter)
-        }
-    }
     val validKeyIdPattern = Regex("(?i)^[0-9a-f]{8}([0-9a-f]{8})?$")
     val normalizedSigningKeyId = signingKeyId
         ?.trim()
@@ -175,14 +120,10 @@ extensions.configure<SigningExtension> {
         ?.removePrefix("0X")
         ?.takeIf { validKeyIdPattern.matches(it) }
     if (signingKey != null && signingPassword != null) {
-        val normalizedSigningKey = normalizeSigningKey(signingKey)
-            ?: throw GradleException(
-                "Invalid signingKey format. Expected armored PGP private key text, escaped-newline key text, or base64-encoded armored key."
-            )
         if (normalizedSigningKeyId != null) {
-            useInMemoryPgpKeys(normalizedSigningKeyId, normalizedSigningKey, signingPassword)
+            useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
         } else {
-            useInMemoryPgpKeys(normalizedSigningKey, signingPassword)
+            useInMemoryPgpKeys(signingKey, signingPassword)
         }
     } else {
         useGpgCmd()
@@ -402,10 +343,7 @@ tasks.register<Zip>("packageCentralBundle") {
 tasks.register("allSecurityChecks") {
     group = "verification"
     description = "Run all security and quality checks (Dependency-Check, SpotBugs, SonarQube)"
-    dependsOn("check")
-    if (enableSpotbugs) {
-        dependsOn("spotbugsMain")
-    }
+    dependsOn("check", "spotbugsMain")
     val dependencyCheckTask = tasks.findByName("dependencyCheckAnalyze") ?: tasks.findByName("dependencyCheck")
     if (dependencyCheckTask != null) {
         dependsOn(dependencyCheckTask)
