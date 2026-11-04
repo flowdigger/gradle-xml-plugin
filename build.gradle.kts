@@ -17,13 +17,26 @@ plugins {
     id("signing")
     id("checkstyle")
     id("org.owasp.dependencycheck") version "13.0.0"
-    id("com.github.spotbugs") version "6.5.13"
+    id("com.github.spotbugs") version "6.5.13" apply false
     id("org.sonarqube") version "7.5.0.8588"
     id("com.diffplug.spotless") version "8.10.4"
 }
 
 group = "org.flowdigger.gradle"
 version = "1.0.0"
+
+val requestedTaskNames = gradle.startParameter.taskNames.map { it.lowercase() }
+val enableSpotbugs = providers.gradleProperty("enableSpotbugs")
+    .map(String::toBoolean)
+    .orElse(
+        requestedTaskNames.any {
+            it.contains("spotbugs") || it.endsWith(":allsecuritychecks") || it == "allsecuritychecks"
+        }
+    )
+    .get()
+if (enableSpotbugs) {
+    apply(plugin = "com.github.spotbugs")
+}
 
 extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
     toolVersion = "10.26.1"
@@ -378,7 +391,10 @@ tasks.register<Zip>("packageCentralBundle") {
 tasks.register("allSecurityChecks") {
     group = "verification"
     description = "Run all security and quality checks (Dependency-Check, SpotBugs, SonarQube)"
-    dependsOn("check", "spotbugsMain")
+    dependsOn("check")
+    if (enableSpotbugs) {
+        dependsOn("spotbugsMain")
+    }
     val dependencyCheckTask = tasks.findByName("dependencyCheckAnalyze") ?: tasks.findByName("dependencyCheck")
     if (dependencyCheckTask != null) {
         dependsOn(dependencyCheckTask)
