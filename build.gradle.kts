@@ -48,6 +48,11 @@ extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
     configFile = file("checkstyle.xml")
 }
 
+extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
+    toolVersion = "10.26.1"
+    configFile = file("checkstyle.xml")
+}
+
 repositories {
     mavenCentral()
 }
@@ -170,12 +175,8 @@ extensions.configure<SigningExtension> {
         ?.removePrefix("0X")
         ?.takeIf { validKeyIdPattern.matches(it) }
     if (signingKey != null && signingPassword != null) {
-        val normalizedSigningKey = normalizeSigningKey(signingKey)
-            ?: throw GradleException(
-                "Invalid signingKey format. Expected armored PGP private key text, escaped-newline key text, or base64-encoded armored key."
-            )
         if (normalizedSigningKeyId != null) {
-            useInMemoryPgpKeys(normalizedSigningKeyId, normalizedSigningKey, signingPassword)
+            useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
         } else {
             useInMemoryPgpKeys(normalizedSigningKey, signingPassword)
         }
