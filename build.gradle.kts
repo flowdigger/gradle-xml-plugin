@@ -24,7 +24,6 @@ plugins {
 
 group = "org.flowdigger.gradle"
 version = "1.0.0"
-<<<<<<< HEAD
 
 val requestedTaskNames = gradle.startParameter.taskNames.map { it.lowercase() }
 val enableSpotbugs = providers.gradleProperty("enableSpotbugs")
@@ -43,8 +42,6 @@ extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
     toolVersion = "10.26.1"
     configFile = file("checkstyle.xml")
 }
-=======
->>>>>>> 5ef3975 (maven central adjustments (#60))
 
 extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
     toolVersion = "10.26.1"
@@ -135,7 +132,7 @@ extensions.configure<SigningExtension> {
     val signingKey = providers.gradleProperty("signingKey").orNull
     val signingPassword = providers.gradleProperty("signingPassword").orNull
     val signingKeyId = providers.gradleProperty("signingKeyId").orNull
-<<<<<<< HEAD
+
     val pgpPrivateKeyHeader = "-----BEGIN PGP PRIVATE KEY BLOCK-----"
     val pgpPrivateKeyFooter = "-----END PGP PRIVATE KEY BLOCK-----"
     fun normalizeSigningKey(rawSigningKey: String): String? {
@@ -166,8 +163,6 @@ extensions.configure<SigningExtension> {
             it.contains(pgpPrivateKeyHeader) && it.contains(pgpPrivateKeyFooter)
         }
     }
-=======
->>>>>>> 5ef3975 (maven central adjustments (#60))
     val validKeyIdPattern = Regex("(?i)^[0-9a-f]{8}([0-9a-f]{8})?$")
     val normalizedSigningKeyId = signingKeyId
         ?.trim()
@@ -175,17 +170,12 @@ extensions.configure<SigningExtension> {
         ?.removePrefix("0X")
         ?.takeIf { validKeyIdPattern.matches(it) }
     if (signingKey != null && signingPassword != null) {
-<<<<<<< HEAD
         val normalizedSigningKey = normalizeSigningKey(signingKey)
             ?: throw GradleException(
                 "Invalid signingKey format. Expected armored PGP private key text, escaped-newline key text, or base64-encoded armored key."
             )
         if (normalizedSigningKeyId != null) {
             useInMemoryPgpKeys(normalizedSigningKeyId, normalizedSigningKey, signingPassword)
-=======
-        if (normalizedSigningKeyId != null) {
-            useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
->>>>>>> 5ef3975 (maven central adjustments (#60))
         } else {
             useInMemoryPgpKeys(normalizedSigningKey, signingPassword)
         }
