@@ -140,14 +140,12 @@ signing {
     val validKeyIdPattern = Regex("(?i)^[0-9a-f]{8}([0-9a-f]{8})?$")
     var normalizedSigningKeyId = signingKeyId
         ?.trim()
-        ?.replace(Regex("(?i)^0x"), "")
+        ?.removePrefix("0x")
+        ?.removePrefix("0X")
+        ?.takeIf { validKeyIdPattern.matches(it) }
 
-    if (normalizedSigningKeyId.isNullOrEmpty() || !validKeyIdPattern.matches(normalizedSigningKeyId)) {
-        normalizedSigningKeyId = null
-    }
-
-    if (!signingKey.isNullOrBlank() && !signingPassword.isNullOrBlank()) {
-        if (!normalizedSigningKeyId.isNullOrBlank()) {
+    if (!signingKey.isNullOrEmpty() && !signingPassword.isNullOrEmpty()) {
+        if (!normalizedSigningKeyId.isNullOrEmpty()) {
             useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
         } else {
             useInMemoryPgpKeys(signingKey, signingPassword)
