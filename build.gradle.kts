@@ -65,14 +65,6 @@ repositories {
     mavenCentral()
 }
 
-extensions.configure<JavaPluginExtension> {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-    withSourcesJar()
-    withJavadocJar()
-}
-
 extensions.configure<GradlePluginDevelopmentExtension> {
     website.set("https://github.com/flowdigger/gradle-xml-plugin")
     vcsUrl.set("https://github.com/flowdigger/gradle-xml-plugin.git")
