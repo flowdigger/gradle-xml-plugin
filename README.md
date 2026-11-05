@@ -436,7 +436,7 @@ tasks.register<org.flowdigger.gradle.xml.XSpecTask>("runXSpec") {
 ./gradlew build
 ./gradlew test
 ./gradlew coverage
-./gradlew allSecurityChecks
+./gradlew -PenableSpotbugs=true allSecurityChecks
 ```
 
 Coverage outputs:
@@ -489,6 +489,13 @@ export ORG_GRADLE_PROJECT_signingKey=...
 export ORG_GRADLE_PROJECT_signingPassword=...
 export ORG_GRADLE_PROJECT_signingKeyId=...
 ```
+
+`ORG_GRADLE_PROJECT_signingKey` accepts:
+- Armored PGP private key text (`-----BEGIN PGP PRIVATE KEY BLOCK----- ...`).
+- Same armored text with escaped newlines (`\n`).
+- Base64-encoded armored key text.
+
+For GitHub Actions repository secret `SIGNING_KEY`, store either multiline armored key directly or base64-encoded armored key.
 
 Build signed Central bundle:
 

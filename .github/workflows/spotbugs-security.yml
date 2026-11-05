@@ -23,10 +23,10 @@ jobs:
       - name: Run SpotBugs if configured
         shell: bash
         run: |
-          if ./gradlew -q tasks --all | grep -q "spotbugsMain"; then
-            ./gradlew --no-daemon spotbugsMain
-          elif ./gradlew -q tasks --all | grep -q "spotbugs$"; then
-            ./gradlew --no-daemon spotbugs
+          if ./gradlew -q -PenableSpotbugs=true tasks --all | grep -q "spotbugsMain"; then
+            ./gradlew --no-daemon -PenableSpotbugs=true spotbugsMain
+          elif ./gradlew -q -PenableSpotbugs=true tasks --all | grep -q "spotbugs$"; then
+            ./gradlew --no-daemon -PenableSpotbugs=true spotbugs
           else
             echo "No SpotBugs task configured; skipping."
           fi
