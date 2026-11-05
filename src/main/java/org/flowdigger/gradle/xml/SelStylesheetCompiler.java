@@ -13,7 +13,7 @@ final class SelStylesheetCompiler {
     private static final String XSL_NS = "http://www.w3.org/1999/XSL/Transform";
     private static final String XS_NS = "http://www.w3.org/2001/XMLSchema";
     private static final String SX_NS = "urn:org.flowdigger.gradle.xml:sel-support";
-    private static final String C_NS = "http://jurgenei.name/canonical";
+    private static final String C_NS = "http://flowdigger.org/canonical";
 
     private SelStylesheetCompiler() {}
 
@@ -96,7 +96,7 @@ final class SelStylesheetCompiler {
                     List.of(
                             SaxXmlWriter.attr(
                                     "select",
-                                    "replace(path($n), 'Q\\{http://jurgenei.name/canonical\\}',"
+                                    "replace(path($n), 'Q\\{http://flowdigger.org/canonical\\}',"
                                             + " 'c:')")),
                     Map.of());
             xml.endElement(XSL_NS, "function", "xsl:function");

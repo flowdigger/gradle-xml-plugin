@@ -1,4 +1,4 @@
-(c:Document {xmlns:c "http://jurgenei.name/canonical" source-document "sales-order-2026"}
+(c:Document {xmlns:c "http://flowdigger.org/canonical" source-document "sales-order-2026"}
   (c:Metadata
     (c:DocumentId "sales-order")
     (c:Version "1.0"))

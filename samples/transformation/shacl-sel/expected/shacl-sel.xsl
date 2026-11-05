@@ -3,8 +3,8 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:sx="urn:org.flowdigger.gradle.xml:sel-support"
-    xmlns:c="http://jurgenei.name/canonical"
-    xmlns:sel="http://jurgenei.name/sel"
+    xmlns:c="http://flowdigger.org/canonical"
+    xmlns:sel="http://flowdigger.org/sel"
     exclude-result-prefixes="xs c sx" expand-text="yes">
 
   <xsl:output method="xml" indent="yes"/>
@@ -13,7 +13,7 @@
 
   <xsl:function name="sx:canonical-path" as="xs:string">
     <xsl:param name="n" as="node()"/>
-    <xsl:sequence select="replace(path($n), 'Q\{http://jurgenei.name/canonical\}', 'c:')"/>
+    <xsl:sequence select="replace(path($n), 'Q\{http://flowdigger.org/canonical\}', 'c:')"/>
   </xsl:function>
 
   <xsl:mode name="m-rule-0" on-no-match="shallow-skip"/>
@@ -27,7 +27,7 @@
   <xsl:template match="/">
     <!-- Emit grouped SEL payloads into independent output files. -->
     <xsl:result-document href="{$output-relations}">
-      <sel:Observations group="relations" xmlns:c="http://jurgenei.name/canonical">
+      <sel:Observations group="relations" xmlns:c="http://flowdigger.org/canonical">
         <xsl:apply-templates select="/" mode="m-rule-0"/>
         <xsl:apply-templates select="/" mode="m-rule-1"/>
         <xsl:apply-templates select="/" mode="m-rule-2"/>

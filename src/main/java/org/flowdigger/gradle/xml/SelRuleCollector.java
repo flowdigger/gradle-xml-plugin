@@ -23,7 +23,7 @@ import org.w3c.dom.NodeList;
  */
 final class SelRuleCollector {
     static final String SCH_NS = "http://purl.oclc.org/dsdl/schematron";
-    static final String SEL_NS = "http://jurgenei.name/sel";
+    static final String SEL_NS = "http://flowdigger.org/sel";
     private static final Pattern WHITESPACE = Pattern.compile("\\s+");
 
     private SelRuleCollector() {}

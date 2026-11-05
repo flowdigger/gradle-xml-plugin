@@ -41,7 +41,7 @@ public abstract class ShaclSelCompileTask extends DefaultTask {
     private static final String SH_NS = "http://www.w3.org/ns/shacl#";
     private static final String RDF_NS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
     private static final String SCH_NS = "http://purl.oclc.org/dsdl/schematron";
-    private static final String SEL_NS = "http://jurgenei.name/sel";
+    private static final String SEL_NS = "http://flowdigger.org/sel";
 
     /**
      * Returns SHACL RDF/XML schema source.

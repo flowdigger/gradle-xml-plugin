@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            xmlns:c="http://jurgenei.name/canonical">
+            xmlns:c="http://flowdigger.org/canonical">
   <sch:title>Bootstrap SEL Schematron</sch:title>
-  <sch:ns prefix="c" uri="http://jurgenei.name/canonical"/>
+  <sch:ns prefix="c" uri="http://flowdigger.org/canonical"/>
   <sch:p>generated-from: file:/Users/cs79en/Developer/GitHub/gradle/gradle-xml-plugin/samples/schematron-bootstrap-ooxml/src/main/xsd/canonical.local.xsd</sch:p>
   <sch:p>generated-at: 2026-08-09T07:06:48.816643Z</sch:p>
 
