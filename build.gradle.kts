@@ -138,14 +138,16 @@ signing {
     val signingPassword = providers.gradleProperty("signingPassword").orNull
     val signingKeyId = providers.gradleProperty("signingKeyId").orNull
     val validKeyIdPattern = Regex("(?i)^[0-9a-f]{8}([0-9a-f]{8})?$")
-    val normalizedSigningKeyId = signingKeyId
+    var normalizedSigningKeyId = signingKeyId
         ?.trim()
-        ?.removePrefix("0x")
-        ?.removePrefix("0X")
-        ?.takeIf { validKeyIdPattern.matches(it) }
+        ?.replace(Regex("(?i)^0x"), "")
 
-    if (!signingKey.isNullOrEmpty() && !signingPassword.isNullOrEmpty()) {
-        if (!normalizedSigningKeyId.isNullOrEmpty()) {
+    if (normalizedSigningKeyId.isNullOrEmpty() || !validKeyIdPattern.matches(normalizedSigningKeyId)) {
+        normalizedSigningKeyId = null
+    }
+
+    if (!signingKey.isNullOrBlank() && !signingPassword.isNullOrBlank()) {
+        if (!normalizedSigningKeyId.isNullOrBlank()) {
             useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
         } else {
             useInMemoryPgpKeys(signingKey, signingPassword)
