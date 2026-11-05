@@ -177,7 +177,7 @@ extensions.configure<SigningExtension> {
         if (normalizedSigningKeyId != null) {
             useInMemoryPgpKeys(normalizedSigningKeyId, normalizedSigningKey, signingPassword)
         } else {
-            useInMemoryPgpKeys(normalizedSigningKey, signingPassword)
+            useInMemoryPgpKeys(signingKey, signingPassword)
         }
     } else {
         useGpgCmd()
