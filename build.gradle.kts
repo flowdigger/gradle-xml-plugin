@@ -17,7 +17,7 @@ plugins {
     id("signing")
     id("checkstyle")
     id("org.owasp.dependencycheck") version "13.0.0"
-    id("com.github.spotbugs") version "6.5.13"
+    id("com.github.spotbugs") version "6.5.13" apply false
     id("org.sonarqube") version "7.5.0.8588"
     id("com.diffplug.spotless") version "8.10.4"
 }
@@ -35,7 +35,7 @@ val enableSpotbugs = providers.gradleProperty("enableSpotbugs")
     )
     .get()
 if (enableSpotbugs) {
-    apply(plugin = "com.github.spotbugs")
+    pluginManager.apply("com.github.spotbugs")
 }
 
 extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
