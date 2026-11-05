@@ -48,6 +48,19 @@ extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
     configFile = file("checkstyle.xml")
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    withSourcesJar()
+    withJavadocJar()
+}
+
+extensions.configure<org.gradle.api.plugins.quality.CheckstyleExtension> {
+    toolVersion = "10.26.1"
+    configFile = file("checkstyle.xml")
+}
+
 repositories {
     mavenCentral()
 }
@@ -177,7 +190,7 @@ extensions.configure<SigningExtension> {
         if (normalizedSigningKeyId != null) {
             useInMemoryPgpKeys(normalizedSigningKeyId, normalizedSigningKey, signingPassword)
         } else {
-            useInMemoryPgpKeys(signingKey, signingPassword)
+            useInMemoryPgpKeys(normalizedSigningKey, signingPassword)
         }
     } else {
         useGpgCmd()
