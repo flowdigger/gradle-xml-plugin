@@ -138,7 +138,7 @@ signing {
     val signingPassword = providers.gradleProperty("signingPassword").orNull
     val signingKeyId = providers.gradleProperty("signingKeyId").orNull
     val validKeyIdPattern = Regex("(?i)^[0-9a-f]{8}([0-9a-f]{8})?$")
-    val normalizedSigningKeyId = signingKeyId
+    var normalizedSigningKeyId = signingKeyId
         ?.trim()
         ?.removePrefix("0x")
         ?.removePrefix("0X")
