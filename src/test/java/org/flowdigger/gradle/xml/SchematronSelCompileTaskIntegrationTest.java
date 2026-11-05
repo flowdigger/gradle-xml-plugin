@@ -40,8 +40,8 @@ public class SchematronSelCompileTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:pattern id='knowledge'>
                 <sch:rule context='c:Paragraph'>
                   <sch:report test='normalize-space(.)' sel:type='paragraph' sel:group='knowledge' sel:copy='.' sel:context='ancestor::c:Section[1]/c:Title'>
@@ -161,8 +161,8 @@ public class SchematronSelCompileTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:phase id='knowledge-phase'>
                 <sch:active pattern='p-knowledge'/>
               </sch:phase>
@@ -213,8 +213,8 @@ public class SchematronSelCompileTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'
                         defaultPhase='architecture-phase'>
               <sch:phase id='knowledge-phase'>
                 <sch:active pattern='p-knowledge'/>
@@ -267,8 +267,8 @@ public class SchematronSelCompileTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:phase id='present-phase'>
                 <sch:active pattern='p-knowledge'/>
               </sch:phase>
@@ -310,8 +310,8 @@ public class SchematronSelCompileTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sel:presets>
                 <sel:preset id='base' group='knowledge' copy='.'/>
                 <sel:preset id='paragraph' type='paragraph' context='ancestor::c:Section[1]/c:Title'/>
@@ -357,7 +357,7 @@ public class SchematronSelCompileTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:pattern id='p-knowledge'>
                 <sch:rule context='Paragraph'>
                   <sch:report test='normalize-space(.)' sel:preset='missing'>Paragraph evidence</sch:report>
@@ -394,8 +394,8 @@ public class SchematronSelCompileTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'
                         sel:outputNamespaceUri='urn:custom:sel'
                         sel:outputNamespacePrefix='obs'>
               <sch:pattern id='knowledge'>
@@ -438,8 +438,8 @@ public class SchematronSelCompileTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'
                         sel:outputNamespaceUri='urn:schema:sel'
                         sel:outputNamespacePrefix='schema'>
               <sch:pattern id='knowledge'>

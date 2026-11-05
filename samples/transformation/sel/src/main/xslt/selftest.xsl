@@ -17,7 +17,7 @@
       error-code='XTMM9405'>Missing expected terminology SEL XML output.</xsl:assert>
     <xsl:assert test="contains(unparsed-text('../../../build/out/sel-xir/canonical-order/sel/knowledge.xir'), 'sel:Observation')
       and contains(unparsed-text('../../../build/out/sel-xir/canonical-order/sel/knowledge.xir'), 'Order Summary')
-      and contains(unparsed-text('../../../build/out/sel-xir/canonical-order/sel/knowledge.xir'), 'xmlns:sel &quot;http://jurgenei.name/sel&quot;')"
+      and contains(unparsed-text('../../../build/out/sel-xir/canonical-order/sel/knowledge.xir'), 'xmlns:sel &quot;http://flowdigger.org/sel&quot;')"
       error-code='XTMM9406'>Missing expected SEL XIR output.</xsl:assert>
     <xsl:assert test="contains(unparsed-text('../../../build/out/sel-preset/canonical-order/sel/knowledge.xml'), 'group=&quot;knowledge&quot;')
       and contains(unparsed-text('../../../build/out/sel-preset/canonical-order/sel/knowledge.xml'), 'SAP sends order status updates to CRM.')"

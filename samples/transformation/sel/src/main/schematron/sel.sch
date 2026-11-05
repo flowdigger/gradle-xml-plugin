@@ -1,6 +1,6 @@
 <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-            xmlns:c='http://jurgenei.name/canonical'
-            xmlns:sel='http://jurgenei.name/sel'
+            xmlns:c='http://flowdigger.org/canonical'
+            xmlns:sel='http://flowdigger.org/sel'
             defaultPhase='knowledge-phase'>
   <sel:presets>
     <sel:preset id='copy-current' copy='.'/>

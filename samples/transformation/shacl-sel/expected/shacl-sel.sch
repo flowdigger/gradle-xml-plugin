@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:sel="http://jurgenei.name/sel">
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:sel="http://flowdigger.org/sel">
   <sch:pattern id="shacl-relations">
     <sch:rule context="*[local-name()='ApplicationComponent']">
       <sch:report test="*[local-name()='hasDataSet']" sel:type="hasDataSet" sel:group="relations" sel:copy="." sel:context="*[local-name()='hasDataSet']">SHACL relation ApplicationComponent -> DataSet</sch:report>

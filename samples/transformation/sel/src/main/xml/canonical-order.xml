@@ -1,4 +1,4 @@
-<Document xmlns='http://jurgenei.name/canonical' source-document='sales-order-2026'>
+<Document xmlns='http://flowdigger.org/canonical' source-document='sales-order-2026'>
   <Metadata>
     <DocumentId>sales-order</DocumentId>
     <Version>1.0</Version>

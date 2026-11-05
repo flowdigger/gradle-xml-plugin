@@ -42,8 +42,8 @@ public class SchematronSelExtractTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:pattern id='knowledge'>
                 <sch:rule context='c:Paragraph'>
                   <sch:report test='normalize-space(.)' sel:type='paragraph' sel:group='knowledge' sel:copy='.' sel:context='ancestor::c:Section[1]/c:Title'>Paragraph evidence</sch:report>
@@ -60,7 +60,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "src/main/xml/canonical.xml",
                 """
-            <Document xmlns='http://jurgenei.name/canonical'>
+            <Document xmlns='http://flowdigger.org/canonical'>
               <Metadata>
                 <DocumentId>sample</DocumentId>
               </Metadata>
@@ -133,8 +133,8 @@ public class SchematronSelExtractTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:pattern id='knowledge'>
                 <sch:rule context='c:Paragraph'>
                   <sch:report test='normalize-space(.)' sel:type='paragraph' sel:group='knowledge' sel:copy='.'>Paragraph evidence</sch:report>
@@ -146,7 +146,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "src/main/xml/canonical.xml",
                 """
-            <Document xmlns='http://jurgenei.name/canonical'>
+            <Document xmlns='http://flowdigger.org/canonical'>
               <Metadata><DocumentId>sample</DocumentId></Metadata>
               <Body><Paragraph>Hello</Paragraph></Body>
             </Document>
@@ -190,7 +190,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "src/main/xml/canonical.xml",
                 """
-            <Document xmlns='http://jurgenei.name/canonical'>
+            <Document xmlns='http://flowdigger.org/canonical'>
               <Metadata><DocumentId>sample</DocumentId></Metadata>
             </Document>
             """);
@@ -232,7 +232,7 @@ public class SchematronSelExtractTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:pattern id='knowledge'>
                 <sch:rule context='Paragraph'>
                   <sch:report test='normalize-space(.)' sel:type='paragraph' sel:group='knowledge' sel:copy='.'>Paragraph evidence</sch:report>
@@ -295,8 +295,8 @@ public class SchematronSelExtractTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:pattern id='knowledge'>
                 <sch:rule context='c:Paragraph'>
                   <sch:report test='normalize-space(.)' sel:type='paragraph' sel:group='knowledge' sel:copy='.'>
@@ -310,7 +310,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "src/main/xir/canonical.xir",
                 """
-            (c:Document {xmlns:c "http://jurgenei.name/canonical"}
+            (c:Document {xmlns:c "http://flowdigger.org/canonical"}
               (c:Body
                 (c:Paragraph "Hello from xir")))
             """);
@@ -328,10 +328,10 @@ public class SchematronSelExtractTaskIntegrationTest {
         assertTrue(content.contains("sel:Observation"));
         assertTrue(content.contains("Hello from xir"));
         assertTrue(!content.contains("<sel:Observation"));
-        assertTrue(content.contains("xmlns:sel \"http://jurgenei.name/sel\""));
-        assertTrue(content.contains("xmlns:c \"http://jurgenei.name/canonical\""));
+        assertTrue(content.contains("xmlns:sel \"http://flowdigger.org/sel\""));
+        assertTrue(content.contains("xmlns:c \"http://flowdigger.org/canonical\""));
         assertTrue(content.contains("path \"/c:Document[1]/c:Body[1]/c:Paragraph[1]\""));
-        assertTrue(!content.contains("Q{http://jurgenei.name/canonical}"));
+        assertTrue(!content.contains("Q{http://flowdigger.org/canonical}"));
         assertTrue(!content.contains("(c:Paragraph\n          {xmlns:c"));
     }
 
@@ -358,8 +358,8 @@ public class SchematronSelExtractTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:pattern id='knowledge'>
                 <sch:rule context='c:Paragraph'>
                   <sch:report test='normalize-space(.)' sel:type='paragraph' sel:group='knowledge' sel:copy='.'>Paragraph evidence</sch:report>
@@ -371,7 +371,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "src/main/xml/canonical.xml",
                 """
-            <Document xmlns='http://jurgenei.name/canonical'>
+            <Document xmlns='http://flowdigger.org/canonical'>
               <Body><Paragraph>Hello fileset</Paragraph></Body>
             </Document>
             """);
@@ -498,8 +498,8 @@ public class SchematronSelExtractTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:phase id='knowledge-phase'>
                 <sch:active pattern='p-knowledge'/>
               </sch:phase>
@@ -524,7 +524,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "src/main/xml/canonical.xml",
                 """
-            <Document xmlns='http://jurgenei.name/canonical'>
+            <Document xmlns='http://flowdigger.org/canonical'>
               <Body>
                 <Paragraph>Hello</Paragraph>
                 <Connector source='a' target='b'/>
@@ -567,8 +567,8 @@ public class SchematronSelExtractTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:phase id='known-phase'>
                 <sch:active pattern='p-knowledge'/>
               </sch:phase>
@@ -582,7 +582,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "src/main/xml/canonical.xml",
                 """
-            <Document xmlns='http://jurgenei.name/canonical'>
+            <Document xmlns='http://flowdigger.org/canonical'>
               <Body><Paragraph>Hello</Paragraph></Body>
             </Document>
             """);
@@ -618,7 +618,7 @@ public class SchematronSelExtractTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sel:presets>
                 <sel:preset id='id-required' type='missing-id' group='quality' copy='.'/>
               </sel:presets>
@@ -683,8 +683,8 @@ public class SchematronSelExtractTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sch:pattern id='knowledge'>
                 <sch:rule context='c:Paragraph'>
                   <sch:report test='normalize-space(.)' sel:type='paragraph' sel:group='knowledge' sel:copy='.'>Paragraph evidence</sch:report>
@@ -696,7 +696,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "src/main/xml/canonical.xml",
                 """
-            <Document xmlns='http://jurgenei.name/canonical'>
+            <Document xmlns='http://flowdigger.org/canonical'>
               <Body><Paragraph>Hello default namespace</Paragraph></Body>
             </Document>
             """);
@@ -738,8 +738,8 @@ public class SchematronSelExtractTaskIntegrationTest {
                 "src/main/schematron/sel.sch",
                 """
             <sch:schema xmlns:sch='http://purl.oclc.org/dsdl/schematron'
-                        xmlns:c='http://jurgenei.name/canonical'
-                        xmlns:sel='http://jurgenei.name/sel'>
+                        xmlns:c='http://flowdigger.org/canonical'
+                        xmlns:sel='http://flowdigger.org/sel'>
               <sel:presets>
                 <sel:preset id='paragraph-template' type='paragraph' group='knowledge' copy='.'>
                   <sel:template>
@@ -761,7 +761,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "src/main/xml/canonical.xml",
                 """
-            <Document xmlns='http://jurgenei.name/canonical'>
+            <Document xmlns='http://flowdigger.org/canonical'>
               <Body>
                 <Section>
                   <Title>Interfaces</Title>
@@ -791,7 +791,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         return """
             <xsl:stylesheet version='3.0'
                 xmlns:xsl='http://www.w3.org/1999/XSL/Transform'
-                xmlns:sel='http://jurgenei.name/sel'>
+                xmlns:sel='http://flowdigger.org/sel'>
               <xsl:param name='source-document'/>
               <xsl:param name='output-default' as='xs:string' xmlns:xs='http://www.w3.org/2001/XMLSchema'/>
 

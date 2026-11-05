@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * @param prefix namespace prefix used for SEL output elements; empty means default namespace.
  */
 record SelOutputConfig(String namespaceUri, String prefix) {
-    static final String DEFAULT_NAMESPACE_URI = "http://jurgenei.name/sel";
+    static final String DEFAULT_NAMESPACE_URI = "http://flowdigger.org/sel";
     static final String DEFAULT_PREFIX = "sel";
     private static final Pattern PREFIX_PATTERN = Pattern.compile("[A-Za-z_][A-Za-z0-9._-]*");
 

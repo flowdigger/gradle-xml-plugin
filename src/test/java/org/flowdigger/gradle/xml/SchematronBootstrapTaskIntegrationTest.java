@@ -57,7 +57,7 @@ public class SchematronBootstrapTaskIntegrationTest {
                 "src/main/xsd/canonical.xsd",
                 """
             <?xml version='1.0' encoding='UTF-8'?>
-            <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='http://jurgenei.name/canonical' xmlns:c='http://jurgenei.name/canonical' elementFormDefault='qualified'>
+            <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='http://flowdigger.org/canonical' xmlns:c='http://flowdigger.org/canonical' elementFormDefault='qualified'>
               <xs:element name='Document'>
                 <xs:complexType>
                   <xs:sequence>
@@ -72,7 +72,7 @@ public class SchematronBootstrapTaskIntegrationTest {
         write(
                 "src/main/xml/canonical.xml",
                 """
-            <Document xmlns='http://jurgenei.name/canonical'>
+            <Document xmlns='http://flowdigger.org/canonical'>
               <Metadata>
                 <DocumentId>sample</DocumentId>
                 <Version>1</Version>
