@@ -207,8 +207,8 @@ extensions.getByName("dependencyCheck").withGroovyBuilder {
     // Ignore Gradle build-environment/tooling jars (not shipped runtime dependencies).
     setProperty("scanBuildEnv", false)
     setProperty("suppressionFile", "dependency-check-suppressions.xml")
-    // Exclude scanner toolchain dependencies from application vulnerability gate.
-    setProperty("skipConfigurations", listOf("spotbugs", "spotbugsPlugins"))
+    // Exclude tooling-only configurations from shipped dependency gate.
+    setProperty("skipConfigurations", listOf("checkstyle", "spotbugs", "spotbugsPlugins", "spotbugsSlf4j"))
 
     // NVD API key configuration (improves scan speed by 30-50%)
     // Get key from: https://nvd.nist.gov/developers/request-an-api-key
