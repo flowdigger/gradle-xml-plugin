@@ -1,1 +1,9 @@
+pluginManagement {
+    includeBuild("../flowdigger-gradle")
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
 rootProject.name = "gradle-xml-plugin"
