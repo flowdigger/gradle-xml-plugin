@@ -25,7 +25,7 @@ public class XSpecTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('runXSpec', org.flowdigger.gradle.xml.XSpecTask) {
               source 'src/main/xspec/sample.xspec'
@@ -61,7 +61,7 @@ public class XSpecTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileXSpec', org.flowdigger.gradle.xml.XSpecCompileTask) {
               input 'src/main/xspec/sample.xspec'

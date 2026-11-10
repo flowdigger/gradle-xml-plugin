@@ -31,7 +31,7 @@ public class SchematronBootstrapTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('bootstrapCanonicalSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
               schemaUrl(file('src/main/xsd/canonical.xsd').toURI().toString())
@@ -115,7 +115,7 @@ public class SchematronBootstrapTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
               schema 'src/main/xsd/schema.xsd'
@@ -151,7 +151,7 @@ public class SchematronBootstrapTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
               schema 'src/main/xsd/schema.xsd'
@@ -218,7 +218,7 @@ public class SchematronBootstrapTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('bootstrapSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
               output 'build/generated/schematron/generated.sch'

@@ -33,7 +33,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               source 'src/main/xml/input.xml'
@@ -88,7 +88,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               source 'src/main/xml/input.xml'
@@ -139,7 +139,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               source 'src/main/xml/input.xml'
@@ -188,7 +188,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               source 'src/main/xml/input.xml'
@@ -240,7 +240,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               source 'src/main/xml/input.xml'
@@ -295,7 +295,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               input 'src/main/xml/a.xml'
@@ -348,7 +348,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               source(fileTree('src/main/xml') {
@@ -415,7 +415,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               source 'src/main/xml/input.xml'
@@ -476,7 +476,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               source 'src/main/xml/input.xml'
@@ -520,7 +520,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               source 'src/main/xml/input.xml'
@@ -563,7 +563,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             // Input configuration
             def seedFile = file('src/seed/schema-index-seed.xml')
@@ -653,7 +653,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             def seedDir = file('src/seeds')
             def indexerStyle = file('src/xslt/indexer.xsl')
@@ -725,7 +725,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
               source 'src/main/xir/input.xir'
@@ -763,7 +763,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               source 'src/main/xml/input.xml'
@@ -806,7 +806,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/main.xsl'
               source 'src/main/xml/input.xml'
@@ -858,7 +858,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
               source 'src/main/xml/input.xml'
@@ -898,7 +898,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
               source 'src/main/xml/input.xml'
@@ -939,7 +939,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
               source 'src/main/xml/input.xml'
@@ -980,7 +980,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
               source 'src/main/xml/input.xml'
@@ -1019,7 +1019,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('xmlToXir', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
               source 'src/main/xml/input.xml'
@@ -1064,7 +1064,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('xmlToXir', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
               source 'src/main/xml/input.xml'
@@ -1118,7 +1118,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xir'
               source 'src/main/xir/input.xir'
@@ -1158,7 +1158,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
               source 'src/main/json/input.json'
@@ -1215,7 +1215,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXslt', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
               source 'src/main/xml/input.xml'
@@ -1260,7 +1260,7 @@ public class XsltTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('xmlToJson', org.flowdigger.gradle.xml.XsltTask) {
               style 'src/main/xslt/identity.xsl'
               source 'src/main/xml/input.xml'

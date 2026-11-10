@@ -30,7 +30,7 @@ public class XsdTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXsd', org.flowdigger.gradle.xml.XsdTask) {
               schema 'src/main/xsd/schema.xsd'
               source 'src/main/xml/invalid.xml'
@@ -90,7 +90,7 @@ public class XsdTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXsd', org.flowdigger.gradle.xml.XsdTask) {
               schema 'src/main/xsd/schema.xir'
               source 'src/main/xir/invalid.xir'

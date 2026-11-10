@@ -26,7 +26,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -110,7 +110,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
@@ -170,7 +170,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -216,7 +216,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -279,7 +279,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -341,7 +341,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -394,7 +394,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -421,7 +421,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -452,7 +452,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -482,7 +482,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -552,7 +552,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -603,7 +603,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -666,7 +666,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'
@@ -723,7 +723,7 @@ public class SchematronSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('extractSel', org.flowdigger.gradle.xml.SchematronSelExtractTask) {
               schema 'src/main/schematron/sel.sch'

@@ -37,7 +37,7 @@ public class SchematronTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
@@ -91,7 +91,7 @@ public class SchematronTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
@@ -155,7 +155,7 @@ public class SchematronTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
@@ -209,7 +209,7 @@ public class SchematronTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
@@ -248,7 +248,7 @@ public class SchematronTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               style 'build/generated/schematron/compiled.xsl'
@@ -302,7 +302,7 @@ public class SchematronTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('schematronTask', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
@@ -375,7 +375,7 @@ public class SchematronTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.xir'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'
@@ -427,7 +427,7 @@ public class SchematronTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runSchematron', org.flowdigger.gradle.xml.SchematronTask) {
               schema 'src/main/schematron/rules.sch'
               transpilerStylesheet 'src/main/schematron/transpile.xsl'

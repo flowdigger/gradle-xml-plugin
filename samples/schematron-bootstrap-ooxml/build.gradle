@@ -1,6 +1,6 @@
 plugins {
-    id 'org.flowdigger.gradle.ooxml'
-    id 'org.flowdigger.gradle.xml'
+    id 'org.flowdigger.ooxml'
+    id 'org.flowdigger.xml'
 }
 
 tasks.register('bootstrapCanonicalSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {

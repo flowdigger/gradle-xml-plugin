@@ -25,7 +25,7 @@ public class ShaclSelExtractTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileShaclSel', org.flowdigger.gradle.xml.ShaclSelCompileTask) {
               schema 'src/main/shacl/collibra.shacl.xml'

@@ -54,11 +54,11 @@ Main task types:
 - `org.flowdigger.gradle.xml.XSpecCompileTask`
 - `org.flowdigger.gradle.xml.XSpecTask`
 
-Plugin ID: `org.flowdigger.gradle.xml`
+Plugin ID: `org.flowdigger.xml`
 
 ```kotlin
 plugins {
-    id("org.flowdigger.gradle.xml")
+    id("org.flowdigger.xml")
 }
 ```
 

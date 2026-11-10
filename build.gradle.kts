@@ -71,7 +71,7 @@ extensions.configure<GradlePluginDevelopmentExtension> {
 
     plugins {
         create("xmlTransformPlugin") {
-            id = "org.flowdigger.gradle.xml"
+            id = "org.flowdigger.xml"
             implementationClass = "org.flowdigger.gradle.xml.XmlTransformPlugin"
             displayName = "XML Transform & Validate Plugin"
             description = "Saxon based XSLT, XQuery, Schematron, XSD, and XSpec tasks with SVRL/JUnit reporting"
@@ -155,6 +155,13 @@ signing {
     }
 
     sign(publishing.publications)
+}
+
+if (providers.gradleProperty("signingKey").isPresent && providers.gradleProperty("signingPassword").isPresent) {
+    val signPublicationTasks = tasks.matching { it.name.startsWith("sign") && it.name.endsWith("Publication") }
+    tasks.matching { it.name.startsWith("publish") && it.name.endsWith("PublicationToMavenLocal") }.configureEach {
+        dependsOn(signPublicationTasks)
+    }
 }
 
 
