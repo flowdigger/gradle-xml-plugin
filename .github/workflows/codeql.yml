@@ -24,18 +24,13 @@ jobs:
         language: ["java"]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Clone flowdigger-gradle for composite build
-        run: |
-          if [ ! -d ../flowdigger-gradle/.git ]; then
-            git clone --depth 1 --branch main https://github.com/flowdigger/flowdigger-gradle.git ../flowdigger-gradle
-          fi
+        uses: actions/checkout@v7
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: ${{ matrix.language }}
           queries: security-and-quality
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
+        uses: github/codeql-action/autobuild@v4
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4

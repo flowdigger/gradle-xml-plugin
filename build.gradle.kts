@@ -17,11 +17,11 @@ plugins {
     id("org.owasp.dependencycheck") version "13.0.0"
     id("com.github.spotbugs") version "6.5.13" apply false
     id("org.sonarqube") version "7.5.0.8588"
-    id("com.diffplug.spotless") version "8.10.4"
+    id("com.diffplug.spotless") version "8.11.0"
 }
 
 group = "org.flowdigger.gradle"
-version = "1.0.0"
+version = "1.0.1"
 
 val requestedTaskNames = gradle.startParameter.taskNames.map { it.lowercase() }
 val enableSpotbugs = providers.gradleProperty("enableSpotbugs")
