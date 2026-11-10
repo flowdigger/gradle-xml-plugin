@@ -33,7 +33,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -83,7 +83,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -129,7 +129,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -171,7 +171,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -216,7 +216,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -266,7 +266,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               input 'src/main/xml/a.xml'
@@ -314,7 +314,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source(fileTree('src/main/xml') {
@@ -376,7 +376,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -432,7 +432,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -471,7 +471,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -497,7 +497,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xir/input.xir'
@@ -527,7 +527,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -565,7 +565,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -608,7 +608,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -643,7 +643,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -679,7 +679,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/json/input.json'
@@ -728,7 +728,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('runXQuery', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'
@@ -767,7 +767,7 @@ public class XQueryTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
             tasks.register('xmlToJson', org.flowdigger.gradle.xml.XQueryTask) {
               query 'src/main/xquery/main.xq'
               source 'src/main/xml/input.xml'

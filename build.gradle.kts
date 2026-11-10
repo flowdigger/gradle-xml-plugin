@@ -71,7 +71,7 @@ extensions.configure<GradlePluginDevelopmentExtension> {
 
     plugins {
         create("xmlTransformPlugin") {
-            id = "org.flowdigger.gradle.xml"
+            id = "org.flowdigger.xml"
             implementationClass = "org.flowdigger.gradle.xml.XmlTransformPlugin"
             displayName = "XML Transform & Validate Plugin"
             description = "Saxon based XSLT, XQuery, Schematron, XSD, and XSpec tasks with SVRL/JUnit reporting"
@@ -157,6 +157,13 @@ signing {
     sign(publishing.publications)
 }
 
+if (providers.gradleProperty("signingKey").isPresent && providers.gradleProperty("signingPassword").isPresent) {
+    val signPublicationTasks = tasks.matching { it.name.startsWith("sign") && it.name.endsWith("Publication") }
+    tasks.matching { it.name.startsWith("publish") && it.name.endsWith("PublicationToMavenLocal") }.configureEach {
+        dependsOn(signPublicationTasks)
+    }
+}
+
 
 spotless {
     // Limit format enforcement to changed files even in shallow CI clones.
@@ -197,6 +204,8 @@ spotless {
 extensions.getByName("dependencyCheck").withGroovyBuilder {
     setProperty("formats", listOf("HTML", "JSON", "XML"))
     setProperty("failBuildOnCVSS", 7.0f)
+    // Ignore Gradle build-environment/tooling jars (not shipped runtime dependencies).
+    setProperty("scanBuildEnv", false)
     setProperty("suppressionFile", "dependency-check-suppressions.xml")
     // Exclude scanner toolchain dependencies from application vulnerability gate.
     setProperty("skipConfigurations", listOf("spotbugs", "spotbugsPlugins"))

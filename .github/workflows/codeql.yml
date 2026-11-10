@@ -25,6 +25,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+      - name: Ensure composite build dependencies are available
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT_PARENT="$(dirname "$GITHUB_WORKSPACE")"
+          OWNER="${GITHUB_REPOSITORY_OWNER}"
+
+          clone_if_referenced() {
+            local includeExpr="$1"
+            local repoName="$2"
+            if ! grep -R -q "$includeExpr" settings.gradle* 2>/dev/null; then
+              return 0
+            fi
+            if [ -d "$ROOT_PARENT/$repoName/.git" ]; then
+              return 0
+            fi
+            if git clone --depth 1 "https://github.com/$OWNER/$repoName.git" "$ROOT_PARENT/$repoName"; then
+              return 0
+            fi
+            git clone --depth 1 "https://github.com/flowdigger/$repoName.git" "$ROOT_PARENT/$repoName"
+          }
+
+          clone_if_referenced 'includeBuild("../flowdigger-gradle")\|includeBuild('\''../flowdigger-gradle'\'')' flowdigger-gradle
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v4
         with:

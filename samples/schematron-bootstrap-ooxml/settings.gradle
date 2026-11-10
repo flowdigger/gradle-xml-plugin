@@ -5,7 +5,7 @@ pluginManagement {
         mavenCentral()
     }
     plugins {
-        id('org.flowdigger.gradle.ooxml') version '0.1.10'
+        id('org.flowdigger.ooxml') version '0.1.10'
     }
 
     def ooxmlBuild = file('../../../gradle-ooxml-plugin')

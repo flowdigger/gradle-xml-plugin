@@ -1,5 +1,5 @@
 plugins {
-    id 'org.flowdigger.gradle.xml'
+    id 'org.flowdigger.xml'
 }
 
 tasks.register('compileShaclSel', org.flowdigger.gradle.xml.ShaclSelCompileTask) {

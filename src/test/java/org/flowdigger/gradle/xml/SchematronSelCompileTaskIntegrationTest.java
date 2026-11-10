@@ -26,7 +26,7 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
@@ -83,7 +83,7 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
@@ -123,7 +123,7 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/missing.sch'
@@ -147,7 +147,7 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
@@ -201,7 +201,7 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
@@ -254,7 +254,7 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
@@ -296,7 +296,7 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
@@ -345,7 +345,7 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
@@ -382,7 +382,7 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
@@ -424,7 +424,7 @@ public class SchematronSelCompileTaskIntegrationTest {
         write(
                 "build.gradle",
                 """
-            plugins { id 'org.flowdigger.gradle.xml' }
+            plugins { id 'org.flowdigger.xml' }
 
             tasks.register('compileSel', org.flowdigger.gradle.xml.SchematronSelCompileTask) {
               schema 'src/main/schematron/sel.sch'
