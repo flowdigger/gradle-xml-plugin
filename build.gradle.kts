@@ -204,6 +204,8 @@ spotless {
 extensions.getByName("dependencyCheck").withGroovyBuilder {
     setProperty("formats", listOf("HTML", "JSON", "XML"))
     setProperty("failBuildOnCVSS", 7.0f)
+    // Ignore Gradle build-environment/tooling jars (not shipped runtime dependencies).
+    setProperty("scanBuildEnv", false)
     setProperty("suppressionFile", "dependency-check-suppressions.xml")
     // Exclude scanner toolchain dependencies from application vulnerability gate.
     setProperty("skipConfigurations", listOf("spotbugs", "spotbugsPlugins"))
