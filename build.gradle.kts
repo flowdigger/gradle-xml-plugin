@@ -3,18 +3,16 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.testing.Test
 import org.gradle.plugin.devel.GradlePluginDevelopmentExtension
-import org.gradle.plugins.signing.SigningExtension
 import org.gradle.testing.jacoco.plugins.JacocoPluginExtension
 import org.gradle.testing.jacoco.tasks.JacocoCoverageVerification
 import org.gradle.testing.jacoco.tasks.JacocoReport
-import java.security.MessageDigest
 import java.util.Base64
 
 plugins {
     id("java-gradle-plugin")
     id("jacoco")
     id("maven-publish")
-    id("signing")
+    id("org.flowdigger.maven-publish")
     id("checkstyle")
     id("org.owasp.dependencycheck") version "13.0.0"
     id("com.github.spotbugs") version "6.5.13" apply false
@@ -94,16 +92,6 @@ extensions.configure<GradlePluginDevelopmentExtension> {
 }
 
 extensions.configure<PublishingExtension> {
-    repositories {
-        maven {
-            name = "central"
-            url = uri("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/")
-            credentials {
-                username = providers.gradleProperty("mavenCentralUsername").orNull
-                password = providers.gradleProperty("mavenCentralPassword").orNull
-            }
-        }
-    }
     publications.withType<MavenPublication>().configureEach {
         pom {
             name.set("Gradle XML Plugin")
@@ -131,30 +119,6 @@ extensions.configure<PublishingExtension> {
             }
         }
     }
-}
-
-signing {
-    val signingKey = providers.gradleProperty("signingKey").orNull
-    val signingPassword = providers.gradleProperty("signingPassword").orNull
-    val signingKeyId = providers.gradleProperty("signingKeyId").orNull
-    val validKeyIdPattern = Regex("(?i)^[0-9a-f]{8}([0-9a-f]{8})?$")
-    var normalizedSigningKeyId = signingKeyId
-        ?.trim()
-        ?.removePrefix("0x")
-        ?.removePrefix("0X")
-        ?.takeIf { validKeyIdPattern.matches(it) }
-
-    if (!signingKey.isNullOrEmpty() && !signingPassword.isNullOrEmpty()) {
-        if (!normalizedSigningKeyId.isNullOrEmpty()) {
-            useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
-        } else {
-            useInMemoryPgpKeys(signingKey, signingPassword)
-        }
-    } else {
-        useGpgCmd()
-    }
-
-    sign(publishing.publications)
 }
 
 
@@ -311,59 +275,6 @@ tasks.register("coverage") {
 
 tasks.named("check") {
     dependsOn(tasks.named("jacocoTestCoverageVerification"))
-}
-
-val centralArtifactId = (findProperty("mavenArtifactId") as String?) ?: project.name
-val centralGroupPath = project.group.toString().replace('.', '/')
-
-val stageCentralBundleRepo = tasks.register<Sync>("stageCentralBundleRepo") {
-    dependsOn(tasks.named("publishToMavenLocal"))
-    val artifactVersionDir = file("${System.getProperty("user.home")}/.m2/repository/$centralGroupPath/$centralArtifactId/${project.version}")
-    from(artifactVersionDir)
-    into(layout.buildDirectory.dir("central-staging-repo/$centralGroupPath/$centralArtifactId/${project.version}"))
-    doFirst {
-        if (!artifactVersionDir.exists()) {
-            throw GradleException("Expected local Maven artifact version directory not found: $artifactVersionDir")
-        }
-    }
-}
-
-val generateCentralBundleChecksums = tasks.register("generateCentralBundleChecksums") {
-    dependsOn(stageCentralBundleRepo)
-    notCompatibleWithConfigurationCache("Generates checksum files by scanning staged output directory at execution time.")
-    doLast {
-        val stagedVersionDir = layout.buildDirectory.dir("central-staging-repo/$centralGroupPath/$centralArtifactId/${project.version}").get().asFile
-        if (!stagedVersionDir.exists()) {
-            throw GradleException("Expected staged version directory not found: $stagedVersionDir")
-        }
-        fun checksum(input: File, algorithm: String): String {
-            val digest = MessageDigest.getInstance(algorithm)
-            input.inputStream().use { stream ->
-                val buffer = ByteArray(8192)
-                while (true) {
-                    val read = stream.read(buffer)
-                    if (read < 0) break
-                    digest.update(buffer, 0, read)
-                }
-            }
-            return digest.digest().joinToString("") { "%02x".format(it.toInt() and 0xff) }
-        }
-        stagedVersionDir.walkTopDown()
-            .filter { it.isFile && !it.name.endsWith(".md5") && !it.name.endsWith(".sha1") }
-            .forEach { file ->
-                file.resolveSibling("${file.name}.md5").writeText("${checksum(file, "MD5")}${System.lineSeparator()}")
-                file.resolveSibling("${file.name}.sha1").writeText("${checksum(file, "SHA-1")}${System.lineSeparator()}")
-            }
-    }
-}
-
-tasks.register<Zip>("packageCentralBundle") {
-    dependsOn(generateCentralBundleChecksums)
-    archiveBaseName.set(project.name)
-    archiveVersion.set(project.version.toString())
-    archiveClassifier.set("central-bundle")
-    destinationDirectory.set(layout.buildDirectory.dir("central-bundle"))
-    from(layout.buildDirectory.dir("central-staging-repo"))
 }
 
 tasks.register("allSecurityChecks") {

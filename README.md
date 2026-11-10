@@ -483,25 +483,29 @@ Workflow and expectations: `CONTRIBUTING.md`
 Set credentials and signing material:
 
 ```bash
-export ORG_GRADLE_PROJECT_mavenCentralUsername=...
-export ORG_GRADLE_PROJECT_mavenCentralPassword=...
-export ORG_GRADLE_PROJECT_signingKey=...
-export ORG_GRADLE_PROJECT_signingPassword=...
-export ORG_GRADLE_PROJECT_signingKeyId=...
+export MAVEN_CENTRAL_USERNAME=...
+export MAVEN_CENTRAL_PASSWORD=...
+export SIGNING_KEY=...
+export SIGNING_PASSWORD=...
 ```
 
-`ORG_GRADLE_PROJECT_signingKey` accepts:
+`SIGNING_KEY` accepts:
 - Armored PGP private key text (`-----BEGIN PGP PRIVATE KEY BLOCK----- ...`).
 - Same armored text with escaped newlines (`\n`).
 - Base64-encoded armored key text.
 
 For GitHub Actions repository secret `SIGNING_KEY`, store either multiline armored key directly or base64-encoded armored key.
 
-Build signed Central bundle:
+Run local target (default):
 
 ```bash
-./gradlew clean packageCentralBundle
+./gradlew publish
 ```
 
-Release workflow (`.github/workflows/release.yml`) uploads bundle to Sonatype Central Publisher API on `v*` tags (or manual dispatch).
-Configure repository secrets: `MAVEN_CENTRAL_USERNAME`, `MAVEN_CENTRAL_PASSWORD`, `SIGNING_KEY`, `SIGNING_PASSWORD`, `SIGNING_KEY_ID`.
+Run Central target:
+
+```bash
+./gradlew publish -Pflowdigger.publish.target=central
+```
+
+Release workflow (`.github/workflows/release.yml`) calls shared reusable workflow and triggers on `v*` tags or manual dispatch.
