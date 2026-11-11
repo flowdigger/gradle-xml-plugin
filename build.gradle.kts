@@ -11,7 +11,6 @@ import java.util.Base64
 plugins {
     id("java-gradle-plugin")
     id("jacoco")
-    id("maven-publish")
     id("org.flowdigger.maven-publish")
     id("checkstyle")
     id("org.owasp.dependencycheck") version "13.0.0"
@@ -22,7 +21,7 @@ plugins {
 }
 
 group = "org.flowdigger.gradle"
-version = "1.0.1"
+version = "1.0.2"
 
 val requestedTaskNames = gradle.startParameter.taskNames.map { it.lowercase() }
 val enableSpotbugs = providers.gradleProperty("enableSpotbugs")
