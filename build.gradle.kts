@@ -17,7 +17,7 @@ plugins {
     id("org.owasp.dependencycheck") version "13.0.0"
     id("org.flowdigger.dependency-check")
     id("com.github.spotbugs") version "6.5.13" apply false
-    id("org.sonarqube") version "7.5.0.8588"
+    id("org.sonarqube") version "7.6.0.18749"
     id("com.diffplug.spotless") version "8.11.0"
 }
 
